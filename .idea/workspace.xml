@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/csvs/exp_data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/xmls/twophase.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/methods.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test1.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1cb4dMPbzwchdRM32ufpLaZ6Ir0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../parameter estimation/parameter estimation/fit.py" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="methods" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/methods.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.methods" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED,ALPHA_COMPARATOR" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="" />
+      <created>1590784044993</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590784044993</updated>
+    </task>
+    <task id="LOCAL-00001" summary="started project">
+      <created>1590789450060</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590789450060</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="started project" />
+    <option name="LAST_COMMIT_MESSAGE" value="started project" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1330" y="212" key="#Inspections/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787654691" />
+    <state x="-1506" y="178" width="1092" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590784453144">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1506" y="178" width="1092" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590784453144" />
+    <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1590787657711">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1590789936804">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590789936804" />
+    <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1590786199657">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590786199657" />
+    <state x="-1180" y="278" key="FileChooserDialogImpl" timestamp="1590786964173">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1180" y="278" key="FileChooserDialogImpl/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590786964173" />
+    <state width="1897" height="281" key="GridCell.Tab.0.bottom" timestamp="1590784657740">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state width="1897" height="281" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590784657740" />
+    <state width="1897" height="281" key="GridCell.Tab.0.center" timestamp="1590784657739">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state width="1897" height="281" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590784657739" />
+    <state width="1897" height="281" key="GridCell.Tab.0.left" timestamp="1590784657739">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state width="1897" height="281" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590784657739" />
+    <state width="1897" height="281" key="GridCell.Tab.0.right" timestamp="1590784657739">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state width="1897" height="281" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590784657739" />
+    <state x="-1460" y="164" key="SettingsEditor" timestamp="1590784300386">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1460" y="164" key="SettingsEditor/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590784300386" />
+    <state x="-1368" y="256" key="Vcs.Push.Dialog.v2" timestamp="1590789945157">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1368" y="256" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590789945157" />
+    <state x="463" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1590784072879">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="463" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590784072879" />
+  </component>
+</project>

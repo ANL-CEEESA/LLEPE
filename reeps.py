@@ -7,6 +7,7 @@ from scipy.optimize import minimize
 import xml.etree.ElementTree as ET
 import seaborn as sns
 import matplotlib.pyplot as plt
+
 sns.set()
 
 
@@ -169,6 +170,7 @@ class REEPS:
         solvent_rho = self._aq_solvent_rho
         extractant_rho = self._extractant_rho
         diluant_rho = self._diluant_rho
+        re_name = self._rare_earth_ion_name
 
         mixed = ct.Mixture(phases_copy)
         aq_ind = None
@@ -190,6 +192,9 @@ class REEPS:
         extractant_ind = phases_copy[org_ind].species_names.index(
             extractant_name)
         diluant_ind = phases_copy[org_ind].species_names.index(diluant_name)
+
+        re_ind = phases_copy[aq_ind].species_names.index(re_name)
+        re_charge = phases_copy[aq_ind].species(re_ind).charge
 
         mix_aq = mixed.phase(aq_ind)
         mix_org = mixed.phase(org_ind)
@@ -215,7 +220,7 @@ class REEPS:
             h_plus_moles = feed_vol * row[0]
             hydroxide_ions = 0
             rare_earth_moles = feed_vol * row[6]
-            chlorine_moles = 3 * rare_earth_moles + h_plus_moles
+            chlorine_moles = re_charge * rare_earth_moles + h_plus_moles
             extractant_moles = feed_vol * row[3]
             extractant_vol = extractant_moles * extractant_mw / extractant_rho
             diluant_vol = feed_vol - extractant_vol

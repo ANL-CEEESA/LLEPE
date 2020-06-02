@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Titus.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Titus.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/xmls/elementz.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/xmls/twophase.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/one_comp_settings.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reeps.py" beforeDir="false" afterPath="$PROJECT_DIR$/reeps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_reeps.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_reeps.py" afterDir="false" />
@@ -35,7 +37,7 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.test_reeps">
+  <component name="RunManager" selected="Python.test">
     <configuration name="fit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -130,7 +132,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_reeps" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.test_reeps" />
         <item itemvalue="Python.test_reeps" />
         <item itemvalue="Python.test_reeps" />
@@ -199,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591057566877</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Completed one composition parameter estimation">
+      <created>1591119253733</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1591119253733</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -217,7 +226,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="started project" />
-    <option name="LAST_COMMIT_MESSAGE" value="started project" />
+    <MESSAGE value="Completed one composition parameter estimation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed one composition parameter estimation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -236,10 +246,10 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1591057565266">
+    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1591119252191">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591057565266" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591119252191" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>

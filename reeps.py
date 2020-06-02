@@ -1,6 +1,5 @@
 import cantera as ct
 import pandas as pd
-import numpy as np
 
 
 class REEPS:
@@ -12,43 +11,43 @@ class REEPS:
     :param x_guess: (float) guess for multiplier variable
     :param h_guess: (float) initial guess standard enthalpy (J/kmol)
     :param phase_names: (list) names of phases in xml file
-    :param aq_phase_solvent_names: (list) names of solvents in aqueous phase
-    :param aq_phase_solvent_rhos: (numpy.ndarray) density of solvents in aqueous phase
-    :param org_phase_solvent_names: (list) names of solvents in organic phase [extractant, diluant]
-    :param org_phase_solvent_rhos: (numpy.ndarray) density of solvents in organic phase
+    :param aq_solvent_name: (str) name of aqueous solvent in xml file
+    :param extractant_name: (str) name of extractant
+    :param diluant_name: (str) name of diluant
+    :param aq_solvent_rho: (float) density of solvent (g/L)
+    :param extractant_rho: (float) density of extractant (g/L)
+    :param diluant_rho: (float) density of extractant (g/L)
+    If no density is given, molar volume/molecular weight is used from xml
     """
 
     def __init__(self,
                  exp_csv_filename,
                  param_xml_file,
-                 x_guess=1,
-                 h_guess=-4856609.0E3,
-                 phase_names=None,
-                 aq_phase_solvent_names=None,
-                 aq_phase_solvent_rhos=None,
-                 org_phase_solvent_names=None,
-                 org_phase_solvent_rhos=None,
+                 x_guess,
+                 h_guess,
+                 phase_names,
+                 aq_solvent_name,
+                 extractant_name,
+                 diluant_name,
+                 aq_solvent_rho=None,
+                 extractant_rho=None,
+                 diluant_rho=None,
                  ):
         self._exp_csv_filename = exp_csv_filename
         self._x_guess = x_guess
         self._h_guess = h_guess
-        if phase_names is None:
-            phase_names = ['HCl_electrolyte', 'PC88A_liquid', ]
-        if aq_phase_solvent_names is None:
-            aq_phase_solvent_names = ['H2O(L)', ]
-        if aq_phase_solvent_rhos is None:
-            aq_phase_solvent_rhos = np.array([1000, ])
-        if org_phase_solvent_names is None:
-            org_phase_solvent_names = ['(HA)2(org_phase)', 'dodecane', ]
-        if org_phase_solvent_rhos is None:
-            org_phase_solvent_rhos = np.array([960, 750, ])
-        self._aq_phase_solvent_names = aq_phase_solvent_names
-        self._aq_phase_solvent_rhos = aq_phase_solvent_rhos
-        self._org_phase_solvent_names = org_phase_solvent_names
-        self._org_phase_solvent_rhos = org_phase_solvent_rhos
+        self._aq_solvent_name = aq_solvent_name
+        self._extractant_name = extractant_name
+        self._diluant_name = diluant_name
+        self._aq_solvent_rho = aq_solvent_rho
+        self._extractant_rho = extractant_rho
+        self._diluant_rho = diluant_rho
 
         self._phases = ct.import_phases(param_xml_file, phase_names)
         self._exp_df = pd.read_csv(self._exp_csv_filename)
+        self._in_moles = None
+
+        self.set_in_moles()
 
     def get_exp_csv_filename(self) -> str:
         return self._exp_csv_filename
@@ -79,66 +78,108 @@ class REEPS:
         self._h_guess = h_guess
         return None
 
-    def get_aq_phase_solvent_names(self) -> list:
-        return self._aq_phase_solvent_names
+    def get_aq_solvent_name(self) -> str:
+        return self._aq_solvent_name
 
-    def set_aq_phase_solvent_names(self, aq_phase_solvent_names):
-        self._aq_phase_solvent_names = aq_phase_solvent_names
+    def set_aq_solvent_name(self, aq_solvent_name):
+        self._aq_solvent_name = aq_solvent_name
         return None
 
-    def get_aq_phase_solvent_rhos(self) -> list:
-        return self._aq_phase_solvent_rhos
+    def get_extractant_name(self) -> str:
+        return self._extractant_name
 
-    def set_aq_phase_solvent_rhos(self, aq_phase_solvent_rhos):
-        self._aq_phase_solvent_rhos = aq_phase_solvent_rhos
+    def set_extractant_name(self, extractant_name):
+        self._extractant_name = extractant_name
         return None
 
-    def get_org_phase_solvent_names(self) -> list:
-        return self._org_phase_solvent_names
+    def get_diluant_name(self) -> str:
+        return self._diluant_name
 
-    def set_org_phase_solvent_names(self, org_phase_solvent_names):
-        self._org_phase_solvent_names = org_phase_solvent_names
+    def set_diluant_name(self, diluant_name):
+        self._diluant_name = diluant_name
+        return None
+    
+    def get_aq_solvent_rho(self) -> str:
+        return self._aq_solvent_rho
+
+    def set_aq_solvent_rho(self, aq_solvent_rho):
+        self._aq_solvent_rho = aq_solvent_rho
         return None
 
-    def get_org_phase_solvent_rhos(self) -> list:
-        return self._org_phase_solvent_rhos
+    def get_extractant_rho(self) -> str:
+        return self._extractant_rho
 
-    def set_org_phase_solvent_rhos(self, org_phase_solvent_rhos):
-        self._org_phase_solvent_rhos = org_phase_solvent_rhos
+    def set_extractant_rho(self, extractant_rho):
+        self._extractant_rho = extractant_rho
+        return None
+
+    def get_diluant_rho(self) -> str:
+        return self._diluant_rho
+
+    def set_diluant_rho(self, diluant_rho):
+        self._diluant_rho = diluant_rho
         return None
 
     def set_in_moles(self):
         phases_copy = self._phases.copy()
         exp_df = self._exp_df.copy()
-        aq_phase_solvent_names = self._aq_phase_solvent_names
-        aq_phase_solvent_rhos = self._aq_phase_solvent_rhos
-        org_phase_solvent_names = self._org_phase_solvent_names
-        org_phase_solvent_rhos = self._org_phase_solvent_rhos
+        solvent_name = self._aq_solvent_name
+        extractant_name = self._extractant_name
+        diluant_name = self._diluant_name
+        solvent_rho = self._aq_solvent_rho
+        extractant_rho = self._extractant_rho
+        diluant_rho = self._diluant_rho
 
         mixed = ct.Mixture(phases_copy)
-        # phase_names = [phase.name for phase in phases_copy]  # expected structure [aq_phase, org_phase]
-        # phase_indices = [mixed.phase_index(phase_name) for phase_name in phase_names]
-        aq_phase_solvent_mws = []
-        for name in aq_phase_solvent_names:
-            aq_phase_solvent_mws.append(mixed.phase(0).molecular_weights[mixed.phase(0).species_index(name)])
-        org_phase_solvent_mws = []
-        for name in org_phase_solvent_names:
-            org_phase_solvent_mws.append(mixed.phase(1).molecular_weights[mixed.phase(1).species_index(name)])
+        aq_ind = None
+        solvent_ind = None
+        for ind, phase in enumerate(phases_copy):
+            if solvent_name in phase.species_names:
+                aq_ind = ind
+                solvent_ind = phase.species_names.index(solvent_name)
+        if aq_ind is None:
+            raise Exception('Solvent "{0}" not found \
+                                in xml file'.format(solvent_name))
 
-        in_moles = []
+        if aq_ind == 0:
+            org_ind = 1
+        else:
+            org_ind = 0
+        extractant_ind = phases_copy[org_ind].species_names.index(
+            extractant_name)
+        diluant_ind = phases_copy[org_ind].species_names.index(diluant_name)
+
+        mix_aq = mixed.phase(aq_ind)
+        mix_org = mixed.phase(org_ind)
+        solvent_mw = mix_aq.molecular_weights[solvent_ind]  # g/mol
+        extractant_mw = mix_org.molecular_weights[extractant_ind]
+        diluant_mw = mix_org.molecular_weights[diluant_ind]
+        if solvent_rho is None:
+            solvent_rho = mix_aq(aq_ind).partial_molar_volumes[
+                                            solvent_ind]/solvent_mw * 1e6  # g/L
+            self._aq_solvent_rho = solvent_rho
+        if extractant_rho is None:
+            extractant_rho = mix_org(org_ind).partial_molar_volumes[
+                                            extractant_ind]/extractant_mw * 1e6
+            self._extractant_rho = extractant_rho
+        if diluant_rho is None:
+            diluant_rho = mix_org(org_ind).partial_molar_volumes[
+                                 extractant_ind] / extractant_mw * 1e6
+            self._diluant_rho = diluant_rho
+            
+        in_moles_data = []
         feed_vol = 1.  # g/L
-        aq_phase_solvent_moles = feed_vol*aq_phase_solvent_rhos[0] / aq_phase_solvent_mws[0]
+        aq_phase_solvent_moles = feed_vol * solvent_rho / solvent_mw
         for row in exp_df.values:
-            h_plus_moles = feed_vol*row[0]
+            h_plus_moles = feed_vol * row[0]
             hydroxide_ions = 0
-            rare_earth_moles = feed_vol*row[6]
-            chlorine_moles = 3*rare_earth_moles + h_plus_moles
-            extractant_moles = feed_vol*row[3]
-            extractant_vol = extractant_moles*org_phase_solvent_rhos[0]/org_phase_solvent_mws[0]
+            rare_earth_moles = feed_vol * row[6]
+            chlorine_moles = 3 * rare_earth_moles + h_plus_moles
+            extractant_moles = feed_vol * row[3]
+            extractant_vol = extractant_moles * extractant_rho / extractant_mw
             diluant_vol = feed_vol - extractant_vol
-            diluant_moles= diluant_vol*org_phase_solvent_rhos[1]/org_phase_solvent_mws[1]
-            complex_moles=0
-
+            diluant_moles = diluant_vol * diluant_rho / diluant_mw
+            complex_moles = 0
 
             species_moles = [aq_phase_solvent_moles,
                              h_plus_moles,
@@ -149,8 +190,9 @@ class REEPS:
                              diluant_moles,
                              complex_moles,
                              ]
-            in_moles.append(species_moles)
-        in_moles_df = pd.DataFrame(in_moles, columns=mixed.species_names)
-        return in_moles_df
+            in_moles_data.append(species_moles)
+        self._in_moles = pd.DataFrame(in_moles_data, columns=mixed.species_names)
+        return None
 
-
+    def get_in_moles(self) -> pd.DataFrame:
+        return self._in_moles

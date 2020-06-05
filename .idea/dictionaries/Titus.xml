@@ -2,16 +2,21 @@
   <dictionary name="Titus">
     <words>
       <w>coeffs</w>
+      <w>conc</w>
       <w>diluant</w>
+      <w>disp</w>
       <w>dodecane</w>
       <w>equilibrate</w>
       <w>extractant</w>
+      <w>ftol</w>
       <w>kmol</w>
       <w>lmse</w>
+      <w>maxiter</w>
       <w>ndarray</w>
       <w>pred</w>
       <w>reeps</w>
       <w>scipy</w>
+      <w>slsqp</w>
       <w>thermo</w>
     </words>
   </dictionary>

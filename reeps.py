@@ -9,6 +9,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import shutil
 import copy
+from inspect import signature
+import os
 sns.set()
 
 
@@ -16,6 +18,7 @@ class REEPS:
     """REEPS  (Rare earth extraction parameter searcher)
     Takes in experimental data
     Returns parameters for GEM
+    Only good for 1 rare earth and 1 extractant
     :param exp_csv_filename: (str) csv file name with experimental data
     :param phases_xml_filename: (str) xml file with parameters for equilibrium calc
     :param opt_dict: (dict) optimize info {species:{thermo_prop:guess}
@@ -27,8 +30,34 @@ class REEPS:
     :param rare_earth_ion_name: (str) name of rare earth ion in xml file
     :param aq_solvent_rho: (float) density of solvent (g/L)
     :param extractant_rho: (float) density of extractant (g/L)
-    :param diluant_rho: (float) density of extractant (g/L)
+    :param diluant_rho: (float) density of diluant (g/L)
     If no density is given, molar volume/molecular weight is used from xml
+    :param objective_function: (function) function to compute objective
+    By default, the objective function is log mean squared error
+    of distribution ratio np.log10(re_org/re_aq)
+    Function needs to take inputs:
+    objective_function(predicted_dict, measured_df, **kwargs)
+    **kwargs is optional
+    Below is the guide for referencing predicted values
+    | To access                               | Use                      |
+    |-------------------------------------    |--------------------------|
+    | predicted rare earth eq conc in aq      | predicted_dict['re_aq']  |
+    | predicted rare earth eq conc in org     | predicted_dict['re_org'] |
+    | predicted hydrogen ion conc in aq       | predicted_dict['h']      |
+    | predicted extractant conc in org        | predicted_dict['z']      |
+    | predicted rare earth distribution ratio | predicted_dict['re_d']   |
+    For measured values, use the column names in the experimental data file
+    :param optimizer: (function) function to perform optimization
+    By default, the optimizer is scipy's optimize function with
+    default_kwargs= {"method": 'SLSQP',
+                    "bounds": [(1e-1, 1e1)*len(x_guess)],
+                    "constraints": (),
+                    "options": {'disp': True, 'maxiter': 1000, 'ftol': 1e-6}}
+    Function needs to take inputs:
+    optimizer(objective_function, x_guess, **kwargs)
+    **kwargs is optional
+    :param temp_xml_file_path: (str) path to temporary xml file
+    default is local temp folder
     """
 
     def __init__(self,
@@ -44,7 +73,12 @@ class REEPS:
                  aq_solvent_rho=None,
                  extractant_rho=None,
                  diluant_rho=None,
+                 objective_function='Log-MSE',
+                 optimizer='SLSQP',
+                 temp_xml_file_path=None
                  ):
+        self._built_in_obj_list = ['Log-MSE']
+        self._built_in_opt_list = ['SLSQP']
         self._exp_csv_filename = exp_csv_filename
         self._phases_xml_filename = phases_xml_filename
         self._opt_dict = opt_dict
@@ -57,9 +91,14 @@ class REEPS:
         self._aq_solvent_rho = aq_solvent_rho
         self._extractant_rho = extractant_rho
         self._diluant_rho = diluant_rho
-
-        self._temp_xml_filename = "temp.xml"
-        shutil.copyfile(phases_xml_filename, self._temp_xml_filename)
+        self._objective_function = None
+        self.set_objective_function(objective_function)
+        self._optimizer = None
+        self.set_optimizer(optimizer)
+        if temp_xml_file_path is None:
+            temp_xml_file_path = '{0}\\temp.xml'.format(os.getenv('TEMP'))
+        self._temp_xml_file_path = temp_xml_file_path
+        shutil.copyfile(phases_xml_filename, self._temp_xml_file_path)
         self._phases = ct.import_phases(phases_xml_filename, phase_names)
         self._exp_df = pd.read_csv(self._exp_csv_filename)
 
@@ -69,6 +108,27 @@ class REEPS:
         self._org_ind = None
 
         self.set_in_moles(feed_vol=1)
+        self._predicted_dict = None
+        self.update_predicted_dict()
+
+    @staticmethod
+    def log_mean_squared_error(predicted_dict, meas_df):
+        meas = meas_df['D(m)'].values
+        pred = predicted_dict['re_org'] / predicted_dict['re_aq']
+        log_pred = np.log10(pred)
+        log_meas = np.log10(meas)
+        obj = np.sum((log_pred - log_meas) ** 2)
+        return obj
+
+    @staticmethod
+    def slsqp_optimizer(objective, x_guess):
+        optimizer_kwargs = {"method": 'SLSQP',
+                            "bounds": [(1e-1, 1e1) * len(x_guess)],
+                            "constraints": (),
+                            "options": {'disp': True, 'maxiter': 1000, 'ftol': 1e-6}}
+        res = minimize(objective, x_guess, **optimizer_kwargs)
+        est_parameters = res.x
+        return est_parameters
 
     def get_exp_csv_filename(self) -> str:
         return self._exp_csv_filename
@@ -76,6 +136,7 @@ class REEPS:
     def set_exp_csv_filename(self, exp_csv_filename):
         self._exp_csv_filename = exp_csv_filename
         self._exp_df = pd.read_csv(self._exp_csv_filename)
+        self.update_predicted_dict()
         return None
 
     def get_phases(self) -> list:
@@ -86,8 +147,10 @@ class REEPS:
         Also runs set_in_mole to set initial moles to 1 g/L"""
         self._phases_xml_filename = phases_xml_filename
         self._phase_names = phase_names
+        shutil.copyfile(phases_xml_filename, self._temp_xml_file_path)
         self._phases = ct.import_phases(phases_xml_filename, phase_names)
         self.set_in_moles(feed_vol=1)
+        self.update_predicted_dict()
         return None
 
     def get_opt_dict(self) -> dict:
@@ -232,35 +295,72 @@ class REEPS:
                              ]
             in_moles_data.append(species_moles)
         self._in_moles = pd.DataFrame(in_moles_data, columns=mixed.species_names)
+        self.update_predicted_dict()
         return None
 
     def get_in_moles(self) -> pd.DataFrame:
         return self._in_moles
 
-    def objective(self, x):
-        """Log mean squared error between measured and predicted data
-        :param x: (list) thermo properties varied to minimize LMSE"""
-        temp_xml_filename = self._temp_xml_filename
+    def set_objective_function(self, objective_function):
+        """Set objective function. see class docstring for instructions"""
+        if not callable(objective_function) \
+                and objective_function not in self._built_in_obj_list:
+            raise Exception(
+                "objective_function must be a function "
+                "or in this strings list: {0}".format(self._built_in_obj_list))
+        if callable(objective_function):
+            if len(signature(objective_function).parameters) < 2:
+                raise Exception(
+                    "objective_function must be a function "
+                    "with at least 3 arguments:"
+                    " f(predicted_dict, experimental_df,**kwargs)")
+        if objective_function == 'Log-MSE':
+            objective_function = self.log_mean_squared_error
+        self._objective_function = objective_function
+        return None
+
+    def get_objective_function(self):
+        return self._objective_function
+
+    def set_optimizer(self, optimizer):
+        if not callable(optimizer) \
+                and optimizer not in self._built_in_opt_list:
+            raise Exception(
+                "optimizer must be a function "
+                "or in this strings list: {0}".format(self._built_in_opt_list))
+        if callable(optimizer):
+            if len(signature(optimizer).parameters) < 2:
+                raise Exception(
+                    "optimizer must be a function "
+                    "with at least 2 arguments: "
+                    "f(objective_func,x_guess,**kwargs)")
+        if optimizer == 'SLSQP':
+            optimizer = self.slsqp_optimizer
+        self._optimizer = optimizer
+        return None
+
+    def get_optimizer(self):
+        return self._optimizer
+
+    def update_predicted_dict(self, phases_xml_filename=None):
+        if phases_xml_filename is None:
+            phases_xml_filename = self._phases_xml_filename
         phase_names = self._phase_names
         aq_ind = self._aq_ind
         org_ind = self._org_ind
         complex_name = self._complex_name
+        extractant_name = self._extractant_name
         rare_earth_ion_name = self._rare_earth_ion_name
         in_moles = self._in_moles
-        exp_df = self._exp_df
 
-        x = np.array(x)
-        opt_dict = copy.deepcopy(self._opt_dict)
-        i = 0
-        for species_name in opt_dict.keys():
-            for thermo_prop in opt_dict[species_name].keys():
-                opt_dict[species_name][thermo_prop] *= x[i]
-                i += 1
-        self.update_xml(opt_dict, temp_xml_filename)
-
-        phases_copy = ct.import_phases(temp_xml_filename, phase_names)
+        phases_copy = ct.import_phases(phases_xml_filename, phase_names)
         mix = ct.Mixture(phases_copy)
-        pred = []
+        predicted_dict = {"re_aq": [],
+                          "re_org": [],
+                          "h": [],
+                          "z": []
+                          }
+
         for row in in_moles.values:
             mix.species_moles = row
             mix.equilibrate('TP', log_level=0)
@@ -268,17 +368,86 @@ class REEPS:
                 org_ind, complex_name)]
             re_aq = mix.species_moles[mix.species_index(
                 aq_ind, rare_earth_ion_name)]
-            pred.append(np.log10(re_org / re_aq))
-        pred = np.array(pred)
-        meas = np.log10(exp_df['D(m)'].values)
-        obj = np.sum((pred - meas) ** 2)
-        return obj
+            hydrogen_ions = mix.species_moles[mix.species_index(aq_ind, 'H+')]
+            extractant = mix.species_moles[mix.species_index(
+                org_ind, extractant_name)]
+            predicted_dict['re_aq'].append(re_aq)
+            predicted_dict['re_org'].append(re_org)
+            predicted_dict['h'].append(hydrogen_ions)
+            predicted_dict['z'].append(extractant)
+        predicted_dict['re_aq'] = np.array(predicted_dict['re_aq'])
+        predicted_dict['re_org'] = np.array(predicted_dict['re_org'])
+        predicted_dict['h'] = np.array(predicted_dict['h'])
+        predicted_dict['z'] = np.array(predicted_dict['z'])
 
-    def fit(self, kwargs) -> float:
-        """Fits experimental to modeled data by estimating complex reference enthalpy
-        Returns estimated complex enthalpy in J/mol
-        :param kwargs: (dict) parameters and options for scipy.minimize
+        self._predicted_dict = predicted_dict
+        return None
+
+    def get_predicted_dict(self):
+        return self._predicted_dict
+
+    def _internal_objective(self, x, kwargs=None):
+        """default Log mean squared error between measured and predicted data
+        :param x: (list) thermo properties varied to minimize LMSE
+        :param kwargs: (list) arguments for objective_function
         """
+        temp_xml_file_path = self._temp_xml_file_path
+        exp_df = self._exp_df
+        objective_function = self._objective_function
+        opt_dict = copy.deepcopy(self._opt_dict)
+        i = 0
+        for species_name in opt_dict.keys():
+            for _ in opt_dict[species_name].keys():
+                i += 1
+        x = np.array(x)
+        if i == len(x.shape):
+            xs = np.array([x])
+            vectorized_x = False
+        else:
+            vectorized_x = True
+            xs = x
+        objective_values = []
+        for x in xs:
+            i = 0
+            for species_name in opt_dict.keys():
+                for thermo_prop in opt_dict[species_name].keys():
+                    opt_dict[species_name][thermo_prop] *= x[i]
+                    i += 1
+            self.update_xml(opt_dict, temp_xml_file_path)
+
+            self.update_predicted_dict(temp_xml_file_path)
+            predicted_dict = self.get_predicted_dict()
+
+            if kwargs is None:
+                # noinspection PyCallingNonCallable
+                obj = objective_function(predicted_dict, exp_df)
+            else:
+                # noinspection PyCallingNonCallable
+                obj = objective_function(predicted_dict, exp_df, **kwargs)
+            objective_values.append(obj)
+        if vectorized_x:
+            objective_values = np.array(objective_values)
+        else:
+            objective_values = objective_values[0]
+        return objective_values
+
+    def fit(self, objective_function=None, optimizer=None, objective_kwargs=None, optimizer_kwargs=None) -> dict:
+        """Fits experimental to modeled data by minimizing objective function
+        Returns estimated complex enthalpy in J/mol
+        :param objective_function: (function) function to compute objective
+        :param optimizer: (function) function to perform optimization
+        :param optimizer_kwargs: (dict) arguments for optimizer
+        :param objective_kwargs: (dict) arguments for objective function
+        """
+        if objective_function is not None:
+            self.set_objective_function(objective_function)
+        if optimizer is not None:
+            self.set_optimizer(optimizer)
+
+        def objective(x):
+            return self._internal_objective(x, objective_kwargs)
+
+        optimizer = self._optimizer
         opt_dict = copy.deepcopy(self._opt_dict)
         # x_guess = []
         i = 0
@@ -287,12 +456,20 @@ class REEPS:
                 # x_guess.append(opt_dict[species_name][thermo_prop])
                 i += 1
         x_guess = np.ones(i)
-        res = minimize(self.objective, x_guess, **kwargs)
+
+        if optimizer_kwargs is None:
+            # noinspection PyCallingNonCallable
+            est_parameters = optimizer(objective, x_guess)
+        else:
+            # noinspection PyCallingNonCallable
+            est_parameters = optimizer(objective, x_guess, **optimizer_kwargs)
+
         i = 0
         for species_name in opt_dict.keys():
             for thermo_prop in opt_dict[species_name].keys():
-                opt_dict[species_name][thermo_prop] *= res.x[i]
+                opt_dict[species_name][thermo_prop] *= est_parameters[i]
                 i += 1
+        self.update_predicted_dict()
         return opt_dict
 
     def update_xml(self,
@@ -323,8 +500,11 @@ class REEPS:
                                                      now.year))
 
         tree.write(phases_xml_filename)
+        if phases_xml_filename == self._phases_xml_filename:
+            self.set_phases(self._phases_xml_filename, self._phase_names)
+        return None
 
-    def parity_plot(self):
+    def parity_plot(self, species='re_aq'):
         """Parity plot between measured and predicted rare earth composition"""
         phases_copy = self._phases.copy()
         mix = ct.Mixture(phases_copy)
@@ -345,8 +525,31 @@ class REEPS:
         max_data = np.max([pred, meas])
         min_max_data = np.array([min_data, max_data])
         fig, ax = plt.subplots()
-        sns.scatterplot(meas, pred, color="r")
-        sns.lineplot(min_max_data, min_max_data, color="b")
-        ax.set(xlabel='Measured X equilibrium', ylabel='Predicted X equilibrium')
+        sns.scatterplot(meas, pred, color="r",
+                        label="Rare earth equilibrium concentration (mol/L)")
+        sns.lineplot(min_max_data, min_max_data, color="b", label="")
+        ax.set(xlabel='Measured', ylabel='Predicted')
         plt.show()
         return None
+
+    def r_squared(self):
+        """r-squared value comparing measured and predicted rare earth composition"""
+        phases_copy = self._phases.copy()
+        mix = ct.Mixture(phases_copy)
+        aq_ind = self._aq_ind
+        exp_df = self._exp_df
+        in_moles = self._in_moles
+        rare_earth_ion_name = self._rare_earth_ion_name
+        pred = []
+        for row in in_moles.values:
+            mix.species_moles = row
+            mix.equilibrate('TP', log_level=0)
+            re_aq = mix.species_moles[mix.species_index(
+                aq_ind, rare_earth_ion_name)]
+            pred.append(re_aq)
+        predicted_y = np.array(pred)
+        actual_y = exp_df['REeq(m)'].values
+        num = sum((actual_y - predicted_y) ** 2)
+        den = sum((actual_y - np.mean(actual_y)) ** 2)
+        r_2 = (1 - num / den)
+        return r_2

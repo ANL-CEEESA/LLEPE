@@ -11,8 +11,9 @@ import shutil
 import copy
 from inspect import signature
 import os
-sns.set()
 
+sns.set()
+sns.set(font_scale=1.6)
 
 class REEPS:
     """REEPS  (Rare earth extraction parameter searcher)
@@ -113,7 +114,7 @@ class REEPS:
 
     @staticmethod
     def log_mean_squared_error(predicted_dict, meas_df):
-        meas = meas_df['D(m)'].values
+        meas = meas_df.values[:, 2]
         pred = predicted_dict['re_org'] / predicted_dict['re_aq']
         log_pred = np.log10(pred)
         log_meas = np.log10(meas)
@@ -123,7 +124,7 @@ class REEPS:
     @staticmethod
     def slsqp_optimizer(objective, x_guess):
         optimizer_kwargs = {"method": 'SLSQP',
-                            "bounds": [(1e-1, 1e1) * len(x_guess)],
+                            "bounds": [(1e-1, 1e1)] * len(x_guess),
                             "constraints": (),
                             "options": {'disp': True, 'maxiter': 1000, 'ftol': 1e-6}}
         res = minimize(objective, x_guess, **optimizer_kwargs)
@@ -400,7 +401,8 @@ class REEPS:
             for _ in opt_dict[species_name].keys():
                 i += 1
         x = np.array(x)
-        if i == len(x.shape):
+
+        if len(x.shape) == 1:
             xs = np.array([x])
             vectorized_x = False
         else:
@@ -449,11 +451,9 @@ class REEPS:
 
         optimizer = self._optimizer
         opt_dict = copy.deepcopy(self._opt_dict)
-        # x_guess = []
         i = 0
         for species_name in opt_dict.keys():
             for _ in opt_dict[species_name].keys():
-                # x_guess.append(opt_dict[species_name][thermo_prop])
                 i += 1
         x_guess = np.ones(i)
 
@@ -504,7 +504,8 @@ class REEPS:
             self.set_phases(self._phases_xml_filename, self._phase_names)
         return None
 
-    def parity_plot(self, species='re_aq'):
+    # noinspection PyUnusedLocal
+    def parity_plot(self, species='re_aq', save_path=None, print_r_squared=False):
         """Parity plot between measured and predicted rare earth composition"""
         phases_copy = self._phases.copy()
         mix = ct.Mixture(phases_copy)
@@ -520,16 +521,32 @@ class REEPS:
                 aq_ind, rare_earth_ion_name)]
             pred.append(re_aq)
         pred = np.array(pred)
-        meas = exp_df['REeq(m)'].values
+        meas = exp_df.values[:, 1]
         min_data = np.min([pred, meas])
         max_data = np.max([pred, meas])
         min_max_data = np.array([min_data, max_data])
         fig, ax = plt.subplots()
-        sns.scatterplot(meas, pred, color="r",
-                        label="Rare earth equilibrium concentration (mol/L)")
-        sns.lineplot(min_max_data, min_max_data, color="b", label="")
+        re_element = ''
+        n_plus = 0
+        for char in self._rare_earth_ion_name:
+            if char.isalpha():
+                re_element = '{0}{1}'.format(re_element, char)
+            else:
+                n_plus += 1
+        re_ion_name = '$%s^{%d+}$' % (re_element, n_plus)
+        p1 = sns.scatterplot(meas, pred, color="r",
+                             label="{0} eq. conc. (mol/L)".format(re_ion_name),
+                             legend=False)
+        p2 = sns.lineplot(min_max_data, min_max_data, color="b", label="")
+        if print_r_squared:
+            p1.text(min_max_data[0], min_max_data[1]*0.9, '$R^2$={0:.2f}'.format(self.r_squared()))
+            plt.legend(loc='lower right')
+        else:
+            plt.legend()
         ax.set(xlabel='Measured', ylabel='Predicted')
         plt.show()
+        if save_path is not None:
+            plt.savefig(save_path, bbox_inches='tight')
         return None
 
     def r_squared(self):
@@ -548,7 +565,7 @@ class REEPS:
                 aq_ind, rare_earth_ion_name)]
             pred.append(re_aq)
         predicted_y = np.array(pred)
-        actual_y = exp_df['REeq(m)'].values
+        actual_y = exp_df.values[:, 1]
         num = sum((actual_y - predicted_y) ** 2)
         den = sum((actual_y - np.mean(actual_y)) ** 2)
         r_2 = (1 - num / den)

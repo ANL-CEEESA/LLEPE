@@ -3,6 +3,7 @@
     <words>
       <w>coeffs</w>
       <w>conc</w>
+      <w>csvs</w>
       <w>diluant</w>
       <w>disp</w>
       <w>dodecane</w>
@@ -18,6 +19,7 @@
       <w>scipy</w>
       <w>slsqp</w>
       <w>thermo</w>
+      <w>xmls</w>
     </words>
   </dictionary>
 </component>

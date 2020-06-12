@@ -1,0 +1,998 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="python" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="python" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>REEPS &mdash; reeps 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Getting Started" href="../guide/quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> reeps
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guide/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/quickstart.html">Getting Started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Searchers</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">REEPS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">reeps</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>REEPS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/modules/reeps.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-reeps"><span id="reeps"></span></span><div class="section" id="id1">
+<h1>REEPS<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reeps.REEPS">
+<em class="property">class </em><code class="sig-prename descclassname">reeps.</code><code class="sig-name descname">REEPS</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exp_csv_filename</span></em>, <em class="sig-param"><span class="n">phases_xml_filename</span></em>, <em class="sig-param"><span class="n">phase_names</span></em>, <em class="sig-param"><span class="n">aq_solvent_name</span></em>, <em class="sig-param"><span class="n">extractant_name</span></em>, <em class="sig-param"><span class="n">diluant_name</span></em>, <em class="sig-param"><span class="n">complex_names</span></em>, <em class="sig-param"><span class="n">rare_earth_ion_names</span></em>, <em class="sig-param"><span class="n">re_species_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">aq_solvent_rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extractant_rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">diluant_rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">opt_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">objective_function</span><span class="o">=</span><span class="default_value">'Log-MSE'</span></em>, <em class="sig-param"><span class="n">optimizer</span><span class="o">=</span><span class="default_value">'SLSQP'</span></em>, <em class="sig-param"><span class="n">temp_xml_file_path</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rare earth elements (REE or RE) Takes in experimental data
+Returns parameters for GEM</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The order in which the REEs appear in the csv file must be the same
+order as they appear in the xml, complex_names and
+rare_earth_ion_names.</p>
+<p>For example, say in exp_csv_filename's csv, RE_1 is Nd RE_2 is Pr,
+and</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">aq_solvent_name</span> <span class="o">=</span> <span class="s1">&#39;H2O(L)&#39;</span>
+<span class="n">extractant_name</span> <span class="o">=</span> <span class="s1">&#39;(HA)2(org)&#39;</span>
+<span class="n">diluent_name</span> <span class="o">=</span> <span class="s1">&#39;dodecane&#39;</span>
+</pre></div>
+</div>
+<p>Then:</p>
+<p>The csvs column ordering must be:</p>
+<p>[h_i, h_eq, z_i, z_eq, Nd_aq_i, Nd_aq_eq, Nd_d_eq,
+Pr_aq_i, Pr_aq_eq, Pr_d_eq]</p>
+<p>The aqueous speciesArray must be
+&quot;H2O(L) H+ OH- Cl- Nd+++ Pr+++&quot;</p>
+<p>The organic speciesArray must be
+&quot;(HA)2(org) dodecane Nd(H(A)2)3(org) Pr(H(A)2)3(org)&quot;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">complex_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Nd(H(A)2)3(org)&#39;</span><span class="p">,</span> <span class="s1">&#39;Pr(H(A)2)3(org)&#39;</span><span class="p">]</span>
+<span class="n">rare_earth_ion_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Nd+++&#39;</span><span class="p">,</span> <span class="s1">&#39;Pr+++&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exp_csv_filename</strong> -- <p>(str) csv file name with experimental data</p>
+<p>In the .csv file, the rows are different experiments and
+columns are the measured quantities.</p>
+<p>The ordering of the columns needs to be:</p>
+<p>[h_i, h_eq, z_i, z_eq, {RE_1}_aq_i, {RE_1}_aq_eq, {RE_1}_d_eq,
+{RE_2}_aq_i, {RE_2}_aq_eq, {RE_2}_d_eq,...
+{RE_N}_aq_i, {RE_N}_aq_eq, {RE_N}_d_eq]</p>
+<p>Naming does not matter, just the order.</p>
+<p>Where {RE_1}-{RE_N} are the rare earth element names of interest
+i.e. Nd, Pr, La, etc.</p>
+<p>Below is an explanation of the columns.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 20%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>Column</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>h_i</p></td>
+<td><p>Initial Concentration of
+H+ ions (mol/L)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>h_eq</p></td>
+<td><p>Equilibrium concentration of
+H+ ions (mol/L)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>z_i</p></td>
+<td><p>Initial concentration of
+extractant (mol/L)</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>z_eq</p></td>
+<td><p>Equilibrium concentration of
+extractant (mol/L)</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>{RE}_aq_i</p></td>
+<td><p>Initial concentration of RE ions (mol/L)</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>{RE}_aq_eq</p></td>
+<td><p>Equilibrium concentration of RE ions
+in aqueous phase (mol/L)</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>{RE}_d_eq</p></td>
+<td><p>Equilibrium Ratio between amount of
+RE atoms in organic to aqueous</p></td>
+</tr>
+</tbody>
+</table>
+</p></li>
+<li><p><strong>phases_xml_filename</strong> -- <p>(str) xml file with parameters
+for equilibrium calc</p>
+<p>Would recommend copying and modifying xmls located in data/xmls
+or in Cantera's &quot;data&quot; folder</p>
+<p>speciesArray fields need specific ordering.</p>
+<p>In aqueous phase: aq_solvent_name, H+, OH-, Cl-, RE_1, RE_2, ..., RE_N</p>
+<p>For aqueous phase, RE_1-RE_N represent RE ion names i.e. Nd+++, Pr+++</p>
+<p>In organic phase : extractant_name, diluant_name, RE_1, RE_2, ..., RE_N</p>
+<p>For organic phase, RE_1-RE_N represent RE complex names
+i.e. Nd(H(A)2)3(org), Pr(H(A)2)3(org)</p>
+</p></li>
+<li><p><strong>phase_names</strong> -- <p>(list) names of phases in xml file</p>
+<p>Found in the xml file under &lt;phase ... id={phase_name}&gt;</p>
+</p></li>
+<li><p><strong>aq_solvent_name</strong> -- (str) name of aqueous solvent in xml file</p></li>
+<li><p><strong>extractant_name</strong> -- (str) name of extractant in xml file</p></li>
+<li><p><strong>diluant_name</strong> -- (str) name of diluant in xml file</p></li>
+<li><p><strong>complex_names</strong> -- <p>(list) names of complexes in xml file.</p>
+<p>Ensure the ordering is correct</p>
+</p></li>
+<li><p><strong>rare_earth_ion_names</strong> -- <p>(list) names of rare earth ions in xml file</p>
+<p>Ensure the ordering is correct</p>
+</p></li>
+<li><p><strong>re_species_list</strong> -- <p>(list) names of rare earth elements.</p>
+<dl class="simple">
+<dt>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, re_species_list will be rare_earth_ion_names without '+'</dt><dd><p>i.e. 'Nd+++'-&gt;'Nd'</p>
+</dd>
+</dl>
+<p>Ensure the ordering is correct</p>
+</p></li>
+<li><p><strong>aq_solvent_rho</strong> -- <p>(float) density of solvent (g/L)</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, molar volume/molecular weight is used from xml</p>
+</p></li>
+<li><p><strong>extractant_rho</strong> -- <p>(float) density of extractant (g/L)</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, molar volume/molecular weight is used from xml</p>
+</p></li>
+<li><p><strong>diluant_rho</strong> -- <p>(float) density of diluant (g/L)</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, molar volume/molecular weight is used from xml</p>
+</p></li>
+<li><p><strong>opt_dict</strong> -- <p>(dict) dictionary containing info about which
+species parameters are updated to fit model to experimental data</p>
+<p>Should have the format as below</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">opt_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;species1&quot;</span><span class="p">:</span>
+                       <span class="p">{</span><span class="s2">&quot;parameter1&quot;</span><span class="p">:</span> <span class="s2">&quot;guess1&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;parameter2&quot;</span><span class="p">:</span> <span class="s2">&quot;guess2&quot;</span><span class="p">,</span>
+                        <span class="o">...</span>
+                        <span class="s2">&quot;parameterN&quot;</span><span class="p">:</span> <span class="s2">&quot;guessN&quot;</span><span class="p">}</span>
+           <span class="s2">&quot;species2&quot;</span><span class="p">:</span>
+                         <span class="p">{</span><span class="s2">&quot;parameter1&quot;</span><span class="p">:</span> <span class="s2">&quot;guess1&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;parameter2&quot;</span><span class="p">:</span> <span class="s2">&quot;guess2&quot;</span><span class="p">,</span>
+                         <span class="o">...</span>
+                         <span class="s2">&quot;parameterN&quot;</span><span class="p">:</span> <span class="s2">&quot;guessN&quot;</span><span class="p">}</span>
+           <span class="o">...</span>
+           <span class="s2">&quot;speciesN&quot;</span><span class="p">:</span>
+                        <span class="p">{</span><span class="s2">&quot;parameter1&quot;</span><span class="p">:</span> <span class="s2">&quot;guess1&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;parameter2&quot;</span><span class="p">:</span> <span class="s2">&quot;guess2&quot;</span><span class="p">,</span>
+                        <span class="o">...</span>
+                        <span class="s2">&quot;parameterN&quot;</span><span class="p">:</span> <span class="s2">&quot;guessN&quot;</span><span class="p">}</span>
+                         <span class="p">}</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>objective_function</strong> -- <p>(function or str) function to compute objective</p>
+<p>By default, the objective function is log mean squared error
+of distribution ratio</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">d_pred</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">d_meas</span><span class="p">))</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Function needs to take inputs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">objective_function</span><span class="p">(</span><span class="n">predicted_dict</span><span class="p">,</span> <span class="n">measured_df</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">kwargs</span></code> is optional</p>
+<p>Function needs to return: (float) value computed by objective function</p>
+<p>Below is the guide for referencing predicted values</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>To access</p></th>
+<th class="head"><p>Use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>hydrogen ion conc in aq</p></td>
+<td><p>predicted_dict['h_eq']</p></td>
+</tr>
+<tr class="row-odd"><td><p>extractant conc in org</p></td>
+<td><p>predicted_dict['z_eq']</p></td>
+</tr>
+<tr class="row-even"><td><p>RE ion eq conc in aq</p></td>
+<td><p>predicted_dict['{RE}_aq_eq']</p></td>
+</tr>
+<tr class="row-odd"><td><p>RE complex eq conc in org</p></td>
+<td><p>predicted_dict['{RE}_org_eq']</p></td>
+</tr>
+<tr class="row-even"><td><p>RE distribution ratio</p></td>
+<td><p>predicted_dict['{RE}_d_eq']</p></td>
+</tr>
+</tbody>
+</table>
+<p>Replace &quot;{RE}&quot; with rare earth element i.e. Nd, La, etc.</p>
+<p>For measured values, use the same names, but
+replace <code class="docutils literal notranslate"><span class="pre">predicted_dict</span></code> with <code class="docutils literal notranslate"><span class="pre">measured_df</span></code></p>
+</p></li>
+<li><p><strong>optimizer</strong> -- <p>(function or str) function to perform optimization</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The optimized variables are not directly the species parameters,
+but instead are first multiplied by the initial guess before
+sending becoming the species parameters.</p>
+<p>For example, say</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">opt_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Nd(H(A)2)3(org):&#39;</span><span class="n">h0</span><span class="s1">&#39;:-4.7e6}</span>
+</pre></div>
+</div>
+<p>If the bounds on h0 need to be [-4.7e7,-4.7e5], then
+divide the bounds by the guess and get</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e1</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Though fit() returns a structure identical to opt_dict with correct
+scaled values, in case bounds and constraints are used, you must
+note the optimized x's are first multiplied by the initial guess
+before written to the xml.</p>
+</div>
+<p>By default, the optimizer is scipy's optimize function with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">default_kwargs</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
+                 <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e1</span><span class="p">)]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_guess</span><span class="p">),</span>
+                 <span class="s2">&quot;constraints&quot;</span><span class="p">:</span> <span class="p">(),</span>
+                 <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                             <span class="s1">&#39;maxiter&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+                             <span class="s1">&#39;ftol&#39;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">}}</span>
+</pre></div>
+</div>
+<p>Function needs to take inputs:
+<code class="docutils literal notranslate"><span class="pre">optimizer(objective_function,</span> <span class="pre">x_guess,</span> <span class="pre">kwargs)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">kwargs</span></code> is optional</p>
+<p>Function needs to return: (np.ndarray) Optimized parameters</p>
+</p></li>
+<li><p><strong>temp_xml_file_path</strong> -- <p>(str) path to temporary xml file.</p>
+<p>This xml file is a duplicate of the phases_xml_file name and is
+modified during the optimization process to avoid changing the original
+xml file</p>
+<p>default is local temp folder</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="reeps.REEPS.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objective_function</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">optimizer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">objective_kwargs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">optimizer_kwargs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits experimental to modeled data by minimizing objective function
+with optimizer. Returns dictionary with opt_dict structure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objective_function</strong> -- (function) function to compute objective</p></li>
+<li><p><strong>optimizer</strong> -- (function) function to perform optimization</p></li>
+<li><p><strong>optimizer_kwargs</strong> -- (dict) arguments for optimizer</p></li>
+<li><p><strong>objective_kwargs</strong> -- (dict) arguments for objective function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns opt_dict</dt>
+<dd class="field-even"><p>(dict) optimized opt_dict. Has identical structure
+as opt_dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_aq_solvent_name">
+<code class="sig-name descname">get_aq_solvent_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_aq_solvent_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_aq_solvent_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns aq_solvent_name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>aq_solvent_name: (str) name of aqueous solvent in xml file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_aq_solvent_rho">
+<code class="sig-name descname">get_aq_solvent_rho</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_aq_solvent_rho"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_aq_solvent_rho" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns aqueous solvent density (g/L)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>aq_solvent_rho: (float) density of aqueous solvent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_complex_names">
+<code class="sig-name descname">get_complex_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_complex_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_complex_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list of complex names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>complex_names: (list) names of complexes in xml file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_diluant_name">
+<code class="sig-name descname">get_diluant_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_diluant_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_diluant_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns diluant name
+:return:  diluant_name: (str) name of diluant in xml file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_diluant_rho">
+<code class="sig-name descname">get_diluant_rho</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_diluant_rho"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_diluant_rho" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns diluant density (g/L)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>diluant_rho: (float) density of diluant</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_exp_df">
+<code class="sig-name descname">get_exp_df</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_exp_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_exp_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the experimental DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(pd.DataFrame) Experimental data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_extractant_name">
+<code class="sig-name descname">get_extractant_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_extractant_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_extractant_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns extractant name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>extractant_name: (str) name of extractant in xml file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_extractant_rho">
+<code class="sig-name descname">get_extractant_rho</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_extractant_rho"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_extractant_rho" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns extractant density (g/L)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>extractant_rho: (float) density of extractant</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_in_moles">
+<code class="sig-name descname">get_in_moles</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_in_moles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_in_moles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the in_moles DataFrame which contains the initial mole
+fractions of each species for each experiment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>in_moles: (pd.DataFrame) DataFrame with initial mole fractions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_objective_function">
+<code class="sig-name descname">get_objective_function</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_objective_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_objective_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns objective function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>objective_function: (func) Objective function to quantify
+error between model and experimental data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_opt_dict">
+<code class="sig-name descname">get_opt_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_opt_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_opt_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dictionary containing optimization information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(dict) dictionary containing info about which
+species parameters are updated to fit model to experimental data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_optimizer">
+<code class="sig-name descname">get_optimizer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns objective function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>optimizer: (func) Optimizer function to minimize objective
+function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_phases">
+<code class="sig-name descname">get_phases</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_phases"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_phases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of Cantera solutions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(list) list of Cantera solutions/phases</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_predicted_dict">
+<code class="sig-name descname">get_predicted_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_predicted_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_predicted_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns predicted dictionary of species concentrations
+that xml parameters predicts given current in_moles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>predicted_dict: (dict) dictionary of species concentrations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_rare_earth_ion_names">
+<code class="sig-name descname">get_rare_earth_ion_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_rare_earth_ion_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_rare_earth_ion_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list of rare earth ion names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>rare_earth_ion_names: (list) names of rare earth ions in 
+xml file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_re_species_list">
+<code class="sig-name descname">get_re_species_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_re_species_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_re_species_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list of rare earth element names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>re_species_list: (list) names of rare earth elements in
+xml file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.get_temp_xml_file_path">
+<code class="sig-name descname">get_temp_xml_file_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.get_temp_xml_file_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.get_temp_xml_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to temporary xml file.</p>
+<p>This xml file is a duplicate of the phases_xml_file name and is
+modified during the optimization process to avoid changing the original
+xml file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>temp_xml_file_path: (str) path to temporary xml file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.log_mean_squared_error">
+<code class="sig-name descname">log_mean_squared_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">predicted_dict</span></em>, <em class="sig-param"><span class="n">meas_df</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.log_mean_squared_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.log_mean_squared_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default objective function for REEPS</p>
+<p>Returns the log mean squared error of
+predicted distribution ratios  (d=n_org/n_aq)
+to measured d.</p>
+<p>np.sum((np.log10(d_pred)-np.log10(d_meas))**2)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>predicted_dict</strong> -- (dict) contains predicted data</p></li>
+<li><p><strong>meas_df</strong> -- (pd.DataFrame) contains experimental data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(float) log mean squared error between predicted and measured</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.parity_plot">
+<code class="sig-name descname">parity_plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">compared_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">save_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">print_r_squared</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.parity_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.parity_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parity plot between measured and predicted compared_value.
+Default compared value is {RE_1}_aq_eq</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>compared_value</strong> -- (str) Quantity to compare predicted and
+experimental data. Can be any column containing &quot;eq&quot; in exp_df i.e.
+h_eq, z_eq, {RE}_d_eq, etc.</p></li>
+<li><p><strong>save_path</strong> -- (str) save path for parity plot</p></li>
+<li><p><strong>print_r_squared</strong> -- (boolean) To plot or not to plot r-squared
+value. Prints 2 places past decimal</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.r_squared">
+<code class="sig-name descname">r_squared</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">compared_value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.r_squared"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.r_squared" title="Permalink to this definition">¶</a></dt>
+<dd><p>r-squared value comparing measured and predicted compared value</p>
+<p>Closer to 1, the better the model's predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>compared_value</strong> -- (str) Quantity to compare predicted and
+experimental data. Can be any column containing &quot;eq&quot; in exp_df i.e.
+h_eq, z_eq, {RE}_d_eq, etc.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_aq_solvent_name">
+<code class="sig-name descname">set_aq_solvent_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">aq_solvent_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_aq_solvent_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_aq_solvent_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change aq_solvent_name to input aq_solvent_name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>aq_solvent_name</strong> -- (str) name of aqueous solvent in xml file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_aq_solvent_rho">
+<code class="sig-name descname">set_aq_solvent_rho</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">aq_solvent_rho</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_aq_solvent_rho"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_aq_solvent_rho" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes aqueous solvent density (g/L) to input aq_solvent_rho</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>aq_solvent_rho</strong> -- (float) density of aqueous solvent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_complex_names">
+<code class="sig-name descname">set_complex_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">complex_names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_complex_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_complex_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change complex names list to input complex_names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>complex_names</strong> -- (list) names of complexes in xml file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_diluant_name">
+<code class="sig-name descname">set_diluant_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diluant_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_diluant_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_diluant_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change diluant_name to input diluant_name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>diluant_name</strong> -- (str) name of diluant in xml file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_diluant_rho">
+<code class="sig-name descname">set_diluant_rho</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diluant_rho</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_diluant_rho"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_diluant_rho" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes diluant density (g/L) to input diluant_rho</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>diluant_rho</strong> -- (float) density of diluant</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_exp_df">
+<code class="sig-name descname">set_exp_df</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exp_csv_filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_exp_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_exp_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes the experimental DataFrame to input exp_csv_filename data
+and renames columns to internal REEPS names</p>
+<p>h_i, h_eq, z_i, z_eq, {RE}_aq_i, {RE}_aq_eq, {RE}_d</p>
+<p>See class docstring on &quot;exp_csv_filename&quot; for further explanations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>exp_csv_filename</strong> -- (str) file name/path for experimental data csv</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_extractant_name">
+<code class="sig-name descname">set_extractant_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extractant_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_extractant_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_extractant_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change extractant_name to input extractant_name
+:param extractant_name: (str) name of extractant in xml file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_extractant_rho">
+<code class="sig-name descname">set_extractant_rho</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extractant_rho</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_extractant_rho"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_extractant_rho" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes extractant density (g/L) to input extractant_rho</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>extractant_rho</strong> -- (float) density of extractant</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_in_moles">
+<code class="sig-name descname">set_in_moles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">feed_vol</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_in_moles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_in_moles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that initializes mole fractions to input feed_vol</p>
+<p>This function is called at initialization</p>
+<p>Sets in_moles to a pd.DataFrame containing initial mole fractions</p>
+<p>Columns for species and rows for different experiments</p>
+<p>This function also calls update_predicted_dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>feed_vol</strong> -- (float) feed volume of mixture (g/L)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_objective_function">
+<code class="sig-name descname">set_objective_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objective_function</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_objective_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_objective_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change objective function to input objective_function.</p>
+<blockquote>
+<div><p>See class docstring on &quot;objective_function&quot; for instructions</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>objective_function</strong> -- (func) Objective function to quantify
+error between model and experimental data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_opt_dict">
+<code class="sig-name descname">set_opt_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">opt_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_opt_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_opt_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the dictionary to input opt_dict.</p>
+<p>opt_dict specifies species parameters to be updated to
+fit model to data</p>
+<p>See class docstring on &quot;opt_dict&quot; for more information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>opt_dict</strong> -- (dict) dictionary containing info about which
+species parameters are updated to fit model to experimental data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_optimizer">
+<code class="sig-name descname">set_optimizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">optimizer</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change optimizer function to input optimizer.</p>
+<blockquote>
+<div><p>See class docstring on &quot;optimizer&quot; for instructions</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>optimizer</strong> -- (func) Optimizer function to minimize objective
+function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_phases">
+<code class="sig-name descname">set_phases</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phases_xml_filename</span></em>, <em class="sig-param"><span class="n">phase_names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_phases"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_phases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change list of Cantera solutions by inputting
+new xml file name and phase names</p>
+<p>Also runs set_in_moles to set initial molality to 1 g/L</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phases_xml_filename</strong> -- (str) xml file with parameters
+for equilibrium calc</p></li>
+<li><p><strong>phase_names</strong> -- (list) names of phases in xml file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_rare_earth_ion_names">
+<code class="sig-name descname">set_rare_earth_ion_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rare_earth_ion_names</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_rare_earth_ion_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_rare_earth_ion_names" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Change list of rare earth ion names to input</dt><dd><p>rare_earth_ion_names</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rare_earth_ion_names</strong> -- (list) names of rare earth ions in 
+xml file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_re_species_list">
+<code class="sig-name descname">set_re_species_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">re_species_list</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_re_species_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_re_species_list" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Change list of rare earth ion names to input</dt><dd><p>rare_earth_ion_names</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>re_species_list</strong> -- (list) names of rare earth elements in
+xml file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.set_temp_xml_file_path">
+<code class="sig-name descname">set_temp_xml_file_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temp_xml_file_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.set_temp_xml_file_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.set_temp_xml_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes temporary xml file path to input temp_xml_file_path.</p>
+<p>This xml file is a duplicate of the phases_xml_file name and is
+modified during the optimization process to avoid changing the original
+xml file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>temp_xml_file_path</strong> -- (str) path to temporary xml file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.slsqp_optimizer">
+<em class="property">static </em><code class="sig-name descname">slsqp_optimizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objective</span></em>, <em class="sig-param"><span class="n">x_guess</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.slsqp_optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.slsqp_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default optimizer for REEPS</p>
+<p>Uses scipy.minimize with options</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">default_kwargs</span><span class="o">=</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
+                <span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e1</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x_guess</span><span class="p">)],</span>
+                <span class="s2">&quot;constraints&quot;</span><span class="p">:</span> <span class="p">(),</span>
+                <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                            <span class="s1">&#39;maxiter&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+                            <span class="s1">&#39;ftol&#39;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">}}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objective</strong> -- (func) the objective function</p></li>
+<li><p><strong>x_guess</strong> -- (np.ndarray) the initial guess (always 1)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(np.ndarray) Optimized parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.update_predicted_dict">
+<code class="sig-name descname">update_predicted_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phases_xml_filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">phase_names</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.update_predicted_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.update_predicted_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that computes the predicted equilibrium concentrations
+the fed phases_xml_filename parameters predicts given the initial
+mole fractions set by in_moles()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phases_xml_filename</strong> -- (str)xml file with parameters
+for equilibrium calc. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the
+current phases_xml_filename is used.</p></li>
+<li><p><strong>phase_names</strong> -- (list) names of phases in xml file.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the current phases_names is used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reeps.REEPS.update_xml">
+<code class="sig-name descname">update_xml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info_dict</span></em>, <em class="sig-param"><span class="n">phases_xml_filename</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/reeps/reeps.html#REEPS.update_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reeps.REEPS.update_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>updates xml file with info_dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info_dict</strong> -- (dict) info in {species_names:{thermo_prop:val}}
+Requires an identical structure to opt_dict</p></li>
+<li><p><strong>phases_xml_filename</strong> -- (str) xml filename if editing other xml
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the current xml will be modified and the internal
+Cantera phases will be refreshed to the new values.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../guide/quickstart.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Titus Quah, Nwike Iloeje
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

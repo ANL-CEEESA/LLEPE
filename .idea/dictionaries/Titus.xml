@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Titus">
     <words>
+      <w>cantera</w>
       <w>coeffs</w>
       <w>conc</w>
       <w>csvs</w>
@@ -12,11 +13,15 @@
       <w>ftol</w>
       <w>kmol</w>
       <w>lmse</w>
+      <w>matplotlib</w>
       <w>maxiter</w>
+      <w>molality</w>
       <w>ndarray</w>
       <w>pred</w>
+      <w>quah</w>
       <w>reeps</w>
       <w>scipy</w>
+      <w>seaborn</w>
       <w>slsqp</w>
       <w>thermo</w>
       <w>xmls</w>

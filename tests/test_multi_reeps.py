@@ -1,33 +1,15 @@
 import json
 import numpy as np
-import pyswarms as ps
 import sys
 sys.path.append('../')
-from reeps import REEPS1
+from reeps import REEPS
 
 with open('multi_ree_settings.txt') as file:
     testing_params = json.load(file)
 
-beaker = REEPS1(**testing_params)
+beaker = REEPS(**testing_params)
 
 
-# def new_obj(predicted_dict, meas_df, epsilon):
-#     meas_cols = list(meas_df)
-#     pred_keys = list(predicted_dict.keys())
-#     meas = meas_df[meas_cols[2]]
-#     pred = (predicted_dict['re_org'] + epsilon) / (predicted_dict['re_aq'] + epsilon)
-#     log_pred = np.log10(pred)
-#     log_meas = np.log10(meas)
-#     obj = np.sum((log_pred - log_meas) ** 2)
-#     return obj
-# #
-# #
-# # def new_obj(ping):
-# #     print(ping)
-# beaker.set_objective_function(new_obj)
-# objective_kwargs = {"epsilon": 1e-14}
-# beaker.set
-# noinspection PyUnusedLocal
 def optimizer(func, x_guess):
     lb = np.array([1e-1])
     ub = np.array([1e1])
@@ -48,6 +30,6 @@ minimizer_kwargs = {"method": 'SLSQP',
 est_enthalpy = beaker.fit()
 print(est_enthalpy)
 
-# beaker.update_xml(est_enthalpy)
-# beaker.parity_plot()
-# print(beaker.r_squared())
+beaker.update_xml(est_enthalpy)
+# beaker.parity_plot('Nd_d_eq', print_r_squared=True)
+print(beaker.r_squared())

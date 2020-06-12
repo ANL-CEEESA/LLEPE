@@ -1,14 +1,14 @@
 import json
+from unittest import TestCase
+
 import numpy as np
 import pyswarms as ps
-import sys
-sys.path.append('../')
-from reeps import REEPS
+from reeps import REEPS1
 
 with open('one_ree_settings.txt') as file:
     testing_params = json.load(file)
 
-beaker = REEPS(**testing_params)
+beaker = REEPS1(**testing_params)
 
 
 # def new_obj(predicted_dict, meas_df, epsilon):
@@ -48,6 +48,118 @@ minimizer_kwargs = {"method": 'SLSQP',
 est_enthalpy = beaker.fit()
 print(est_enthalpy)
 
-# beaker.update_xml(est_enthalpy)
+
+beaker.update_xml(est_enthalpy)
 # beaker.parity_plot()
-# print(beaker.r_squared())
+print(beaker.r_squared())
+# class TestREEPS1(TestCase):
+#     def test_slsqp_optimizer(self):
+#         self.fail()
+#
+#     def test_log_mean_squared_error(self):
+#         self.fail()
+#
+#     def test_get_exp_df(self):
+#         self.fail()
+#
+#     def test_set_exp_df(self):
+#         self.fail()
+#
+#     def test_get_phases(self):
+#         self.fail()
+#
+#     def test_set_phases(self):
+#         self.fail()
+#
+#     def test_get_opt_dict(self):
+#         self.fail()
+#
+#     def test_set_opt_dict(self):
+#         self.fail()
+#
+#     def test_get_aq_solvent_name(self):
+#         self.fail()
+#
+#     def test_set_aq_solvent_name(self):
+#         self.fail()
+#
+#     def test_get_extractant_name(self):
+#         self.fail()
+#
+#     def test_set_extractant_name(self):
+#         self.fail()
+#
+#     def test_get_diluant_name(self):
+#         self.fail()
+#
+#     def test_set_diluant_name(self):
+#         self.fail()
+#
+#     def test_get_complex_names(self):
+#         self.fail()
+#
+#     def test_set_complex_names(self):
+#         self.fail()
+#
+#     def test_get_rare_earth_ion_names(self):
+#         self.fail()
+#
+#     def test_set_rare_earth_ion_names(self):
+#         self.fail()
+#
+#     def test_get_aq_solvent_rho(self):
+#         self.fail()
+#
+#     def test_set_aq_solvent_rho(self):
+#         self.fail()
+#
+#     def test_get_extractant_rho(self):
+#         self.fail()
+#
+#     def test_set_extractant_rho(self):
+#         self.fail()
+#
+#     def test_get_diluant_rho(self):
+#         self.fail()
+#
+#     def test_set_diluant_rho(self):
+#         self.fail()
+#
+#     def test_set_in_moles(self):
+#         self.fail()
+#
+#     def test_get_in_moles(self):
+#         self.fail()
+#
+#     def test_set_objective_function(self):
+#         self.fail()
+#
+#     def test_get_objective_function(self):
+#         self.fail()
+#
+#     def test_set_optimizer(self):
+#         self.fail()
+#
+#     def test_get_optimizer(self):
+#         self.fail()
+#
+#     def test_update_predicted_dict(self):
+#         self.fail()
+#
+#     def test_get_predicted_dict(self):
+#         self.fail()
+#
+#     def test__internal_objective(self):
+#         self.fail()
+#
+#     def test_fit(self):
+#         self.fail()
+#
+#     def test_update_xml(self):
+#         self.fail()
+#
+#     def test_parity_plot(self):
+#         self.fail()
+#
+#     def test_r_squared(self):
+#         self.fail()

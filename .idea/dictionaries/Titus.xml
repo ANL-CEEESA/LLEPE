@@ -19,11 +19,13 @@
       <w>ndarray</w>
       <w>pred</w>
       <w>quah</w>
+      <w>rbfopt</w>
       <w>reeps</w>
       <w>scipy</w>
       <w>seaborn</w>
       <w>slsqp</w>
       <w>thermo</w>
+      <w>viridis</w>
       <w>xmls</w>
     </words>
   </dictionary>

@@ -15,8 +15,10 @@ def optimizer(func, x_guess):
     ub = np.array([1e1])
     bounds = (lb, ub)
     options = {'c1': 1e-3, 'c2': 1e-3, 'w': 0.9}
-    mini_optimizer = ps.single.global_best.GlobalBestPSO(n_particles=100, dimensions=1,
-                                                         options=options, bounds=bounds)
+    mini_optimizer = ps.single.global_best.GlobalBestPSO(n_particles=100,
+                                                         dimensions=1,
+                                                         options=options,
+                                                         bounds=bounds)
     f_opt, x_opt = mini_optimizer.optimize(func, iters=100)
 
     return x_opt

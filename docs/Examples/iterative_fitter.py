@@ -111,7 +111,8 @@ while rel_diff > 1e-4:
                 'extractant_rho': 960.0,
                 'diluant_rho': 750.0,
                 'objective_function': llepe.lmse_perturbed_obj,
-                'optimizer': optimizer
+                'optimizer': optimizer,
+                'temp_xml_file_path': 'outputs/temp.xml'
             }
             estimator = llepe.LLEPE(**llepe_params)
             estimator.update_xml(llepe_params['opt_dict'])

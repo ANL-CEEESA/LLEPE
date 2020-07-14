@@ -15,7 +15,7 @@ meas_pitzer_param_df = pd.read_csv("../../data/csvs/may_pitzer_params.csv")
 labeled_data = pd.read_csv("../../data/csvs/"
                            "zeroes_removed_PC88A_HCL_NdPrCeLaDySmY.csv")
 exp_data = labeled_data.drop(labeled_data.columns[0], axis=1)
-xml_file = "../../data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml"
+xml_file = "PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml"
 eps = 1e-4
 mini_eps = 1e-8
 x_guesses = [[-5178500.0, -1459500.0],
@@ -103,8 +103,10 @@ while rel_diff > 1e-4:
                 'aq_solvent_name': 'H2O(L)',
                 'extractant_name': '(HA)2(org)',
                 'diluant_name': 'dodecane',
-                'complex_names': ['{0}(H(A)2)3(org)'.format(species)],
-                'extracted_species_ion_names': ['{0}+++'.format(species)],
+                'complex_names': ['{0}(H(A)2)3(org)'.format(species)
+                                  for species in species_list],
+                'extracted_species_ion_names': ['{0}+++'.format(species)
+                                                for species in species_list],
                 'aq_solvent_rho': 1000.0,
                 'extractant_rho': 960.0,
                 'diluant_rho': 750.0,
@@ -172,8 +174,8 @@ while rel_diff > 1e-4:
             pitzer_guess_dict[pitzer_param].append(value)
             if i > 2:
                 mini_rel_diff1 = np.abs(value_list[-1]
-                                        - value_list[-2])/(
-                    np.abs(value_list[-2]))
+                                        - value_list[-2]) / (
+                                     np.abs(value_list[-2]))
                 mini_rel_diff2 = np.abs(value_list[-2] - value_list[-3]) / (
                     np.abs(value_list[-3]))
                 if mini_rel_diff1 < mini_eps and mini_rel_diff2 < mini_eps:
@@ -184,11 +186,7 @@ while rel_diff > 1e-4:
     output_df = pd.DataFrame(output_dict)
     old_row = output_df.iloc[-2, :].values[3:]
     new_row = output_df.iloc[-1, :].values[3:]
-    rel_diff = np.sum(np.abs(new_row - old_row)/np.abs(old_row))
+    rel_diff = np.sum(np.abs(new_row - old_row) / np.abs(old_row))
     output_dict['rel_diff'].append(rel_diff)
     output_df = pd.DataFrame(output_dict)
     output_df.to_csv('outputs/iterative_fitter_output_df.csv')
-    
-
-
-

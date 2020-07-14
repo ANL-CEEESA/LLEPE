@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='llepe',
     version='0.0.0',
-    packages=['LLEPE'],
+    packages=['llepe'],
     package_data={
         'csvs': ['data/csvs/*.csv'],
         'xmls': ['data/xmls/*.xml'],

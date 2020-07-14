@@ -1,37 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="Edited parity plot to allow color to represent 3rd dimension. Still need to improve colorbar axis name.">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Titus.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Titus.xml" afterDir="false" />
+    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/xmls/twophase.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/twophase.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/index.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/modules/reeps.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/modules/reeps.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/.buildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/reeps/reeps.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/reeps/reeps.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/index.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/index.rst.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/modules/reeps.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/modules/reeps.rst.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/guide/install.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/guide/install.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/guide/quickstart.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/guide/quickstart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/modules/reeps.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/modules/reeps.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/py-modindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/py-modindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/modules/reeps.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/modules/reeps.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reeps/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reeps/reeps.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/multi_ree_settings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/one_ree_settings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_multi_reeps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_reeps.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_reeps.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +254,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592321239574</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="updated to LLEPE">
+      <created>1594739391460</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1594739391460</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -304,7 +283,8 @@
     <MESSAGE value="Modified reeps to grab charge from REE in xml file for initial chlorine moles calculation" />
     <MESSAGE value="Allow user to change optimizer and objective function. Also added r-squared evaluator. Changed temp file location to user temp folder. Added a prediction dictionary to access the values predicted by model." />
     <MESSAGE value="Edited parity plot to allow color to represent 3rd dimension. Still need to improve colorbar axis name." />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited parity plot to allow color to represent 3rd dimension. Still need to improve colorbar axis name." />
+    <MESSAGE value="updated to LLEPE" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated to LLEPE" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -324,11 +304,11 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="169" y="115" key="CommitChangelistDialog2" timestamp="1594738674676">
+    <state x="169" y="115" key="CommitChangelistDialog2" timestamp="1594739389480">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321237444" />
-    <state x="169" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594738674676" />
+    <state x="169" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594739389480" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
@@ -378,10 +358,11 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1245" y="438" width="437" height="168" key="VCS.ChangelistChooser/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321346068" />
-    <state x="-1368" y="256" key="Vcs.Push.Dialog.v2" timestamp="1592321242949">
-      <screen x="-1920" y="2" width="1920" height="1040" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1594739395292">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1368" y="256" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321242949" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594739395292" />
     <state x="263" y="182" width="1283" height="717" key="com.intellij.ide.util.TipDialog" timestamp="1594694030135">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

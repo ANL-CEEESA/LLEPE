@@ -1267,6 +1267,7 @@ class LLEPE:
                 default_title = '{0} complex eq. conc. (mol/L)'.format(
                     compared_species)
         fig, ax = plt.subplots()
+
         if isinstance(data_labels, list):
             unique_labels = list(set(data_labels))
             for label in unique_labels:
@@ -1287,17 +1288,14 @@ class LLEPE:
             if c_label is not None:
                 c_bar.set_label(c_label, rotation=270, labelpad=20)
         else:
-            ax.scatter(meas, pred, color="r",
-                       legend=False)
-        ax.plot(min_max_data, min_max_data, color="r", label="")
+            ax.scatter(meas, pred, c="r", label="")
+
+        ax.plot(min_max_data, min_max_data, color="b", label="")
 
         if print_r_squared:
             ax.text(min_max_data[0],
                     min_max_data[1] * 0.9,
                     '$R^2$={0:.2f}'.format(self.r_squared(compared_value)))
-            # plt.legend(loc='lower right')
-        # else:
-        # plt.legend()
 
         ax.set(xlabel='Measured', ylabel='Predicted')
         if plot_title is None:

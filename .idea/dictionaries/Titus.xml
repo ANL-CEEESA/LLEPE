@@ -12,6 +12,7 @@
       <w>extractant</w>
       <w>ftol</w>
       <w>kmol</w>
+      <w>llepe</w>
       <w>lmse</w>
       <w>matplotlib</w>
       <w>maxiter</w>
@@ -25,6 +26,7 @@
       <w>seaborn</w>
       <w>slsqp</w>
       <w>thermo</w>
+      <w>vals</w>
       <w>viridis</w>
       <w>xmls</w>
     </words>

@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
+    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="Edited parity plot to allow color to represent 3rd dimension. Still need to improve colorbar axis name.">
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Titus.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Titus.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reeps/reeps.py" beforeDir="false" afterPath="$PROJECT_DIR$/reeps/reeps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_multi_reeps.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_multi_reeps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/xmls/twophase.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/twophase.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/modules/reeps.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/modules/reeps.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/.buildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/reeps/reeps.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/reeps/reeps.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/index.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/index.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/modules/reeps.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/modules/reeps.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/guide/install.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/guide/install.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/guide/quickstart.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/guide/quickstart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/modules/reeps.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/modules/reeps.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/py-modindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/py-modindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/conf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/modules/reeps.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/modules/reeps.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reeps/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reeps/reeps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/multi_ree_settings.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/one_ree_settings.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_multi_reeps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_reeps.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_reeps.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +41,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Setup Script" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -39,20 +65,24 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../parameter estimation/parameter estimation/fit.py" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
-  <component name="RunManager" selected="Python.li_data_fit">
-    <configuration name="li_data_fit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.eval_mod_lin_params_const_pitzer">
+    <configuration name="eval_const_lin_params_pitzer_fit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/one_rare_earth_fit" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/one_rare_earth_fit/li_data_fit.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code/eval_const_lin_params_pitzer_fit.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -61,58 +91,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="multi_re_data_transformer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="eval_mod_lin_params_const_pitzer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/one_rare_earth_fit" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/one_rare_earth_fit/multi_re_data_transformer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="reeps" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="parameter-estimation" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/reeps" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/reeps/reeps.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="scratch_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="parameter-estimation" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code/eval_mod_lin_params_const_pitzer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -121,7 +109,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="single_re_data_transformer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="eval_mod_lin_params_mod_pitzer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -129,13 +117,52 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/one_rare_earth_fit" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/one_rare_earth_fit/single_re_data_transformer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code/eval_mod_lin_params_mod_pitzer.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="grapher_pitzer_compare_r_squared" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code/grapher_pitzer_compare_r_squared.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="grapher_pitzer_sens_anal" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code/grapher_pitzer_sens_anal.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -144,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.li_data_fit" />
-        <item itemvalue="Python.scratch_2" />
-        <item itemvalue="Python.reeps" />
-        <item itemvalue="Python.multi_re_data_transformer" />
-        <item itemvalue="Python.single_re_data_transformer" />
+        <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
+        <item itemvalue="Python.grapher_pitzer_sens_anal" />
+        <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
+        <item itemvalue="Python.grapher_pitzer_compare_r_squared" />
+        <item itemvalue="Python.grapher_pitzer_compare_r_squared" />
       </list>
     </recent_temporary>
   </component>
@@ -248,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591972483196</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Included package data in data/csvs and data/xmls. Note this only works for sdists. If bdist is needed, research &quot;manifest.in&quot; python setup files.">
+      <created>1592321239574</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1592321239574</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -269,8 +303,8 @@
     <MESSAGE value="Completed one composition parameter estimation" />
     <MESSAGE value="Modified reeps to grab charge from REE in xml file for initial chlorine moles calculation" />
     <MESSAGE value="Allow user to change optimizer and objective function. Also added r-squared evaluator. Changed temp file location to user temp folder. Added a prediction dictionary to access the values predicted by model." />
-    <MESSAGE value="Included package data in data/csvs and data/xmls. Note this only works for sdists. If bdist is needed, research &quot;manifest.in&quot; python setup files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Included package data in data/csvs and data/xmls. Note this only works for sdists. If bdist is needed, research &quot;manifest.in&quot; python setup files." />
+    <MESSAGE value="Edited parity plot to allow color to represent 3rd dimension. Still need to improve colorbar axis name." />
+    <option name="LAST_COMMIT_MESSAGE" value="Edited parity plot to allow color to represent 3rd dimension. Still need to improve colorbar axis name." />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -290,43 +324,48 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="169" y="115" key="CommitChangelistDialog2" timestamp="1591972481244">
+    <state x="169" y="115" key="CommitChangelistDialog2" timestamp="1594738674676">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591212137077" />
-    <state x="169" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591972481244" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321237444" />
+    <state x="169" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594738674676" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591048879404" />
-    <state x="-1180" y="278" key="FileChooserDialogImpl" timestamp="1591977779746">
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1592953302783">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1180" y="278" key="FileChooserDialogImpl/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592851918282" />
+    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1592953302783" />
+    <state x="-1523" y="423" key="GitRewordDialog" timestamp="1592321433648">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state x="-1180" y="278" key="FileChooserDialogImpl/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591977779746" />
-    <state width="1899" height="280" key="GridCell.Tab.0.bottom" timestamp="1592250647211">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1523" y="423" key="GitRewordDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321433648" />
+    <state width="1899" height="279" key="GridCell.Tab.0.bottom" timestamp="1594689830790">
+      <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state width="1899" height="280" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592019561222" />
+    <state width="1899" height="279" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594689830790" />
     <state width="1897" height="281" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386435" />
-    <state width="1899" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592250647211" />
-    <state width="1899" height="280" key="GridCell.Tab.0.center" timestamp="1592250647211">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594670971711" />
+    <state width="1899" height="279" key="GridCell.Tab.0.center" timestamp="1594689830785">
+      <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state width="1899" height="280" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592019561222" />
+    <state width="1899" height="279" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594689830785" />
     <state width="1897" height="281" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386434" />
-    <state width="1899" height="280" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592250647211" />
-    <state width="1899" height="280" key="GridCell.Tab.0.left" timestamp="1592250647211">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594670971711" />
+    <state width="1899" height="279" key="GridCell.Tab.0.left" timestamp="1594689830780">
+      <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state width="1899" height="280" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592019561220" />
+    <state width="1899" height="279" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594689830780" />
     <state width="1897" height="281" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386433" />
-    <state width="1899" height="280" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592250647211" />
-    <state width="1899" height="280" key="GridCell.Tab.0.right" timestamp="1592250647211">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1899" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594670971710" />
+    <state width="1899" height="279" key="GridCell.Tab.0.right" timestamp="1594689830787">
+      <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state width="1899" height="280" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592019561222" />
+    <state width="1899" height="279" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594689830786" />
     <state width="1897" height="281" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386434" />
-    <state width="1899" height="280" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592250647211" />
+    <state width="1899" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594670971711" />
     <state x="-1460" y="164" key="SettingsEditor" timestamp="1591824476757">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
@@ -335,31 +374,39 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591822611305" />
-    <state x="-1368" y="256" key="Vcs.Push.Dialog.v2" timestamp="1591047662716">
+    <state x="-1245" y="438" width="437" height="168" key="VCS.ChangelistChooser" timestamp="1592321346068">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state x="-1368" y="256" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591047662716" />
-    <state x="263" y="182" width="1283" height="717" key="com.intellij.ide.util.TipDialog" timestamp="1592167059593">
+    <state x="-1245" y="438" width="437" height="168" key="VCS.ChangelistChooser/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321346068" />
+    <state x="-1368" y="256" key="Vcs.Push.Dialog.v2" timestamp="1592321242949">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1368" y="256" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321242949" />
+    <state x="263" y="182" width="1283" height="717" key="com.intellij.ide.util.TipDialog" timestamp="1594694030135">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1341" y="300" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591885589059" />
-    <state x="463" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590784072879" />
-    <state x="263" y="182" width="1283" height="717" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592167059593" />
+    <state x="-1341" y="300" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1593278433547" />
+    <state x="463" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1592413869252" />
+    <state x="263" y="182" width="1283" height="717" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594694030135" />
     <state x="-1151" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591821870917">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1151" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591821870917" />
     <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591037545358" />
-    <state x="701" y="164" key="refactoring.ChangeSignatureDialog" timestamp="1591641371174">
+    <state x="601" y="253" width="700" height="530" key="recent.locations.popup" timestamp="1593450221360">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="601" y="253" width="700" height="530" key="recent.locations.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593450221360" />
+    <state x="701" y="164" key="refactoring.ChangeSignatureDialog" timestamp="1594217920814">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1219" y="166" key="refactoring.ChangeSignatureDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591059193684" />
-    <state x="701" y="164" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591641371174" />
-    <state x="-1297" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1591993050079">
-      <screen x="-1920" y="2" width="1920" height="1040" />
+    <state x="701" y="164" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594217920814" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594418193025">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1297" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591993050079" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591649653766" />
+    <state x="-1297" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594092852973" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594418193025" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -3,12 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to reeps's docs! - the Rare earth element parameter searcher
-====================================================================
-REEPS is a package for thermodynamic parameter estimation specifically 
-for rare earth element extraction modeling. 
+Welcome to llepe's docs! - the Liquid-Liquid Extraction Parameter Estimator
+===========================================================================
+LLEPE is a package for thermodynamic parameter estimation for liquid-liquid extraction modeling
 
-REEPS takes experimental data in a csv and system data in a xml.
+LLEPE takes experimental data in a csv and system data in a xml.
 
 The package then uses Cantera, another python package, to simulate equilibrium.
 

@@ -1,8 +1,8 @@
 .. _reeps:
 
-.. automodule:: reeps
+.. automodule:: llepe
 
-REEPS
+LLEPE
 =====
 
 
@@ -10,6 +10,6 @@ REEPS
 Parameters
 ----------
 
-.. autoclass:: REEPS
+.. autoclass:: LLEPE
   :members:
   :inherited-members:

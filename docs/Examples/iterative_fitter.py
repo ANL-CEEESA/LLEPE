@@ -15,7 +15,7 @@ meas_pitzer_param_df = pd.read_csv("../../data/csvs/may_pitzer_params.csv")
 labeled_data = pd.read_csv("../../data/csvs/"
                            "zeroes_removed_PC88A_HCL_NdPrCeLaDySmY.csv")
 exp_data = labeled_data.drop(labeled_data.columns[0], axis=1)
-xml_file = "PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml"
+xml_file = "../../data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml"
 eps = 1e-4
 mini_eps = 1e-8
 x_guesses = [[-5178500.0, -1459500.0],

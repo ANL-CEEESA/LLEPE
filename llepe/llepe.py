@@ -316,7 +316,7 @@ class LLEPE:
         except FileNotFoundError:
             self._phases_xml_filename = \
                 pkg_resources.resource_filename('llepe',
-                                                '..\data\xmls\{0}'.format(
+                                                '../data/xmls/{0}'.format(
                                                     phases_xml_filename))
             shutil.copyfile(self._phases_xml_filename,
                             self._temp_xml_file_path)
@@ -327,7 +327,7 @@ class LLEPE:
                 self._exp_df = pd.read_csv(self._exp_data)
             except FileNotFoundError:
                 self._exp_data = pkg_resources.resource_filename(
-                    'llepe', '..\data\csvs\{0}'.format(self._exp_data))
+                    'llepe', '../data/csvs/{0}'.format(self._exp_data))
                 self._exp_df = pd.read_csv(self._exp_data)
         else:
             self._exp_df = self._exp_data.copy()
@@ -442,7 +442,7 @@ class LLEPE:
                 self._exp_df = pd.read_csv(self._exp_data)
             except FileNotFoundError:
                 self._exp_data = pkg_resources.resource_filename(
-                    'llepe', '..\data\csvs\{0}'.format(self._exp_data))
+                    'llepe', '../data/csvs/{0}'.format(self._exp_data))
                 self._exp_df = pd.read_csv(self._exp_data)
         else:
             self._exp_df = exp_data.copy()
@@ -496,7 +496,7 @@ class LLEPE:
         except FileNotFoundError:
             self._phases_xml_filename = \
                 pkg_resources.resource_filename('llepe',
-                                                '..\data\xmls\{0}'.format(
+                                                '../data/xmls/{0}'.format(
                                                     phases_xml_filename))
             shutil.copyfile(self._phases_xml_filename,
                             self._temp_xml_file_path)

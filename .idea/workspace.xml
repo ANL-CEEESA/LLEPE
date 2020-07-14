@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
+    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="removed 'r' when accessing package files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/llepe/llepe.py" beforeDir="false" afterPath="$PROJECT_DIR$/llepe/llepe.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -288,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594769933314</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="removed 'r' when accessing package files">
+      <created>1594770234669</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1594770234669</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -316,7 +322,8 @@
     <MESSAGE value="commented out skopt in optimizers" />
     <MESSAGE value="changed xml_path in iterative_fitter.py and added iterative_fitter_monitor.py" />
     <MESSAGE value="updated zeroes_removed_PC88A_HCL_NdPrCeLaDySmY.csv to be labeled" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated zeroes_removed_PC88A_HCL_NdPrCeLaDySmY.csv to be labeled" />
+    <MESSAGE value="removed 'r' when accessing package files" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed 'r' when accessing package files" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -336,11 +343,11 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="836" y="163" key="CommitChangelistDialog2" timestamp="1594770211231">
+    <state x="836" y="163" key="CommitChangelistDialog2" timestamp="1594770278027">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321237444" />
-    <state x="836" y="163" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594770211231" />
+    <state x="836" y="163" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594770278027" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
@@ -390,11 +397,11 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1245" y="438" width="437" height="168" key="VCS.ChangelistChooser/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321346068" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1594769935600">
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1594770236524">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1368" y="256" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321242949" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594769935600" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594770236524" />
     <state x="263" y="182" width="1283" height="717" key="com.intellij.ide.util.TipDialog" timestamp="1594694030135">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

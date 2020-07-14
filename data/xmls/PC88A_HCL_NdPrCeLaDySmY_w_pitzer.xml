@@ -33,7 +33,7 @@
       <thermo>
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
-          <h0 units="J/mol" updated="Updated at 17:38 7-14-2020">-1459500.0</h0>
+          <h0 units="J/mol" updated="Updated at 17:50 7-14-2020">-1459500.0</h0>
           <s0 units="J/mol/K"> 558.9824 </s0>
           <cp0 units="J/mol/K"> 0.0</cp0>
         </const_cp>
@@ -50,7 +50,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 17:38 7-14-2020">-5178500.0</h0>
+          <h0 units="J/mol" updated="Updated at 17:50 7-14-2020">-5178500.0</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -261,10 +261,10 @@
         </binarySaltParameters>
 		
         <binarySaltParameters anion="Cl-" cation="Nd+++">
-          <beta0 updated="Updated at 17:38 7-14-2020"> 0.5877, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 17:38 7-14-2020"> 5.206, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 17:50 7-14-2020"> 0.5877, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 17:50 7-14-2020"> 5.206, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 17:38 7-14-2020"> -0.01969, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 17:50 7-14-2020"> -0.01969, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>

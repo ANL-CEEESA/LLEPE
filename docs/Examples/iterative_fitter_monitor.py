@@ -5,6 +5,8 @@ go = 'y'
 parameters = 'slope,intercept,beta0,beta1,Cphi'.split(',')
 while go == 'y':
     go = input('continue? ')
+    if go != 'y':
+        break
     plt.close('all')
     df = pd.read_csv('outputs/iterative_fitter_output_df.csv')
     info_cols = {parameter: [] for parameter in parameters}

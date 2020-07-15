@@ -261,6 +261,8 @@ class LLEPE:
         dependent_param is a function of.
 
         See example code for usage.
+    :param custom_objects_dict: (dict) dictionary containing custom objects
+        format: {<object_name_string>: <object>,...}
     """
 
     def __init__(self,
@@ -281,6 +283,7 @@ class LLEPE:
                  optimizer='scipy_minimize',
                  temp_xml_file_path=None,
                  dependant_params_dict=None,
+                 custom_objects_dict=None
                  ):
         self._built_in_obj_list = ['Log-MSE']
         self._built_in_opt_list = ['scipy_minimize']
@@ -305,6 +308,7 @@ class LLEPE:
             temp_xml_file_path = r'{0}/temp.xml'.format(os.getenv('TEMP'))
         self._temp_xml_file_path = temp_xml_file_path
         self._dependant_params_dict = dependant_params_dict
+        self._custom_objects_dict = custom_objects_dict
         # Try and except for adding package data to path.
         # This only works for sdist, not bdist
         # If bdist is needed, research "manifest.in" python setup files
@@ -893,6 +897,23 @@ class LLEPE:
         self._dependant_params_dict = dependant_params_dict
         return None
 
+    def get_custom_objects_dict(self):
+        """
+        Returns the custom_objects_dict
+        :return: custom_objects_dict: (dict) dictionary containing
+            information about custom objects from user
+        """
+        return self._custom_objects_dict
+
+    def set_custom_objects_dict(self, custom_objects_dict):
+        """
+        Sets the custom_objects_dict
+        :param custom_objects_dict: (dict) dictionary containing information
+        about about custom objects from user
+        """
+        self._custom_objects_dict = custom_objects_dict
+        return None
+
     def update_predicted_dict(self,
                               phases_xml_filename=None,
                               phase_names=None):
@@ -985,6 +1006,7 @@ class LLEPE:
         objective_function = self._objective_function
         opt_dict = copy.deepcopy(self._opt_dict)
         dep_dict = copy.deepcopy(self._dependant_params_dict)
+        custom_objects_dict = copy.deepcopy(self._custom_objects_dict)
         x = np.array(x)
 
         if len(x.shape) == 1:
@@ -1000,6 +1022,8 @@ class LLEPE:
                         x[ind]):  # if nan, do not update xml with nan
                     opt_dict[param_name]['input_value'] *= x[ind]
 
+            if custom_objects_dict is not None:
+                self.update_custom_objects_dict(opt_dict)
             self.update_xml(opt_dict,
                             temp_xml_file_path,
                             dependant_params_dict=dep_dict)
@@ -1070,8 +1094,8 @@ class LLEPE:
                    dependant_params_dict=None):
         """updates xml file with info_dict
 
-        :param info_dict: (dict) info in {species_names:{thermo_prop:val}}
-            Requires an identical structure to opt_dict
+        :param info_dict: (dict) Requires an identical structure to opt_dict
+            Ignores items with keys containing "custom_object_name"
         :param phases_xml_filename: (str) xml filename if editing other xml
             If ``None``, the current xml will be modified and the internal
             Cantera phases will be refreshed to the new values.
@@ -1110,6 +1134,8 @@ class LLEPE:
         for key in list(new_dict.keys()):
             d = new_dict[key]
             now = datetime.now()
+            if 'custom_object_name' in list(d.keys()):
+                continue
             if (d['upper_attrib_name'] is not None
                     and d['lower_attrib_name'] is not None):
                 for child1 in root.iter(d['upper_element_name']):
@@ -1164,6 +1190,29 @@ class LLEPE:
         tree.write(phases_xml_filename)
         if phases_xml_filename == self._phases_xml_filename:
             self.set_phases(self._phases_xml_filename, self._phase_names)
+        return None
+
+    def update_custom_objects_dict(self, info_dict):
+        """
+        updates internal custom_objects_dict with info_dict
+        :param info_dict: Requires an identical structure to opt_dict
+            Ignores items with keys containing "custom_object_name"
+        :return: None.
+        """
+        custom_objects_dict = copy.deepcopy(self._custom_objects_dict)
+        for key in list(info_dict.keys()):
+            d = info_dict[key]
+            if 'upper_element_name' in list(d.keys()):
+                continue
+            func = d['function']
+            value = d['input_value']
+            kwargs = d['kwargs']
+            object_name = d['custom_object_name']
+            new_object = func(custom_objects_dict[object_name],
+                              value,
+                              **kwargs)
+            custom_objects_dict[object_name] = new_object
+        self._custom_objects_dict = custom_objects_dict
         return None
 
     def parity_plot(self,

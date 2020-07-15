@@ -2,7 +2,6 @@ from scipy.optimize import curve_fit
 import llepe
 import pandas as pd
 import numpy as np
-import json
 
 
 def linear(x, a, b):

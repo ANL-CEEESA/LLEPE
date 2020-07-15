@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples/iterative_fitter_monitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/iterative_fitter_monitor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -321,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594770746301</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="add outputs folder to examples">
+      <created>1594772074449</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1594772074449</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -352,7 +361,8 @@
     <MESSAGE value="removed 'r' when accessing package files" />
     <MESSAGE value="flipped backslashes for package files" />
     <MESSAGE value="changed temp file to outputs/temp.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed temp file to outputs/temp.xml" />
+    <MESSAGE value="add outputs folder to examples" />
+    <option name="LAST_COMMIT_MESSAGE" value="add outputs folder to examples" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -376,11 +386,11 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="836" y="163" key="CommitChangelistDialog2" timestamp="1594770745103">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1594785435182">
+      <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321237444" />
-    <state x="836" y="163" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594770745103" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594785435182" />
+    <state x="836" y="163" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594772072782" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>

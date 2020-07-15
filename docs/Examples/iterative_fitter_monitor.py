@@ -13,6 +13,25 @@ while go == 'y':
             if parameter in col:
                 info_cols[parameter].append(col)
     for parameter in parameters:
+        mini_df = df[info_cols[parameter]]
         fig, ax = plt.subplots()
-        ax.title
-
+        ax.set_title(parameter)
+        for col in info_cols[parameter]:
+            ax.plot(df['iters'].values,
+                    df[col].values,
+                    label=col,
+                    linestyle='-',
+                    marker='o')
+        ax.set_xlabel('iteration')
+        ax.set_ylabel('Value')
+        plt.legend()
+        plt.show()
+    fig, ax = plt.subplots()
+    ax.set_title('best_obj_value')
+    ax.plot(df['iters'].values,
+            df['best_obj'].values,
+            linestyle='-',
+            marker='o')
+    ax.set_xlabel('iteration')
+    ax.set_ylabel('Value')
+    plt.show()

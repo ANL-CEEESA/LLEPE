@@ -45,6 +45,7 @@ i = 0
 rel_diff = 1000
 while rel_diff > 1e-4:
     i += 1
+    print(i)
     best_obj = 1e20
     output_dict['iter'].append(i)
     for species in species_list:
@@ -57,7 +58,8 @@ while rel_diff > 1e-4:
             'Cphi': [],
             'obj_value': [],
             'guess': []}
-        for x_guess in x_guesses:
+        for ind1, x_guess in enumerate(x_guesses):
+            print(ind1)
             info_dict = {'(HA)2(org)_h0': {'upper_element_name': 'species',
                                            'upper_attrib_name': 'name',
                                            'upper_attrib_value': '(HA)2(org)',

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -378,7 +378,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594904686321</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Updated iterative_fitter.py">
+      <created>1594905182139</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1594905182139</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -438,11 +445,11 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="662" y="155" key="CommitChangelistDialog2" timestamp="1594904684951">
+    <state x="662" y="155" key="CommitChangelistDialog2" timestamp="1594905180145">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594866466867" />
-    <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594904684951" />
+    <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594905180145" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>

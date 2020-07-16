@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Titus.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Titus.xml" afterDir="false" />
+    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="Updated iterative_fitter.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llepe/llepe.py" beforeDir="false" afterPath="$PROJECT_DIR$/llepe/llepe.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -356,7 +353,21 @@
       <option name="project" value="LOCAL" />
       <updated>1594852623912</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Updated iterative_fitter.py">
+      <created>1594866327563</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1594866327563</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Updated iterative_fitter.py">
+      <created>1594866469947</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1594866469947</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -391,7 +402,8 @@
     <MESSAGE value="updated iterative_fitter_monitor.py" />
     <MESSAGE value="updated iterative_fitter.py to have more feedback" />
     <MESSAGE value="Added new feature to include custom_object_dicts where user can optimize parameters in the dependent_params_dict." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new feature to include custom_object_dicts where user can optimize parameters in the dependent_params_dict." />
+    <MESSAGE value="Updated iterative_fitter.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated iterative_fitter.py" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -415,11 +427,11 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1594866466867">
-      <screen x="-1920" y="2" width="1920" height="1040" />
+    <state x="662" y="155" key="CommitChangelistDialog2" timestamp="1594875436164">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594866466867" />
-    <state x="836" y="163" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594772072782" />
+    <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594875436164" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>

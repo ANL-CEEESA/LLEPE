@@ -173,7 +173,7 @@ while rel_diff > 1e-4:
                          }
     lin_guess_dict = {'species': [],
                       'slope': [],
-                      'intercept:': []}
+                      'intercept': []}
     for species in species_list:
         pitzer_guess_dict['species'].append(species)
         lin_guess_dict['species'].append(species)
@@ -205,10 +205,12 @@ while rel_diff > 1e-4:
     lin_guess_df = pd.DataFrame(lin_guess_dict)
 
     output_dict['best_obj'].append(best_obj)
+    output_dict['rel_diff'].append(100)
     output_df = pd.DataFrame(output_dict)
     old_row = output_df.iloc[-2, :].values[3:]
     new_row = output_df.iloc[-1, :].values[3:]
     rel_diff = np.sum(np.abs(new_row - old_row) / np.abs(old_row))
+    del(output_dict['rel_diff'][-1])
     output_dict['rel_diff'].append(rel_diff)
     output_df = pd.DataFrame(output_dict)
     output_df.to_csv('outputs/iterative_fitter_output.csv')

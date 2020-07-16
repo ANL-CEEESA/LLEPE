@@ -92,7 +92,7 @@ optimizer = 'scipy_minimize'
 output_dict = {'iter': [0],
                'best_obj': [1e20],
                'rel_diff': [1e20],
-               'ext_h0': [1e20]}
+               'best_ext_h0': [1e20]}
 for species in species_list:
     output_dict['{0}_slope'.format(species)] = [1e20]
     output_dict['{0}_intercept'.format(species)] = [1e20]

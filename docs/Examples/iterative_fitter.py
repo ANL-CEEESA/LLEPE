@@ -192,6 +192,7 @@ while rel_diff > 1e-4:
         pitzer_guess_dict['species'].append(species)
         lin_guess_dict['species'].append(species)
         for pitzer_param in pitzer_param_list:
+            pitzer_str = '{0}_{1}'.format(species, pitzer_param)
             value_list = output_dict['{0}_{1}'.format(species, pitzer_param)]
             value = value_list[-1]
             pitzer_guess_dict[pitzer_param].append(value)
@@ -202,8 +203,10 @@ while rel_diff > 1e-4:
                 mini_rel_diff2 = np.abs(value_list[-2] - value_list[-3]) / (
                     np.abs(value_list[-3]))
                 if mini_rel_diff1 < mini_eps and mini_rel_diff2 < mini_eps:
-                    ignore_list.append('{0}_{1}'.format(species, pitzer_param))
+                    if pitzer_str not in ignore_list:
+                        ignore_list.append(pitzer_str)
         for lin_param in lin_param_list:
+            lin_str = '{0}_{1}'.format(species, lin_param)
             value_list = output_dict['{0}_{1}'.format(species, lin_param)]
             value = value_list[-1]
             lin_guess_dict[lin_param].append(value)
@@ -214,7 +217,8 @@ while rel_diff > 1e-4:
                 mini_rel_diff2 = np.abs(value_list[-2] - value_list[-3]) / (
                     np.abs(value_list[-3]))
                 if mini_rel_diff1 < mini_eps and mini_rel_diff2 < mini_eps:
-                    ignore_list.append('{0}_{1}'.format(species, lin_param))
+                    if lin_str not in ignore_list:
+                        ignore_list.append(lin_str)
     pitzer_guess_df = pd.DataFrame(pitzer_guess_dict)
     lin_guess_df = pd.DataFrame(lin_guess_dict)
 

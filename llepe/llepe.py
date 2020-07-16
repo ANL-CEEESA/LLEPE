@@ -1105,7 +1105,8 @@ class LLEPE:
         if phases_xml_filename is None:
             phases_xml_filename = self._phases_xml_filename
         new_dict = copy.deepcopy(info_dict)
-        dep_dict = dependant_params_dict
+        dep_dict = copy.deepcopy(dependant_params_dict)
+        custom_objects_dict = copy.deepcopy(self._custom_objects_dict)
 
         if dep_dict is not None:
             new_dict.update(dep_dict)
@@ -1123,10 +1124,12 @@ class LLEPE:
                 ind_vals = [new_dict[ind_param_name]['input_value']
                             for ind_param_name in ind_param_names]
                 if mod_kwargs is None:
-                    new_dict[param_name]['input_value'] = mod_func(ind_vals)
-                else:
                     new_dict[param_name]['input_value'] = \
                         mod_func(ind_vals,
+                                 custom_objects_dict)
+                else:
+                    new_dict[param_name]['input_value'] = \
+                        mod_func(ind_vals, custom_objects_dict,
                                  **mod_kwargs)
         tree = ET.parse(phases_xml_filename)
         root = tree.getroot()

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="Updated iterative_fitter.py">
+    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples/iterative_fitter_monitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/iterative_fitter_monitor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +43,7 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
-  <component name="RunManager" selected="Python.iterative_fitter">
+  <component name="RunManager" selected="Python.iterative_fitter_monitor">
     <configuration name="eval_mod_lin_params_const_pitzer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -52,27 +54,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code/eval_mod_lin_params_const_pitzer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="grapher_obj_func" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="parameter-estimation" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/one_rare_earth_fit" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/one_rare_earth_fit/grapher_obj_func.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -117,6 +98,24 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="iterative_fitter_monitor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docs/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/docs/examples/iterative_fitter_monitor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="scratch_3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -137,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.iterative_fitter_monitor" />
+        <item itemvalue="Python.iterative_fitter_monitor" />
         <item itemvalue="Python.iterative_fitter" />
         <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
         <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
-        <item itemvalue="Python.scratch_3" />
-        <item itemvalue="Python.grapher_pitzer_sens_analy" />
       </list>
     </recent_temporary>
   </component>
@@ -367,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594866469947</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Updated iterative_fitter.py">
+      <created>1594875465079</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1594875465079</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,11 +433,11 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="662" y="155" key="CommitChangelistDialog2" timestamp="1594875436164">
+    <state x="662" y="155" key="CommitChangelistDialog2" timestamp="1594875463744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594866466867" />
-    <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594875436164" />
+    <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594875463744" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
@@ -445,30 +451,30 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1523" y="423" key="GitRewordDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321433648" />
-    <state width="1899" height="348" key="GridCell.Tab.0.bottom" timestamp="1594852783300">
-      <screen x="-1920" y="2" width="1920" height="1040" />
+    <state width="1899" height="279" key="GridCell.Tab.0.bottom" timestamp="1594903350183">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852783300" />
     <state width="1897" height="281" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386435" />
-    <state width="1899" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594769549587" />
-    <state width="1899" height="348" key="GridCell.Tab.0.center" timestamp="1594852783299">
-      <screen x="-1920" y="2" width="1920" height="1040" />
+    <state width="1899" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594903350183" />
+    <state width="1899" height="279" key="GridCell.Tab.0.center" timestamp="1594903350183">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852783299" />
     <state width="1897" height="281" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386434" />
-    <state width="1899" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594769549587" />
-    <state width="1899" height="348" key="GridCell.Tab.0.left" timestamp="1594852783299">
-      <screen x="-1920" y="2" width="1920" height="1040" />
+    <state width="1899" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594903350183" />
+    <state width="1899" height="279" key="GridCell.Tab.0.left" timestamp="1594903350183">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852783299" />
     <state width="1897" height="281" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386433" />
-    <state width="1899" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594769549587" />
-    <state width="1899" height="348" key="GridCell.Tab.0.right" timestamp="1594852783300">
-      <screen x="-1920" y="2" width="1920" height="1040" />
+    <state width="1899" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594903350183" />
+    <state width="1899" height="279" key="GridCell.Tab.0.right" timestamp="1594903350183">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852783300" />
     <state width="1897" height="281" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386434" />
-    <state width="1899" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594769549587" />
+    <state width="1899" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594903350183" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1594852783301">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>

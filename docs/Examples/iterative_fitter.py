@@ -91,7 +91,8 @@ ignore_list = []
 optimizer = 'scipy_minimize'
 output_dict = {'iter': [0],
                'best_obj': [1e20],
-               'rel_diff': [1e20]}
+               'rel_diff': [1e20],
+               'ext_h0': [1e20]}
 for species in species_list:
     output_dict['{0}_slope'.format(species)] = [1e20]
     output_dict['{0}_intercept'.format(species)] = [1e20]
@@ -103,6 +104,7 @@ while rel_diff > 1e-4:
     i += 1
     print(i)
     best_obj = 1e20
+    best_ext_h0 = 0
     output_dict['iter'].append(i)
     for species in species_list:
         print(species)
@@ -156,15 +158,27 @@ while rel_diff > 1e-4:
             optimizer_kwargs=optimizer_kwargs)
         if obj_value < best_obj:
             best_obj = obj_value
-        keys = list(opt_dict.keys())
+            best_ext_h0 = opt_dict['(HA)2(org)_h0']['input_value']
+
         for lin_param in lin_param_list:
-            mini_dict = opt_dict['{0}_{1}'.format(species, lin_param)] 
-            value = mini_dict['input_value']
-            output_dict['{0}_{1}'.format(species, lin_param)].append(value)
+            if '{0}_{1}'.format(species, lin_param) not in ignore_list:
+                mini_dict = opt_dict['{0}_{1}'.format(species, lin_param)]
+                value = mini_dict['input_value']
+                output_dict['{0}_{1}'.format(species, lin_param)].append(value)
+            else:
+                value = output_dict['{0}_{1}'.format(species, lin_param)][-1]
+                output_dict['{0}_{1}'.format(species, lin_param)].append(value)
         for pitzer_param in pitzer_param_list:
-            mini_dict = opt_dict['{0}_{1}'.format(species, pitzer_param)]
-            value = mini_dict['input_value']
-            output_dict['{0}_{1}'.format(species, pitzer_param)].append(value)
+            if '{0}_{1}'.format(species, pitzer_param) not in ignore_list:
+                mini_dict = opt_dict['{0}_{1}'.format(species, pitzer_param)]
+                value = mini_dict['input_value']
+                output_dict['{0}_{1}'.format(
+                    species, pitzer_param)].append(value)
+            else:
+                value = output_dict['{0}_{1}'.format(
+                    species, pitzer_param)][-1]
+                output_dict['{0}_{1}'.format(
+                    species, pitzer_param)].append(value)
         estimator.update_custom_objects_dict(info_dict)
         estimator.update_xml(opt_dict)
     pitzer_guess_dict = {'species': [],
@@ -204,11 +218,12 @@ while rel_diff > 1e-4:
     pitzer_guess_df = pd.DataFrame(pitzer_guess_dict)
     lin_guess_df = pd.DataFrame(lin_guess_dict)
 
+    output_dict['best_ext_h0'].append(best_ext_h0)
     output_dict['best_obj'].append(best_obj)
     output_dict['rel_diff'].append(100)
     output_df = pd.DataFrame(output_dict)
-    old_row = output_df.iloc[-2, :].values[3:]
-    new_row = output_df.iloc[-1, :].values[3:]
+    old_row = output_df.iloc[-2, :].values[4:]
+    new_row = output_df.iloc[-1, :].values[4:]
     rel_diff = np.sum(np.abs(new_row - old_row) / np.abs(old_row))
     del(output_dict['rel_diff'][-1])
     output_dict['rel_diff'].append(rel_diff)

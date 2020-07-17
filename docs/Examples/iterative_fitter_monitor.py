@@ -27,7 +27,8 @@ for parameter in parameters:
     ax.set_xlabel('iteration')
     ax.set_ylabel('Value')
     plt.legend()
-    plt.show()
+    plt.tight_layout()
+    plt.savefig('outputs/{0}.png'.format(parameter))
 fig, ax = plt.subplots()
 ax.set_title('best_obj_value')
 ax.plot(df['iter'].values[1:],
@@ -36,7 +37,8 @@ ax.plot(df['iter'].values[1:],
         marker='o')
 ax.set_xlabel('iteration')
 ax.set_ylabel('Value')
-plt.show()
+plt.tight_layout()
+plt.savefig('outputs/best_obj.png')
 fig, ax = plt.subplots()
 ax.set_title('rel_diff')
 ax.plot(df['iter'].values[1:],
@@ -45,4 +47,5 @@ ax.plot(df['iter'].values[1:],
         marker='o')
 ax.set_xlabel('iteration')
 ax.set_ylabel('Value')
-plt.show()
+plt.tight_layout()
+plt.savefig('outputs/rel_diff.png')

@@ -13,7 +13,7 @@ def mod_lin_param_df(lp_df, input_val, mini_species, mini_lin_param):
 
 species_list = 'Nd,Pr,Ce,La,Dy,Sm,Y'.split(',')
 pitzer_param_list = ['beta0', 'beta1']
-lin_param_list = ['slope', 'intercept']
+lin_param_list = ['intercept']
 meas_pitzer_param_df = pd.read_csv("../../data/csvs/may_pitzer_params.csv")
 pitzer_params_filename = "../../data/jsons/min_h0_pitzer_params.txt"
 with open(pitzer_params_filename) as file:
@@ -27,6 +27,9 @@ exp_data = labeled_data.drop(labeled_data.columns[0], axis=1)
 xml_file = "PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml"
 lin_param_df = pd.read_csv("../../data/csvs"
                            "/zeroes_removed_min_h0_pitzer_lin_params.csv")
+new_lin_param_df = lin_param_df.copy()
+for ind, row in lin_param_df.iterrows():
+    new_lin_param_df.at[ind, 'slope'] = 3
 estimator_params = {'exp_data': exp_data,
                     'phases_xml_filename': xml_file,
                     'phase_names': ['HCl_electrolyte', 'PC88A_liquid'],
@@ -68,12 +71,12 @@ for species, complex_name in zip(species_list,
                   'independent_params': '(HA)2(org)_h0'}
     dependant_params_dict['{0}_h0'.format(complex_name)] = inner_dict
 estimator.update_xml(pitzer_params_dict)
-estimator.set_custom_objects_dict({'lin_param_df': lin_param_df})
+estimator.set_custom_objects_dict({'lin_param_df': new_lin_param_df})
 estimator.set_dependant_params_dict(dependant_params_dict)
 estimator.update_xml(ext_h0_dict,
                      dependant_params_dict=dependant_params_dict)
-eps = 1e-4
-mini_eps = 1e-8
+eps = 1e-8
+mini_eps = 1e-4
 pitzer_guess_dict = {'species': [],
                      'beta0': [],
                      'beta1': []}
@@ -85,7 +88,7 @@ for species in species_list:
         pitzer_guess_dict[param].append(value)
 pitzer_guess_df = pd.DataFrame(pitzer_guess_dict)
 ext_h0_guess = ext_h0_dict['(HA)2(org)_h0']['input_value']
-lin_guess_df = lin_param_df.copy()
+lin_guess_df = new_lin_param_df.copy()
 
 ignore_list = []
 optimizer = 'scipy_minimize'
@@ -94,13 +97,15 @@ output_dict = {'iter': [0],
                'rel_diff': [1e20],
                'best_ext_h0': [1e20]}
 for species in species_list:
-    output_dict['{0}_slope'.format(species)] = [1e20]
-    output_dict['{0}_intercept'.format(species)] = [1e20]
+    for lin_param in lin_param_list:
+        output_dict['{0}_{1}'.format(species, lin_param)] = [1e20]
     for pitzer_param in pitzer_param_list:
         output_dict['{0}_{1}'.format(species, pitzer_param)] = [1e20]
 i = 0
 rel_diff = 1000
-while rel_diff > 1e-4:
+obj_diff1 = 1000
+obj_diff2 = 1000
+while obj_diff1 > eps and obj_diff2 > eps:
     i += 1
     print(i)
     best_obj = 1e20
@@ -181,13 +186,12 @@ while rel_diff > 1e-4:
                     species, pitzer_param)].append(value)
         estimator.update_custom_objects_dict(info_dict)
         estimator.update_xml(opt_dict)
-    pitzer_guess_dict = {'species': [],
-                         'beta0': [],
-                         'beta1': [],
-                         }
-    lin_guess_dict = {'species': [],
-                      'slope': [],
-                      'intercept': []}
+    pitzer_guess_dict = {'species': []}
+    for pitzer_param in pitzer_param_list:
+        pitzer_guess_dict[pitzer_param] = []
+    lin_guess_dict = {'species': []}
+    for lin_param in lin_param_list:
+        lin_guess_dict[lin_param] = []
     for species in species_list:
         pitzer_guess_dict['species'].append(species)
         lin_guess_dict['species'].append(species)
@@ -221,6 +225,7 @@ while rel_diff > 1e-4:
                         ignore_list.append(lin_str)
     pitzer_guess_df = pd.DataFrame(pitzer_guess_dict)
     lin_guess_df = pd.DataFrame(lin_guess_dict)
+    ext_h0_guess = best_ext_h0
 
     output_dict['best_ext_h0'].append(best_ext_h0)
     output_dict['best_obj'].append(best_obj)
@@ -232,4 +237,8 @@ while rel_diff > 1e-4:
     del(output_dict['rel_diff'][-1])
     output_dict['rel_diff'].append(rel_diff)
     output_df = pd.DataFrame(output_dict)
-    output_df.to_csv('outputs/iterative_fitter_output.csv')
+    output_df.to_csv('outputs/iterative_fitter_output1.csv')
+    obj_diff1 = np.abs(output_dict['best_obj'][-1]-output_dict['best_obj'][-2])
+    if i > 2:
+        obj_diff2 = np.abs(
+            output_dict['best_obj'][-1] - output_dict['best_obj'][-3])

@@ -1326,7 +1326,8 @@ class LLEPE:
                 filtered_data = combined_df[combined_df['label'] == label]
                 filtered_meas = filtered_data['meas']
                 filtered_pred = filtered_data['pred']
-                ax.scatter(filtered_meas, filtered_pred, label=label)
+                if len(filtered_pred) != 0:
+                    ax.scatter(filtered_meas, filtered_pred, label=label)
             if legend:
                 ax.legend(loc='best')
 

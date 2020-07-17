@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter_eval_grapher.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter_w_mse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Examples/outputs/temp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/outputs/temp.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llepe/objectives.py" beforeDir="false" afterPath="$PROJECT_DIR$/llepe/objectives.py" afterDir="false" />
+    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="Updated iterative_fitter.py to calculate error for all species. Added new test with mean squared error.">
+      <change afterPath="$PROJECT_DIR$/docs/Examples/outputs/iterative_fitter_output2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Examples/outputs/iterative_fitter_short_info_dict.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -414,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594962327468</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Updated iterative_fitter.py to calculate error for all species. Added new test with mean squared error.">
+      <created>1595008865648</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1595008865648</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -451,7 +453,8 @@
     <MESSAGE value="Added new feature to include custom_object_dicts where user can optimize parameters in the dependent_params_dict." />
     <MESSAGE value="Updated iterative_fitter.py" />
     <MESSAGE value="Updated iterative_fitter.py to fix slopes to 3, stop after minimal change in best objective. ALso added last results from iteration_fitter.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated iterative_fitter.py to fix slopes to 3, stop after minimal change in best objective. ALso added last results from iteration_fitter.py" />
+    <MESSAGE value="Updated iterative_fitter.py to calculate error for all species. Added new test with mean squared error." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated iterative_fitter.py to calculate error for all species. Added new test with mean squared error." />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -475,10 +478,10 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1595008855209">
+    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1595009120606">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1595008855209" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1595009120606" />
     <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594913509145" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />

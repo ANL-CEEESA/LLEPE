@@ -11,16 +11,19 @@ def mod_lin_param_df(lp_df, input_val, mini_species, mini_lin_param):
     return new_lp_df
 
 
+def ext_to_complex(h0, custom_obj_dict, mini_species):
+    linear_params = custom_obj_dict['lin_param_df']
+    mini_row = linear_params[linear_params['species'] == mini_species]
+    val = mini_row['slope'].values[0] * h0[0] + mini_row['intercept'].values[0]
+    return val
+
+
 species_list = 'Nd,Pr,Ce,La,Dy,Sm,Y'.split(',')
 pitzer_param_list = ['beta0', 'beta1']
 lin_param_list = ['intercept']
-meas_pitzer_param_df = pd.read_csv("../../data/csvs/may_pitzer_params.csv")
-pitzer_params_filename = "../../data/jsons/min_h0_pitzer_params.txt"
-with open(pitzer_params_filename) as file:
-    pitzer_params_dict = json.load(file)
-ext_h0_filename = "../../data/jsons/min_h0_guess_ext_h0.txt"
-with open(ext_h0_filename) as file:
-    ext_h0_dict = json.load(file)
+short_info_filename = 'outputs/iterative_fitter_short_info_dict.txt'
+with open(short_info_filename) as file:
+    short_info_dict = json.load(file)
 labeled_data = pd.read_csv("../../data/csvs/"
                            "zeroes_removed_PC88A_HCL_NdPrCeLaDySmY.csv")
 exp_data = labeled_data.drop(labeled_data.columns[0], axis=1)
@@ -30,6 +33,9 @@ lin_param_df = pd.read_csv("../../data/csvs"
 new_lin_param_df = lin_param_df.copy()
 for ind, row in lin_param_df.iterrows():
     new_lin_param_df.at[ind, 'slope'] = 3
+    species = row['species']
+    val = short_info_dict['{0}_intercept'.format(species)]
+    new_lin_param_df.at[ind, 'intercept'] = val
 estimator_params = {'exp_data': exp_data,
                     'phases_xml_filename': xml_file,
                     'phase_names': ['HCl_electrolyte', 'PC88A_liquid'],
@@ -44,18 +50,10 @@ estimator_params = {'exp_data': exp_data,
                     'aq_solvent_rho': 1000.0,
                     'extractant_rho': 960.0,
                     'diluant_rho': 750.0,
-                    'temp_xml_file_path': 'outputs/temp.xml',
-                    'objective_function': llepe.lmse_perturbed_obj
+                    'temp_xml_file_path': 'outputs/temp1.xml',
+                    'objective_function': llepe.mean_squared_error,
+                    'custom_objects_dict': {'lin_param_df': new_lin_param_df}
                     }
-estimator = llepe.LLEPE(**estimator_params)
-
-
-def ext_to_complex(h0, custom_obj_dict, mini_species):
-    linear_params = custom_obj_dict['lin_param_df']
-    row = linear_params[linear_params['species'] == mini_species]
-    return row['slope'].values[0] * h0[0] + row['intercept'].values[0]
-
-
 dependant_params_dict = {}
 for species, complex_name in zip(species_list,
                                  estimator_params['complex_names']):
@@ -68,13 +66,44 @@ for species, complex_name in zip(species_list,
                   'input_format': '{0}',
                   'function': ext_to_complex,
                   'kwargs': {"mini_species": species},
-                  'independent_params': '(HA)2(org)_h0'}
+                  'independent_params': '(HA)2(org)_h0',
+                  }
     dependant_params_dict['{0}_h0'.format(complex_name)] = inner_dict
-estimator.update_xml(pitzer_params_dict)
-estimator.set_custom_objects_dict({'lin_param_df': new_lin_param_df})
-estimator.set_dependant_params_dict(dependant_params_dict)
-estimator.update_xml(ext_h0_dict,
+info_dict = {'(HA)2(org)_h0': {'upper_element_name': 'species',
+                               'upper_attrib_name': 'name',
+                               'upper_attrib_value': '(HA)2(org)',
+                               'lower_element_name': 'h0',
+                               'lower_attrib_name': None,
+                               'lower_attrib_value': None,
+                               'input_format': '{0}',
+                               'input_value':
+                                   short_info_dict['(HA)2(org)_h0']}}
+for species in species_list:
+    for param in pitzer_param_list:
+        name = "{0}_{1}".format(species, param)
+        inner_dict = {'upper_element_name': 'binarySaltParameters',
+                      'upper_attrib_name': 'cation',
+                      'upper_attrib_value': '{0}+++'.format(species),
+                      'lower_element_name': param,
+                      'lower_attrib_name': None,
+                      'lower_attrib_value': None,
+                      'input_format': ' {0}, 0.0, 0.0, 0.0, 0.0 ',
+                      'input_value':
+                          short_info_dict[name]}
+        info_dict[name] = inner_dict
+    for param in lin_param_list:
+        name = "{0}_{1}".format(species, param)
+        inner_dict = {'custom_object_name': 'lin_param_df',
+                      'function': mod_lin_param_df,
+                      'kwargs': {'mini_species': species,
+                                 'mini_lin_param': param},
+                      'input_value': short_info_dict[name]
+                      }
+
+estimator = llepe.LLEPE(**estimator_params)
+estimator.update_xml(info_dict,
                      dependant_params_dict=dependant_params_dict)
+estimator.set_dependant_params_dict(dependant_params_dict)
 eps = 1e-20
 mini_eps = 1e-4
 pitzer_guess_dict = {'species': [],
@@ -83,11 +112,11 @@ pitzer_guess_dict = {'species': [],
 for species in species_list:
     pitzer_guess_dict['species'].append(species)
     for param in pitzer_param_list:
-        mini_dict = pitzer_params_dict['{0}_{1}'.format(species, param)]
+        mini_dict = info_dict['{0}_{1}'.format(species, param)]
         value = mini_dict['input_value']
         pitzer_guess_dict[param].append(value)
 pitzer_guess_df = pd.DataFrame(pitzer_guess_dict)
-ext_h0_guess = ext_h0_dict['(HA)2(org)_h0']['input_value']
+ext_h0_guess = info_dict['(HA)2(org)_h0']['input_value']
 lin_guess_df = new_lin_param_df.copy()
 
 ignore_list = []
@@ -154,7 +183,7 @@ while obj_diff1 > eps or obj_diff2 > eps:
         estimator.set_opt_dict(info_dict)
         estimator.update_custom_objects_dict(info_dict)
         estimator.update_xml(info_dict)
-        obj_kwargs = {'species_list': species_list, 'epsilon': 1e-100}
+        obj_kwargs = {'species_list': species_list}
         bounds = [(1e-1, 1e1)] * len(info_dict)
         optimizer_kwargs = {"method": 'l-bfgs-b',
                             "bounds": bounds}
@@ -234,11 +263,12 @@ while obj_diff1 > eps or obj_diff2 > eps:
     old_row = output_df.iloc[-2, :].values[4:]
     new_row = output_df.iloc[-1, :].values[4:]
     rel_diff = np.sum(np.abs(new_row - old_row) / np.abs(old_row))
-    del(output_dict['rel_diff'][-1])
+    del (output_dict['rel_diff'][-1])
     output_dict['rel_diff'].append(rel_diff)
     output_df = pd.DataFrame(output_dict)
-    output_df.to_csv('outputs/iterative_fitter_output4.csv')
-    obj_diff1 = np.abs(output_dict['best_obj'][-1]-output_dict['best_obj'][-2])
+    output_df.to_csv('outputs/iterative_fitter_w_mse_output.csv')
+    obj_diff1 = np.abs(
+        output_dict['best_obj'][-1] - output_dict['best_obj'][-2])
     if i > 2:
         obj_diff2 = np.abs(
             output_dict['best_obj'][-1] - output_dict['best_obj'][-3])

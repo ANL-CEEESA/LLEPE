@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter_eval_grapher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter_w_mse.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llepe/llepe.py" beforeDir="false" afterPath="$PROJECT_DIR$/llepe/llepe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Examples/outputs/temp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/outputs/temp.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/llepe/objectives.py" beforeDir="false" afterPath="$PROJECT_DIR$/llepe/objectives.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +46,7 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
-  <component name="RunManager" selected="Python.estimator_eval">
+  <component name="RunManager" selected="Python.iterative_fitter_w_mse">
     <configuration name="estimator_eval" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,16 +83,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="grapher_all_opt_lin_params_compare" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="iterative_fitter_eval_grapher" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/multi_re_fit" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docs/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/multi_re_fit/grapher_all_opt_lin_params_compare.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/docs/examples/iterative_fitter_eval_grapher.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -97,16 +101,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="grapher_r_squared" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="iterative_fitter_w_mse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/multi_re_fit" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docs/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/multi_re_fit/grapher_r_squared.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/docs/examples/iterative_fitter_w_mse.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -138,11 +142,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.iterative_fitter_w_mse" />
+        <item itemvalue="Python.iterative_fitter_eval_grapher" />
+        <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
         <item itemvalue="Python.estimator_eval" />
         <item itemvalue="Python.estimator_eval" />
-        <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
-        <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
-        <item itemvalue="Python.grapher_r_squared" />
       </list>
     </recent_temporary>
   </component>
@@ -403,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594913510497</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Updated iterative_fitter.py to fix slopes to 3, stop after minimal change in best objective. ALso added last results from iteration_fitter.py">
+      <created>1594962327468</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1594962327468</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -439,7 +450,8 @@
     <MESSAGE value="updated iterative_fitter.py to have more feedback" />
     <MESSAGE value="Added new feature to include custom_object_dicts where user can optimize parameters in the dependent_params_dict." />
     <MESSAGE value="Updated iterative_fitter.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated iterative_fitter.py" />
+    <MESSAGE value="Updated iterative_fitter.py to fix slopes to 3, stop after minimal change in best objective. ALso added last results from iteration_fitter.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated iterative_fitter.py to fix slopes to 3, stop after minimal change in best objective. ALso added last results from iteration_fitter.py" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -463,10 +475,10 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="662" y="155" key="CommitChangelistDialog2" timestamp="1594913509145">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1595008855209">
+      <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594866466867" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1595008855209" />
     <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594913509145" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
@@ -521,6 +533,10 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852783301" />
+    <state x="-1257" y="233" key="RollbackChangesDialog" timestamp="1594962287671">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1257" y="233" key="RollbackChangesDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594962287671" />
     <state x="-1460" y="164" key="SettingsEditor" timestamp="1591824476757">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>

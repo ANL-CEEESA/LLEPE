@@ -33,7 +33,7 @@
       <thermo>
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
-          <h0 units="J/mol" updated="Updated at 11:58 7-17-2020">-1376882.3191117246</h0>
+          <h0 units="J/mol" updated="Updated at 18:30 7-26-2020">-1376882.0784583509</h0>
           <s0 units="J/mol/K"> 558.9824 </s0>
           <cp0 units="J/mol/K"> 0.0</cp0>
         </const_cp>
@@ -50,7 +50,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 11:58 7-17-2020">-4925566.309854757</h0>
+          <h0 units="J/mol" updated="Updated at 18:30 7-26-2020">-4924298.0880370205</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -67,7 +67,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 11:58 7-17-2020">-4938249.845712334</h0>
+          <h0 units="J/mol" updated="Updated at 18:30 7-26-2020">-4935685.119723228</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -85,7 +85,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 11:58 7-17-2020">-4920387.823199008</h0>
+          <h0 units="J/mol" updated="Updated at 18:30 7-26-2020">-4920369.042961768</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -103,7 +103,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 11:58 7-17-2020">-4933548.865580005</h0>
+          <h0 units="J/mol" updated="Updated at 18:30 7-26-2020">-4928639.61964031</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -120,7 +120,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 11:58 7-17-2020">-4932560.171447597</h0>
+          <h0 units="J/mol" updated="Updated at 18:30 7-26-2020">-4931991.722599618</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -138,7 +138,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 11:58 7-17-2020">-4944840.781582316</h0>
+          <h0 units="J/mol" updated="Updated at 18:30 7-26-2020">-4944682.264585918</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -157,7 +157,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 11:58 7-17-2020">-4924696.189921901</h0>
+          <h0 units="J/mol" updated="Updated at 18:30 7-26-2020">-4924669.3217661735</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -245,10 +245,10 @@
         </binarySaltParameters>
 
 		<binarySaltParameters anion="Cl-" cation="Pr+++">
-          <beta0 updated="Updated at 11:58 7-17-2020"> 0.05879108748614492, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 11:58 7-17-2020"> 0.5448324180244323, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 18:30 7-26-2020"> 0.058791091500561485, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 18:30 7-26-2020"> 0.5448322248125199, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 10:47 7-17-2020"> -0.02066999867229882, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 18:30 7-26-2020"> -0.02066999867229882, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -261,10 +261,10 @@
         </binarySaltParameters>
 		
         <binarySaltParameters anion="Cl-" cation="Nd+++">
-          <beta0 updated="Updated at 11:58 7-17-2020"> 1.2137222016802447, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 11:58 7-17-2020"> 7.748226963005033, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 18:30 7-26-2020"> 1.213717095858249, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 18:30 7-26-2020"> 7.7481294675488375, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 10:47 7-17-2020"> -0.01963615126026457, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 18:30 7-26-2020"> -0.01963615126026457, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -277,10 +277,10 @@
         </binarySaltParameters>
 		
 		<binarySaltParameters anion="Cl-" cation="La+++">
-          <beta0 updated="Updated at 11:58 7-17-2020"> 1.022316535866388, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 11:58 7-17-2020"> 0.5296311209773129, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 18:30 7-26-2020"> 1.0223168335791355, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 18:30 7-26-2020"> 0.5296306654103653, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 10:47 7-17-2020"> -0.024339999997603376, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 18:30 7-26-2020"> -0.024339999997603376, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -293,10 +293,10 @@
         </binarySaltParameters>
 		
         <binarySaltParameters anion="Cl-" cation="Dy+++">
-          <beta0 updated="Updated at 11:58 7-17-2020"> 0.7646397332938777, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 11:58 7-17-2020"> 7.849320590516409, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 18:30 7-26-2020"> 0.7646372240575223, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 18:30 7-26-2020"> 7.849276225207628, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 10:47 7-17-2020"> -0.019699989216349984, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 18:30 7-26-2020"> -0.019699989216349984, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -309,10 +309,10 @@
         </binarySaltParameters>
 		
 		<binarySaltParameters anion="Cl-" cation="Ce+++">
-          <beta0 updated="Updated at 11:58 7-17-2020"> 0.2035235053232368, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 11:58 7-17-2020"> 21.120426174002823, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 18:30 7-26-2020"> 0.20352350320923904, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 18:30 7-26-2020"> 21.120419048363047, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 10:47 7-17-2020"> -0.02618999999473301, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 18:30 7-26-2020"> -0.02618999999473301, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -325,10 +325,10 @@
         </binarySaltParameters>
 		
 		<binarySaltParameters anion="Cl-" cation="Y+++">
-          <beta0 updated="Updated at 11:58 7-17-2020"> 0.8852802073165494, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 11:58 7-17-2020"> 9.334653075341238, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 18:30 7-26-2020"> 0.8852797060008407, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 18:30 7-26-2020"> 9.334636294454038, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 10:47 7-17-2020"> -0.015467323909969704, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 18:30 7-26-2020"> -0.015467323909969704, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -341,10 +341,10 @@
         </binarySaltParameters>
 		
 		<binarySaltParameters anion="Cl-" cation="Sm+++">
-          <beta0 updated="Updated at 11:58 7-17-2020"> 0.6989081585234721, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 11:58 7-17-2020"> 6.877882600430561, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 18:30 7-26-2020"> 0.6989083059080712, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 18:30 7-26-2020"> 6.877881736471866, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 10:47 7-17-2020"> -0.019920000110321332, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 18:30 7-26-2020"> -0.019920000110321332, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>

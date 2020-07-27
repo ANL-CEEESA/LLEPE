@@ -127,7 +127,8 @@ class LLEPE:
     :param extracted_species_list: (list) names of extracted species elements.
 
         If ``None``, extracted_species_list will be extracted_species_ion_names
-            without '+' i.e. 'Nd+++'->'Nd'
+        without '+' i.e. 'Nd+++'->'Nd'
+
     :param aq_solvent_rho: (float) density of solvent (g/L)
 
         If ``None``, molar volume/molecular weight is used from xml
@@ -255,10 +256,18 @@ class LLEPE:
         'function', 'kwargs', and 'independent_params.
 
         'function' is a function of the form
-        ``function(independent_param__value_list, **kwargs)``
+
+        ``function(independent_param__value_list, custom_objects_dict,
+        **kwargs)``
+
         'kwargs' are the extra arguments to pass to function
+
         'independent_params' is a list of parameter names in opt_dict that the
         dependent_param is a function of.
+
+        'custom_objects_dict' is for accessing the estimator's internal
+        custom_objects_dict and must be included in the arguments, even if the
+        custom_objects_dict is not set and is None.
 
         See example code for usage.
     :param custom_objects_dict: (dict) dictionary containing custom objects
@@ -883,6 +892,7 @@ class LLEPE:
     def get_dependant_params_dict(self):
         """
         Returns the dependant_params_dict
+
         :return: dependant_params_dict: (dict) dictionary containing
             information about parameters dependant on opt_dict
         """
@@ -891,8 +901,9 @@ class LLEPE:
     def set_dependant_params_dict(self, dependant_params_dict):
         """
         Sets the dependant_params_dict
+
         :param dependant_params_dict: (dict) dictionary containing information
-        about parameters dependant on opt_dict
+            about parameters dependant on opt_dict
         """
         self._dependant_params_dict = dependant_params_dict
         return None
@@ -900,6 +911,7 @@ class LLEPE:
     def get_custom_objects_dict(self):
         """
         Returns the custom_objects_dict
+
         :return: custom_objects_dict: (dict) dictionary containing
             information about custom objects from user
         """
@@ -908,8 +920,9 @@ class LLEPE:
     def set_custom_objects_dict(self, custom_objects_dict):
         """
         Sets the custom_objects_dict
+
         :param custom_objects_dict: (dict) dictionary containing information
-        about about custom objects from user
+            about about custom objects from user
         """
         self._custom_objects_dict = custom_objects_dict
         return None
@@ -1198,9 +1211,11 @@ class LLEPE:
     def update_custom_objects_dict(self, info_dict):
         """
         updates internal custom_objects_dict with info_dict
+
         :param info_dict: Requires an identical structure to opt_dict
             Ignores items with keys containing "custom_object_name"
-        :return: None.
+
+        :return: None
         """
         custom_objects_dict = copy.deepcopy(self._custom_objects_dict)
         for key in list(info_dict.keys()):

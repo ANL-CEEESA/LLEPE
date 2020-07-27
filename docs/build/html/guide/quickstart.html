@@ -160,29 +160,42 @@
 <p>Here is a quick example of how to fit an xml thermodynamic model to experimental data.</p>
 <p>This code fits Nd standard enthalpy in the &quot;twophase.xml&quot; cantera file to the
 experimental data in &quot;Nd_exp_data.csv&quot;.</p>
+<p>This code requires that you copy and paste the &quot;elementz.xml&quot; file in the llepe's data folder into
+the Cantera's data folder located in your environments site-packages folder.</p>
 <p>The code then produces a parity plot of the measured and predicted concentrations of Nd 3+ in the
 aqueous phase.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reeps</span> <span class="kn">import</span> <span class="n">REEPS</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">llepe</span> <span class="kn">import</span> <span class="n">LLEPE</span>
+<span class="n">opt_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Nd(H(A)2)3(org)_h0&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;upper_element_name&#39;</span><span class="p">:</span> <span class="s1">&#39;species&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;upper_attrib_name&#39;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;upper_attrib_value&#39;</span><span class="p">:</span> <span class="s1">&#39;Nd(H(A)2)3(org)&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;lower_element_name&#39;</span><span class="p">:</span> <span class="s1">&#39;h0&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;lower_attrib_name&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="s1">&#39;lower_attrib_value&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                      <span class="s1">&#39;input_format&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;input_value&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.7e6</span><span class="p">}}</span>
 
-<span class="n">searcher_parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;exp_csv_filename&#39;</span><span class="p">:</span> <span class="s1">&#39;Nd_exp_data.csv&#39;</span><span class="p">,</span>
+<span class="n">searcher_parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;exp_data&#39;</span><span class="p">:</span> <span class="s1">&#39;Nd_exp_data.csv&#39;</span><span class="p">,</span>
                                            <span class="s1">&#39;phases_xml_filename&#39;</span><span class="p">:</span> <span class="s1">&#39;twophase.xml&#39;</span><span class="p">,</span>
-                                           <span class="s1">&#39;opt_dict&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Nd(H(A)2)3(org)&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;h0&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.7e6</span><span class="p">}},</span>
+                                           <span class="s1">&#39;opt_dict&#39;</span><span class="p">:</span> <span class="n">opt_dict</span><span class="p">,</span>
                                            <span class="s1">&#39;phase_names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;HCl_electrolyte&#39;</span><span class="p">,</span> <span class="s1">&#39;PC88A_liquid&#39;</span><span class="p">],</span>
                                            <span class="s1">&#39;aq_solvent_name&#39;</span><span class="p">:</span> <span class="s1">&#39;H2O(L)&#39;</span><span class="p">,</span>
                                            <span class="s1">&#39;extractant_name&#39;</span><span class="p">:</span> <span class="s1">&#39;(HA)2(org)&#39;</span><span class="p">,</span>
                                            <span class="s1">&#39;diluant_name&#39;</span><span class="p">:</span> <span class="s1">&#39;dodecane&#39;</span><span class="p">,</span>
                                            <span class="s1">&#39;complex_names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nd(H(A)2)3(org)&#39;</span><span class="p">],</span>
-                                           <span class="s1">&#39;rare_earth_ion_names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nd+++&#39;</span><span class="p">],</span>
+                                           <span class="s1">&#39;extracted_species_ion_names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Nd+++&#39;</span><span class="p">],</span>
                                            <span class="s1">&#39;aq_solvent_rho&#39;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>
                                            <span class="s1">&#39;extractant_rho&#39;</span><span class="p">:</span> <span class="mf">960.0</span><span class="p">,</span>
                                            <span class="s1">&#39;diluant_rho&#39;</span><span class="p">:</span> <span class="mf">750.0</span><span class="p">}</span>
-<span class="n">searcher</span> <span class="o">=</span> <span class="n">REEPS</span><span class="p">(</span><span class="o">**</span><span class="n">searcher_parameters</span><span class="p">)</span>
+<span class="n">searcher</span> <span class="o">=</span> <span class="n">LLEPE</span><span class="p">(</span><span class="o">**</span><span class="n">searcher_parameters</span><span class="p">)</span>
 <span class="n">est_enthalpy</span> <span class="o">=</span> <span class="n">searcher</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="n">searcher</span><span class="o">.</span><span class="n">update_xml</span><span class="p">(</span><span class="n">est_enthalpy</span><span class="p">)</span>
 <span class="n">searcher</span><span class="o">.</span><span class="n">parity_plot</span><span class="p">(</span><span class="n">print_r_squared</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The code should return something like this</p>
+<div class="figure align-default">
+<img alt="../_images/quick_start_output.png" src="../_images/quick_start_output.png" />
+</div>
 </div>
 
 

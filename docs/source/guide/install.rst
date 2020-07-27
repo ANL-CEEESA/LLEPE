@@ -8,7 +8,7 @@ Installation
 Prerequisites
 =============
 
-REEPS requires python3 (>=3.5) with the development headers. 
+LLEPE requires python3 (>=3.5) with the development headers. 
 
 
 Stable Release

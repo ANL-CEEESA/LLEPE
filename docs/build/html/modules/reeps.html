@@ -163,7 +163,7 @@
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="llepe.LLEPE">
-<em class="property">class </em><code class="sig-prename descclassname">llepe.</code><code class="sig-name descname">LLEPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exp_data</span></em>, <em class="sig-param"><span class="n">phases_xml_filename</span></em>, <em class="sig-param"><span class="n">phase_names</span></em>, <em class="sig-param"><span class="n">aq_solvent_name</span></em>, <em class="sig-param"><span class="n">extractant_name</span></em>, <em class="sig-param"><span class="n">diluant_name</span></em>, <em class="sig-param"><span class="n">complex_names</span></em>, <em class="sig-param"><span class="n">extracted_species_ion_names</span></em>, <em class="sig-param"><span class="n">extracted_species_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">aq_solvent_rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extractant_rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">diluant_rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">opt_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">objective_function</span><span class="o">=</span><span class="default_value">'Log-MSE'</span></em>, <em class="sig-param"><span class="n">optimizer</span><span class="o">=</span><span class="default_value">'SLSQP'</span></em>, <em class="sig-param"><span class="n">temp_xml_file_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dependant_params_dict</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/llepe/llepe.html#LLEPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#llepe.LLEPE" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">llepe.</code><code class="sig-name descname">LLEPE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exp_data</span></em>, <em class="sig-param"><span class="n">phases_xml_filename</span></em>, <em class="sig-param"><span class="n">phase_names</span></em>, <em class="sig-param"><span class="n">aq_solvent_name</span></em>, <em class="sig-param"><span class="n">extractant_name</span></em>, <em class="sig-param"><span class="n">diluant_name</span></em>, <em class="sig-param"><span class="n">complex_names</span></em>, <em class="sig-param"><span class="n">extracted_species_ion_names</span></em>, <em class="sig-param"><span class="n">extracted_species_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">aq_solvent_rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extractant_rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">diluant_rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">opt_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">objective_function</span><span class="o">=</span><span class="default_value">'Log-MSE'</span></em>, <em class="sig-param"><span class="n">optimizer</span><span class="o">=</span><span class="default_value">'scipy_minimize'</span></em>, <em class="sig-param"><span class="n">temp_xml_file_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dependant_params_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">custom_objects_dict</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/llepe/llepe.html#LLEPE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#llepe.LLEPE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Liquid-Liquid Extraction Parameter estimator</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -277,10 +277,8 @@ i.e. Nd(H(A)2)3(org), Pr(H(A)2)3(org)</p>
 <li><p><strong>extracted_species_ion_names</strong> -- (list) names of extracted species ions
 in xml file</p></li>
 <li><p><strong>extracted_species_list</strong> -- <p>(list) names of extracted species elements.</p>
-<dl class="simple">
-<dt>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, extracted_species_list will be extracted_species_ion_names</dt><dd><p>without '+' i.e. 'Nd+++'-&gt;'Nd'</p>
-</dd>
-</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, extracted_species_list will be extracted_species_ion_names
+without '+' i.e. 'Nd+++'-&gt;'Nd'</p>
 </p></li>
 <li><p><strong>aq_solvent_rho</strong> -- <p>(float) density of solvent (g/L)</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, molar volume/molecular weight is used from xml</p>
@@ -402,13 +400,19 @@ xml file</p>
 about parameters dependant on opt_dict. Has a similar structure to
 opt_dict except instead of input values, it has 3 other fields:
 'function', 'kwargs', and 'independent_params.</p>
-<p>'function' is a function of the form
-<code class="docutils literal notranslate"><span class="pre">function(independent_param__value_list,</span> <span class="pre">**kwargs)</span></code>
-'kwargs' are the extra arguments to pass to function
-'independent_params' is a list of parameter names in opt_dict that the
+<p>'function' is a function of the form</p>
+<p><code class="docutils literal notranslate"><span class="pre">function(independent_param__value_list,</span> <span class="pre">custom_objects_dict,</span>
+<span class="pre">**kwargs)</span></code></p>
+<p>'kwargs' are the extra arguments to pass to function</p>
+<p>'independent_params' is a list of parameter names in opt_dict that the
 dependent_param is a function of.</p>
+<p>'custom_objects_dict' is for accessing the estimator's internal
+custom_objects_dict and must be included in the arguments, even if the
+custom_objects_dict is not set and is None.</p>
 <p>See example code for usage.</p>
 </p></li>
+<li><p><strong>custom_objects_dict</strong> -- (dict) dictionary containing custom objects
+format: {&lt;object_name_string&gt;: &lt;object&gt;,...}</p></li>
 </ul>
 </dd>
 </dl>
@@ -470,13 +474,27 @@ optimized opt_dict: Has identical structure as opt_dict</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="llepe.LLEPE.get_custom_objects_dict">
+<code class="sig-name descname">get_custom_objects_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/llepe/llepe.html#LLEPE.get_custom_objects_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#llepe.LLEPE.get_custom_objects_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the custom_objects_dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>custom_objects_dict: (dict) dictionary containing
+information about custom objects from user</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="llepe.LLEPE.get_dependant_params_dict">
 <code class="sig-name descname">get_dependant_params_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/llepe/llepe.html#LLEPE.get_dependant_params_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#llepe.LLEPE.get_dependant_params_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the dependant_params_dict
-:return: dependant_params_dict: (dict) dictionary containing</p>
-<blockquote>
-<div><p>information about parameters dependant on opt_dict</p>
-</div></blockquote>
+<dd><p>Returns the dependant_params_dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dependant_params_dict: (dict) dictionary containing
+information about parameters dependant on opt_dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -796,11 +814,27 @@ objective_function value</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="llepe.LLEPE.set_custom_objects_dict">
+<code class="sig-name descname">set_custom_objects_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">custom_objects_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/llepe/llepe.html#LLEPE.set_custom_objects_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#llepe.LLEPE.set_custom_objects_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the custom_objects_dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>custom_objects_dict</strong> -- (dict) dictionary containing information
+about about custom objects from user</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="llepe.LLEPE.set_dependant_params_dict">
 <code class="sig-name descname">set_dependant_params_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dependant_params_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/llepe/llepe.html#LLEPE.set_dependant_params_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#llepe.LLEPE.set_dependant_params_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the dependant_params_dict
-:param dependant_params_dict: (dict) dictionary containing information
+<dd><p>Sets the dependant_params_dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dependant_params_dict</strong> -- (dict) dictionary containing information
 about parameters dependant on opt_dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -980,6 +1014,21 @@ xml file.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="llepe.LLEPE.update_custom_objects_dict">
+<code class="sig-name descname">update_custom_objects_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/llepe/llepe.html#LLEPE.update_custom_objects_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#llepe.LLEPE.update_custom_objects_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>updates internal custom_objects_dict with info_dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>info_dict</strong> -- Requires an identical structure to opt_dict
+Ignores items with keys containing &quot;custom_object_name&quot;</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="llepe.LLEPE.update_predicted_dict">
 <code class="sig-name descname">update_predicted_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phases_xml_filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">phase_names</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/llepe/llepe.html#LLEPE.update_predicted_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#llepe.LLEPE.update_predicted_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function that computes the predicted equilibrium concentrations
@@ -1005,8 +1054,8 @@ If <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>info_dict</strong> -- (dict) info in {species_names:{thermo_prop:val}}
-Requires an identical structure to opt_dict</p></li>
+<li><p><strong>info_dict</strong> -- (dict) Requires an identical structure to opt_dict
+Ignores items with keys containing &quot;custom_object_name&quot;</p></li>
 <li><p><strong>phases_xml_filename</strong> -- (str) xml filename if editing other xml
 If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the current xml will be modified and the internal
 Cantera phases will be refreshed to the new values.</p></li>

@@ -2,29 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/csvs/multicomponent_PC88A_HCL_NdPrCeLaDySmY.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/csvs/PC88A_HCL_NdPrCeLaDySmY.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/csvs/PC88A_HCL_NdPrCeLaDySmY.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/xmls/twophase.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/twophase.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Examples/iterative_fitter_eval_grapher.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter_eval_grapher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Examples/outputs/temp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/outputs/temp.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/guide/install.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/guide/install.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/guide/quickstart.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/guide/quickstart.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/modules/reeps.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/modules/reeps.doctree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/llepe/llepe.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/llepe/llepe.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/guide/install.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/guide/install.rst.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/guide/quickstart.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/guide/quickstart.rst.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/guide/install.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/guide/install.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/guide/quickstart.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/guide/quickstart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/modules/reeps.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/modules/reeps.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/guide/install.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/guide/install.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/source/guide/quickstart.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/guide/quickstart.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llepe/llepe.py" beforeDir="false" afterPath="$PROJECT_DIR$/llepe/llepe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Examples/1_getting_started.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/1_getting_started.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -454,7 +435,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595009200358</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Updated documentation">
+      <created>1595883443287</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1595883443287</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -493,7 +481,8 @@
     <MESSAGE value="Updated iterative_fitter.py to fix slopes to 3, stop after minimal change in best objective. ALso added last results from iteration_fitter.py" />
     <MESSAGE value="Updated iterative_fitter.py to calculate error for all species. Added new test with mean squared error." />
     <MESSAGE value="deleted redundant files" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted redundant files" />
+    <MESSAGE value="Updated documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated documentation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -517,9 +506,10 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1595009194979">
-      <screen x="-1920" y="2" width="1920" height="1040" />
+    <state x="-1364" y="115" key="CommitChangelistDialog2" timestamp="1595883440666">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1364" y="115" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595883440666" />
     <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1595009194979" />
     <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594913509145" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">

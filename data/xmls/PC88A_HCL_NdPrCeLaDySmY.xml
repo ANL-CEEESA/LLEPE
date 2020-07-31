@@ -33,7 +33,7 @@
       <thermo>
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
-          <h0 units="J/mol" updated="Updated at 16:32 7-31-2020">-1376877.1544988335</h0>
+          <h0 units="J/mol" updated="Updated at 12:9 7-31-2020">-1059541.4005512903</h0>
           <s0 units="J/mol/K"> 558.9824 </s0>
           <cp0 units="J/mol/K"> 0.0</cp0>
         </const_cp>
@@ -50,7 +50,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 16:32 7-31-2020">-4926549.797810851</h0>
+          <h0 units="J/mol" updated="Updated at 12:9 7-31-2020">-3978649.6160132056</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -67,7 +67,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 16:32 7-31-2020">-4935519.640701385</h0>
+          <h0 units="J/mol" updated="Updated at 12:9 7-31-2020">-3985038.4367615725</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -85,7 +85,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 16:32 7-31-2020">-4928317.781440989</h0>
+          <h0 units="J/mol" updated="Updated at 12:9 7-31-2020">-3978119.7710579354</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -103,7 +103,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 16:32 7-31-2020">-4927428.65973482</h0>
+          <h0 units="J/mol" updated="Updated at 12:9 7-31-2020">-3977135.4681356866</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -120,7 +120,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 16:32 7-31-2020">-4935155.356789877</h0>
+          <h0 units="J/mol" updated="Updated at 12:9 7-31-2020">-3985847.427512692</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -138,7 +138,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 16:32 7-31-2020">-4944228.17930387</h0>
+          <h0 units="J/mol" updated="Updated at 12:9 7-31-2020">-4001903.249479101</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -157,7 +157,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 16:32 7-31-2020">-4925606.187988869</h0>
+          <h0 units="J/mol" updated="Updated at 12:9 7-31-2020">-3976184.3569597593</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -244,117 +244,7 @@
           </source>
         </binarySaltParameters>
 
-		<binarySaltParameters anion="Cl-" cation="Pr+++">
-          <beta0 updated="Updated at 16:32 7-31-2020"> 0.5879108393945309, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 16:32 7-31-2020"> 5.4483234694357385, 0.0, 0.0, 0.0, 0.0 </beta1>
-          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 16:32 7-31-2020"> -0.02066999867229882, 0.0, 0.0, 0.0, 0.0 </Cphi>
-          <Alpha1> 2 </Alpha1>
-          <Alpha2> 0 </Alpha2>
-          <source>
-            Table S1: Pitzer parameters for osmotic and activity coeff Supp Info.
-            May, P. M.;  Rowland, D.;  Hefter, G.;  Konigsberger, E. 
-			A generic and updatable Pitzer characterization of aqueous binary electrolyte 
-			solutions at 1 bar and 25 C.
-			Journal of Chemical and Engineering Data 2011,56, 5066&#8211;5077.
-          </source>
-        </binarySaltParameters>
-		
-        <binarySaltParameters anion="Cl-" cation="Nd+++">
-          <beta0 updated="Updated at 16:32 7-31-2020"> 0.7459775851223264, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 16:32 7-31-2020"> 7.68392131299453, 0.0, 0.0, 0.0, 0.0 </beta1>
-          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 16:32 7-31-2020"> -0.01963615126026457, 0.0, 0.0, 0.0, 0.0 </Cphi>
-          <Alpha1> 2 </Alpha1>
-          <Alpha2> 0 </Alpha2>
-          <source>
-            Table S1: Pitzer parameters for osmotic and activity coeff Supp Info.
-            May, P. M.;  Rowland, D.;  Hefter, G.;  Konigsberger, E. 
-			A generic and updatable Pitzer characterization of aqueous binary electrolyte 
-			solutions at 1 bar and 25 C.
-			Journal of Chemical and Engineering Data 2011,56, 5066&#8211;5077.
-          </source>
-        </binarySaltParameters>
-		
-		<binarySaltParameters anion="Cl-" cation="La+++">
-          <beta0 updated="Updated at 16:32 7-31-2020"> 0.5929999713109059, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 16:32 7-31-2020"> 5.2769992484445485, 0.0, 0.0, 0.0, 0.0 </beta1>
-          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 16:32 7-31-2020"> -0.024339999997603376, 0.0, 0.0, 0.0, 0.0 </Cphi>
-          <Alpha1> 2 </Alpha1>
-          <Alpha2> 0 </Alpha2>
-          <source>
-            Table S1: Pitzer parameters for osmotic and activity coeff Supp Info.
-            May, P. M.;  Rowland, D.;  Hefter, G.;  Konigsberger, E. 
-			A generic and updatable Pitzer characterization of aqueous binary electrolyte 
-			solutions at 1 bar and 25 C.
-			Journal of Chemical and Engineering Data 2011,56, 5066&#8211;5077.
-          </source>
-        </binarySaltParameters>
-		
-        <binarySaltParameters anion="Cl-" cation="Dy+++">
-          <beta0 updated="Updated at 16:32 7-31-2020"> 0.612950248542597, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 16:32 7-31-2020"> 5.3599329374557385, 0.0, 0.0, 0.0, 0.0 </beta1>
-          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 16:32 7-31-2020"> -0.019699989216349984, 0.0, 0.0, 0.0, 0.0 </Cphi>
-          <Alpha1> 2 </Alpha1>
-          <Alpha2> 0 </Alpha2>
-          <source>
-            Table S1: Pitzer parameters for osmotic and activity coeff Supp Info.
-            May, P. M.;  Rowland, D.;  Hefter, G.;  Konigsberger, E. 
-			A generic and updatable Pitzer characterization of aqueous binary electrolyte 
-			solutions at 1 bar and 25 C.
-			Journal of Chemical and Engineering Data 2011,56, 5066&#8211;5077.
-          </source>
-        </binarySaltParameters>
-		
-		<binarySaltParameters anion="Cl-" cation="Ce+++">
-          <beta0 updated="Updated at 16:32 7-31-2020"> 0.6005000182766684, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 16:32 7-31-2020"> 4.910000193972841, 0.0, 0.0, 0.0, 0.0 </beta1>
-          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 16:32 7-31-2020"> -0.02618999999473301, 0.0, 0.0, 0.0, 0.0 </Cphi>
-          <Alpha1> 2 </Alpha1>
-          <Alpha2> 0 </Alpha2>
-          <source>
-            Table S1: Pitzer parameters for osmotic and activity coeff Supp Info.
-            May, P. M.;  Rowland, D.;  Hefter, G.;  Konigsberger, E. 
-			A generic and updatable Pitzer characterization of aqueous binary electrolyte 
-			solutions at 1 bar and 25 C.
-			Journal of Chemical and Engineering Data 2011,56, 5066&#8211;5077.
-          </source>
-        </binarySaltParameters>
-		
-		<binarySaltParameters anion="Cl-" cation="Y+++">
-          <beta0 updated="Updated at 16:32 7-31-2020"> 0.9656352678202726, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 16:32 7-31-2020"> 8.514180603037651, 0.0, 0.0, 0.0, 0.0 </beta1>
-          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 16:32 7-31-2020"> -0.015467323909969704, 0.0, 0.0, 0.0, 0.0 </Cphi>
-          <Alpha1> 2 </Alpha1>
-          <Alpha2> 0 </Alpha2>
-          <source>
-            Table S1: Pitzer parameters for osmotic and activity coeff Supp Info.
-            May, P. M.;  Rowland, D.;  Hefter, G.;  Konigsberger, E. 
-			A generic and updatable Pitzer characterization of aqueous binary electrolyte 
-			solutions at 1 bar and 25 C.
-			Journal of Chemical and Engineering Data 2011,56, 5066&#8211;5077.
-          </source>
-        </binarySaltParameters>
-		
-		<binarySaltParameters anion="Cl-" cation="Sm+++">
-          <beta0 updated="Updated at 16:32 7-31-2020"> 0.5977991228263208, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 16:32 7-31-2020"> 5.278978156246855, 0.0, 0.0, 0.0, 0.0 </beta1>
-          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 16:32 7-31-2020"> -0.019920000110321332, 0.0, 0.0, 0.0, 0.0 </Cphi>
-          <Alpha1> 2 </Alpha1>
-          <Alpha2> 0 </Alpha2>
-          <source>
-            Table S1: Pitzer parameters for osmotic and activity coeff Supp Info.
-            May, P. M.;  Rowland, D.;  Hefter, G.;  Konigsberger, E. 
-			A generic and updatable Pitzer characterization of aqueous binary electrolyte 
-			solutions at 1 bar and 25 C.
-			Journal of Chemical and Engineering Data 2011,56, 5066&#8211;5077.
-          </source>
-        </binarySaltParameters>
+        
 
         
 

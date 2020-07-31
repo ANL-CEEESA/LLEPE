@@ -4,10 +4,10 @@
  
   <phase dim="3" id="PC88A_liquid">
     <elementArray datasrc="elementz.xml">
-        Cl O H C P Ce dummy 
+        Cl O H C P Pr dummy 
     </elementArray>
     <speciesArray datasrc="#species_PC88A_liquid">
-      (HA)2(org) dodecane Ce(H(A)2)3(org)
+      (HA)2(org) dodecane Pr(H(A)2)3(org)
     </speciesArray>
     <state>
       <temperature units="K"> 298.15 </temperature>
@@ -33,7 +33,7 @@
       <thermo>
         <const_cp Tmax="300.0" Tmin="298.0">
            <t0 units="K">298.14999999999998</t0>
-	   <h0 units="J/mol" updated="Updated at 15:10 7-31-2020">-1460300.0</h0>  
+	   <h0 units="J/mol" updated="Updated at 15:9 7-31-2020">-1460300.0</h0>  
 	   <s0 units="J/mol/K"> 558.9824 </s0>  
            <cp0 units="J/mol/K"> 0.0</cp0>
         </const_cp>
@@ -44,13 +44,13 @@
     </species>
 
     
-    <species name="Ce(H(A)2)3(org)">
-      <atomArray> C:48 H:102 O:9 P:3 Ce:1 </atomArray>
+    <species name="Pr(H(A)2)3(org)">
+      <atomArray> C:48 H:102 O:9 P:3 Pr:1 </atomArray>
       <thermo>
         <const_cp Tmax="300.0" Tmin="298.0">
            <t0 units="K">298.14999999999998</t0>
 	    
-	   <h0 units="J/mol" updated="Updated at 15:10 7-31-2020">-5177400.0</h0> 
+	   <h0 units="J/mol" updated="Updated at 15:9 7-31-2020">-5177400.0</h0> 
 	   <s0 units="J/mol/K"> 1117.965 </s0>  
            <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -84,7 +84,7 @@
 
   <phase dim="3" id="HCl_electrolyte">
     <speciesArray datasrc="#species_waterSolution">
-      H2O(L) H+ OH- Cl- Ce+++
+      H2O(L) H+ OH- Cl- Pr+++
     </speciesArray>
 
     <state>
@@ -140,7 +140,7 @@
       </activityCoefficients>
       <solvent> H2O(L) </solvent>
     </thermo>
-    <elementArray datasrc="elements.xml"> O H Ce C Fe Si N Na Cl Ca P E </elementArray>
+    <elementArray datasrc="elements.xml"> O H Pr C Fe Si N Na Cl Ca P E </elementArray>
     <kinetics model="none">
     </kinetics>
   </phase>
@@ -292,25 +292,26 @@
     </species>
 
 
-    <species name="Ce+++">
-      <speciesChemFormula> Ce+++ </speciesChemFormula>
-      <atomArray> Ce:1 </atomArray>
+    <species name="Pr+++">
+      <speciesChemFormula> Pr+++ </speciesChemFormula>
+      <atomArray> Pr:1 </atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
-          <DG0_f_Pr_Tr units="cal/gmol"> -161600 </DG0_f_Pr_Tr>
-          <DH0_f_Pr_Tr units="cal/gmol"> -167400 </DH0_f_Pr_Tr>
-          <S0_Pr_Tr units="cal/gmol/K"> -49 </S0_Pr_Tr>
+          <DG0_f_Pr_Tr units="cal/gmol"> -162600 </DG0_f_Pr_Tr>
+          <DH0_f_Pr_Tr units="cal/gmol"> -168800 </DH0_f_Pr_Tr>
+          <S0_Pr_Tr units="cal/gmol/K"> -50 </S0_Pr_Tr>
         </HKFT>
       </thermo>
       <standardState model="HKFT">
-        <a1 units="cal/gmol/bar"> -0.29292 </a1>
-        <a2 units="cal/gmol"> -1493.38 </a2>
-        <a3 units="cal-K/gmol/bar"> 11.6196 </a3>
-        <a4 units="cal-K/gmol"> -21616 </a4>
-        <c1 units="cal/gmol/K"> 4.0445 </c1>
-        <c2 units="cal-K/gmol"> -108974 </c2>
-        <omega_Pr_Tr units="cal/gmol"> 222510 </omega_Pr_Tr>
+        <a1 units="cal/gmol/bar"> -0.32406 </a1>
+        <a2 units="cal/gmol"> -1419.98 </a2>
+        <a3 units="cal-K/gmol/bar"> 8.1257 </a3>
+        <a4 units="cal-K/gmol"> -21920 </a4>
+        <c1 units="cal/gmol/K"> -1.1975 </c1>
+        <c2 units="cal-K/gmol"> -127511 </c2>
+        <omega_Pr_Tr units="cal/gmol"> 223500 </omega_Pr_Tr>
+        <molarVolume units="cm3/mol"> -42.1 </molarVolume>
       </standardState>
       <source>
         ref:G9

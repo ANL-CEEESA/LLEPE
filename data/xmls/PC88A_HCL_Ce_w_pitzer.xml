@@ -33,7 +33,7 @@
       <thermo>
         <const_cp Tmax="300.0" Tmin="298.0">
            <t0 units="K">298.14999999999998</t0>
-	   <h0 units="J/mol" updated="Updated at 15:10 7-31-2020">-1460300.0</h0>  
+	   <h0 units="J/mol" updated="Updated at 16:15 7-31-2020">-1460300.0</h0>  
 	   <s0 units="J/mol/K"> 558.9824 </s0>  
            <cp0 units="J/mol/K"> 0.0</cp0>
         </const_cp>
@@ -50,7 +50,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
            <t0 units="K">298.14999999999998</t0>
 	    
-	   <h0 units="J/mol" updated="Updated at 15:10 7-31-2020">-5177400.0</h0> 
+	   <h0 units="J/mol" updated="Updated at 16:15 7-31-2020">-5177400.0</h0> 
 	   <s0 units="J/mol/K"> 1117.965 </s0>  
            <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -136,7 +136,21 @@
             molality-based model.
           </source>
         </binarySaltParameters>
-
+		<binarySaltParameters anion="Cl-" cation="Ce+++">
+          <beta0 updated="Updated at 16:15 7-31-2020"> 0.6005, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 16:15 7-31-2020"> 4.91, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
+          <Cphi updated="Updated at 16:15 7-31-2020"> -0.026189999999999998, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Alpha1> 2 </Alpha1>
+          <Alpha2> 0 </Alpha2>
+          <source>
+            Table S1: Pitzer parameters for osmotic and activity coeff Supp Info.
+            May, P. M.;  Rowland, D.;  Hefter, G.;  Konigsberger, E. 
+			A generic and updatable Pitzer characterization of aqueous binary electrolyte 
+			solutions at 1 bar and 25 C.
+			Journal of Chemical and Engineering Data 2011,56, 5066&#8211;5077.
+          </source>
+        </binarySaltParameters>
       </activityCoefficients>
       <solvent> H2O(L) </solvent>
     </thermo>

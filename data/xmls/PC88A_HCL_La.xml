@@ -4,10 +4,10 @@
  
   <phase dim="3" id="PC88A_liquid">
     <elementArray datasrc="elementz.xml">
-        Cl O H C P Ce dummy 
+        Cl O H C P La dummy 
     </elementArray>
     <speciesArray datasrc="#species_PC88A_liquid">
-      (HA)2(org) dodecane Ce(H(A)2)3(org)
+      (HA)2(org) dodecane La(H(A)2)3(org)
     </speciesArray>
     <state>
       <temperature units="K"> 298.15 </temperature>
@@ -44,8 +44,8 @@
     </species>
 
     
-    <species name="Ce(H(A)2)3(org)">
-      <atomArray> C:48 H:102 O:9 P:3 Ce:1 </atomArray>
+    <species name="La(H(A)2)3(org)">
+      <atomArray> C:48 H:102 O:9 P:3 La:1 </atomArray>
       <thermo>
         <const_cp Tmax="300.0" Tmin="298.0">
            <t0 units="K">298.14999999999998</t0>
@@ -84,7 +84,7 @@
 
   <phase dim="3" id="HCl_electrolyte">
     <speciesArray datasrc="#species_waterSolution">
-      H2O(L) H+ OH- Cl- Ce+++
+      H2O(L) H+ OH- Cl- La+++
     </speciesArray>
 
     <state>
@@ -140,7 +140,7 @@
       </activityCoefficients>
       <solvent> H2O(L) </solvent>
     </thermo>
-    <elementArray datasrc="elements.xml"> O H Ce C Fe Si N Na Cl Ca P E </elementArray>
+    <elementArray datasrc="elements.xml"> O H La C Fe Si N Na Cl Ca P E </elementArray>
     <kinetics model="none">
     </kinetics>
   </phase>
@@ -292,25 +292,25 @@
     </species>
 
 
-    <species name="Ce+++">
-      <speciesChemFormula> Ce+++ </speciesChemFormula>
-      <atomArray> Ce:1 </atomArray>
+    <species name="La+++">
+      <speciesChemFormula> La+++ </speciesChemFormula>
+      <atomArray> La:1 </atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
-          <DG0_f_Pr_Tr units="cal/gmol"> -161600 </DG0_f_Pr_Tr>
-          <DH0_f_Pr_Tr units="cal/gmol"> -167400 </DH0_f_Pr_Tr>
-          <S0_Pr_Tr units="cal/gmol/K"> -49 </S0_Pr_Tr>
+          <DG0_f_Pr_Tr units="cal/gmol"> -164000 </DG0_f_Pr_Tr>
+          <DH0_f_Pr_Tr units="cal/gmol"> -169600 </DH0_f_Pr_Tr>
+          <S0_Pr_Tr units="cal/gmol/K"> -52 </S0_Pr_Tr>
         </HKFT>
       </thermo>
       <standardState model="HKFT">
-        <a1 units="cal/gmol/bar"> -0.29292 </a1>
-        <a2 units="cal/gmol"> -1493.38 </a2>
-        <a3 units="cal-K/gmol/bar"> 11.6196 </a3>
-        <a4 units="cal-K/gmol"> -21616 </a4>
-        <c1 units="cal/gmol/K"> 4.0445 </c1>
-        <c2 units="cal-K/gmol"> -108974 </c2>
-        <omega_Pr_Tr units="cal/gmol"> 222510 </omega_Pr_Tr>
+        <a1 units="cal/gmol/bar"> -0.2788 </a1>
+        <a2 units="cal/gmol"> -1438.24 </a2>
+        <a3 units="cal-K/gmol/bar"> 10.9602 </a3>
+        <a4 units="cal-K/gmol"> -21844 </a4>
+        <c1 units="cal/gmol/K"> 4.2394 </c1>
+        <c2 units="cal-K/gmol"> -106122 </c2>
+        <omega_Pr_Tr units="cal/gmol"> 215720 </omega_Pr_Tr>
       </standardState>
       <source>
         ref:G9

@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/csvs/labeled_zeroes_removed_ce.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/csvs/labeled_zeroes_removed_dy.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/csvs/labeled_zeroes_removed_la.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/csvs/labeled_zeroes_removed_nd.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/csvs/labeled_zeroes_removed_pr.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/csvs/labeled_zeroes_removed_sm.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/csvs/labeled_zeroes_removed_y.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_Dy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_La.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_Pr.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_Sm.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_Y.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/Examples/2_basic_fit_method.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_Ce.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_Ce.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_Nd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_Nd.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -478,7 +462,21 @@
       <option name="project" value="LOCAL" />
       <updated>1596211535974</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Changed iterative fit to only fit to multicomponent data.">
+      <created>1596235195126</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1596235195126</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Updated examples to include basic, filtered, and Pitzer fit methods.">
+      <created>1596235357316</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1596235357316</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -519,7 +517,8 @@
     <MESSAGE value="deleted redundant files" />
     <MESSAGE value="Updated documentation" />
     <MESSAGE value="Changed iterative fit to only fit to multicomponent data." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed iterative fit to only fit to multicomponent data." />
+    <MESSAGE value="Updated examples to include basic, filtered, and Pitzer fit methods." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated examples to include basic, filtered, and Pitzer fit methods." />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -543,11 +542,11 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1596235285970">
+    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1596235633869">
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1364" y="115" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595905945326" />
-    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1596235285970" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1596235633869" />
     <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594913509145" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
       <screen x="-1920" y="2" width="1920" height="1040" />
@@ -626,6 +625,10 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1245" y="438" width="437" height="168" key="VCS.ChangelistChooser/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321346068" />
+    <state x="-1074" y="439" key="VCS.EditChangelistDialog" timestamp="1596235460655">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1074" y="439" key="VCS.EditChangelistDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1596235460655" />
     <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1594770419652">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

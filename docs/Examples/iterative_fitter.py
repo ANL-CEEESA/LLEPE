@@ -22,7 +22,7 @@ ext_h0_filename = "../../data/jsons/min_h0_guess_ext_h0.txt"
 with open(ext_h0_filename) as file:
     ext_h0_dict = json.load(file)
 labeled_data = pd.read_csv("../../data/csvs/"
-                           "zeroes_removed_PC88A_HCL_NdPrCeLaDySmY.csv")
+                           "multicomponent_PC88A_HCL_NdPrCeLaDySmY.csv")
 exp_data = labeled_data.drop(labeled_data.columns[0], axis=1)
 xml_file = "PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml"
 lin_param_df = pd.read_csv("../../data/csvs"
@@ -237,8 +237,7 @@ while obj_diff1 > eps or obj_diff2 > eps:
     del(output_dict['rel_diff'][-1])
     output_dict['rel_diff'].append(rel_diff)
     output_df = pd.DataFrame(output_dict)
-    output_df.to_csv('outputs/iterative_fitter_output4.csv')
-    obj_diff1 = np.abs(output_dict['best_obj'][-1]-output_dict['best_obj'][-2])
+    output_df.to_csv('outputs/iterative_fitter_output_multicomponent.csv')
+    obj_diff1 = output_dict['best_obj'][-2]-output_dict['best_obj'][-1]
     if i > 2:
-        obj_diff2 = np.abs(
-            output_dict['best_obj'][-1] - output_dict['best_obj'][-3])
+        obj_diff2 = output_dict['best_obj'][-3] - output_dict['best_obj'][-1]

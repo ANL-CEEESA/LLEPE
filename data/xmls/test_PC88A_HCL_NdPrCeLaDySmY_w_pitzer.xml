@@ -11,7 +11,7 @@
     </speciesArray>
     <state>
       <temperature units="K"> 298.15 </temperature>
-      <pressure units="Pa"> 100000.0 </pressure>
+      <pressure units="Pa"> 101325.0 </pressure>
       <soluteMolalities>
         (HA)2(org): 0.25
       </soluteMolalities>
@@ -33,7 +33,7 @@
       <thermo>
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
-          <h0 units="J/mol" updated="Updated at 19:20 7-29-2020">-1377917.5269485628</h0>
+          <h0 units="J/mol" updated="Updated at 11:14 7-28-2020">-1375274.5395942358</h0>
           <s0 units="J/mol/K"> 558.9824 </s0>
           <cp0 units="J/mol/K"> 0.0</cp0>
         </const_cp>
@@ -50,7 +50,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 19:20 7-29-2020">-4929625.060282971</h0>
+          <h0 units="J/mol" updated="Updated at 11:14 7-28-2020">-4924702.801342797</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -67,7 +67,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 19:20 7-29-2020">-4941397.084772181</h0>
+          <h0 units="J/mol" updated="Updated at 11:14 7-28-2020">-4933297.85118053</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -85,7 +85,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 19:20 7-29-2020">-4932551.489263242</h0>
+          <h0 units="J/mol" updated="Updated at 11:14 7-28-2020">-4925793.594958098</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -103,7 +103,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 19:20 7-29-2020">-4935194.142426379</h0>
+          <h0 units="J/mol" updated="Updated at 11:14 7-28-2020">-4921414.408105163</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -120,7 +120,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 19:20 7-29-2020">-4935179.480883835</h0>
+          <h0 units="J/mol" updated="Updated at 11:14 7-28-2020">-4927250.91118887</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -138,7 +138,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 19:20 7-29-2020">-4947210.070800013</h0>
+          <h0 units="J/mol" updated="Updated at 11:14 7-28-2020">-4939280.834663128</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -157,7 +157,7 @@
         <const_cp Tmax="300.0" Tmin="298.0">
           <t0 units="K">298.14999999999998</t0>
 
-          <h0 units="J/mol" updated="Updated at 19:20 7-29-2020">-4929116.779371853</h0>
+          <h0 units="J/mol" updated="Updated at 11:14 7-28-2020">-4921187.817651384</h0>
           <s0 units="J/mol/K"> 1117.965 </s0>
           <cp0 units="J/mol/K">0.0</cp0>
         </const_cp>
@@ -210,12 +210,12 @@
 
   <phase dim="3" id="HCl_electrolyte">
     <speciesArray datasrc="#species_waterSolution">
-      H2O(L) H+ OH- Cl- Nd+++ Pr+++ Ce+++ La+++ Dy+++ Sm+++ Y+++
+      H2O(L) H+ OH- Cl- Nd+++ Pr+++ Ce+++ La+++ Dy+++ Sm+++ Y+++ Na+
     </speciesArray>
 
     <state>
       <temperature units="K"> 298.15 </temperature>
-      <pressure units="Pa"> 100000.0 </pressure>
+      <pressure units="Pa"> 101325.0 </pressure>
       <soluteMolalities>
         Cl-: 1.0E-7
         H+: 1.0E-7
@@ -245,10 +245,10 @@
         </binarySaltParameters>
 
 		<binarySaltParameters anion="Cl-" cation="Pr+++">
-          <beta0 updated="Updated at 19:20 7-29-2020"> 0.058791077174068576, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 19:20 7-29-2020"> 0.5448320238819658, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 11:14 7-28-2020"> 0.41211840588454257, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 11:14 7-28-2020"> 0.5446957279361009, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 19:20 7-29-2020"> -0.02066999867229882, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 11:14 7-28-2020"> -0.02066999867229882, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -261,10 +261,10 @@
         </binarySaltParameters>
 		
         <binarySaltParameters anion="Cl-" cation="Nd+++">
-          <beta0 updated="Updated at 19:20 7-29-2020"> 1.0825315776813356, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 19:20 7-29-2020"> 6.211262701179254, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 11:14 7-28-2020"> 0.35663172954569944, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 11:14 7-28-2020"> 2.9004659704748335, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 19:20 7-29-2020"> -0.01963615126026457, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 11:14 7-28-2020"> -0.01963615126026457, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -277,10 +277,10 @@
         </binarySaltParameters>
 		
 		<binarySaltParameters anion="Cl-" cation="La+++">
-          <beta0 updated="Updated at 19:20 7-29-2020"> 0.5930048961782302, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 19:20 7-29-2020"> 5.2771447352927785, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 11:14 7-28-2020"> 0.05797526981415538, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 11:14 7-28-2020"> 16.763625801929546, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 19:20 7-29-2020"> -0.024339999997603376, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 11:14 7-28-2020"> -0.024339999997603376, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -293,10 +293,10 @@
         </binarySaltParameters>
 		
         <binarySaltParameters anion="Cl-" cation="Dy+++">
-          <beta0 updated="Updated at 19:20 7-29-2020"> 0.5532852863195881, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 19:20 7-29-2020"> 9.206787175138805, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 11:14 7-28-2020"> 0.5534945060571388, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 11:14 7-28-2020"> 9.205570263716002, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 19:20 7-29-2020"> -0.019699989216349984, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 11:14 7-28-2020"> -0.019699989216349984, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -309,10 +309,10 @@
         </binarySaltParameters>
 		
 		<binarySaltParameters anion="Cl-" cation="Ce+++">
-          <beta0 updated="Updated at 19:20 7-29-2020"> 0.6005020116531858, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 19:20 7-29-2020"> 4.91004437191519, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 11:14 7-28-2020"> 0.05726405599313575, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 11:14 7-28-2020"> 2.6992201079308558, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 19:20 7-29-2020"> -0.02618999999473301, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 11:14 7-28-2020"> -0.02618999999473301, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -325,10 +325,10 @@
         </binarySaltParameters>
 		
 		<binarySaltParameters anion="Cl-" cation="Y+++">
-          <beta0 updated="Updated at 19:20 7-29-2020"> 0.8866269789489127, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 19:20 7-29-2020"> 9.867663759220948, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 11:14 7-28-2020"> 0.8866130626375315, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 11:14 7-28-2020"> 9.867928019371377, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 19:20 7-29-2020"> -0.015467323909969704, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 11:14 7-28-2020"> -0.015467323909969704, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -341,10 +341,10 @@
         </binarySaltParameters>
 		
 		<binarySaltParameters anion="Cl-" cation="Sm+++">
-          <beta0 updated="Updated at 19:20 7-29-2020"> 0.5978087860273482, 0.0, 0.0, 0.0, 0.0 </beta0>
-          <beta1 updated="Updated at 19:20 7-29-2020"> 5.279188095059934, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta0 updated="Updated at 11:14 7-28-2020"> 0.5978087854283536, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1 updated="Updated at 11:14 7-28-2020"> 5.279188087719687, 0.0, 0.0, 0.0, 0.0 </beta1>
           <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
-          <Cphi updated="Updated at 19:20 7-29-2020"> -0.019920000110321332, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Cphi updated="Updated at 11:14 7-28-2020"> -0.019920000110321332, 0.0, 0.0, 0.0, 0.0 </Cphi>
           <Alpha1> 2 </Alpha1>
           <Alpha2> 0 </Alpha2>
           <source>
@@ -362,7 +362,7 @@
       <solvent> H2O(L) </solvent>
     </thermo>
     
-    <elementArray datasrc="elementz.xml"> O H Nd Pr Ce La Dy Y Sm C N Cl P E </elementArray>
+    <elementArray datasrc="elementz.xml"> O H Nd Pr Ce La Dy Y Sm C N Cl P E  Na</elementArray>
     <kinetics model="none">
     </kinetics>
   </phase>
@@ -389,7 +389,7 @@
 
     <species name="OH-">
       <speciesChemFormula> OH- </speciesChemFormula>
-      <atomArray> O:1 H:1 </atomArray>
+      <atomArray> O:1 H:1 E:1</atomArray>
       <charge> -1 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
@@ -446,7 +446,7 @@
     
     <species name="Cl-">
       <speciesChemFormula> Cl- </speciesChemFormula>
-      <atomArray> Cl:1 </atomArray>
+      <atomArray> Cl:1 E:1</atomArray>
       <charge> -1 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="273.15">
@@ -470,7 +470,7 @@
 
     <species name="H+">
       <speciesChemFormula> H+ </speciesChemFormula>
-      <atomArray> H:1 </atomArray>
+      <atomArray> H:1 E:-1</atomArray>
       <charge> +1 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="273.15">
@@ -495,7 +495,7 @@
 
     <species name="Nd+++">
       <speciesChemFormula> Nd+++ </speciesChemFormula>
-      <atomArray> Nd:1 </atomArray>
+      <atomArray> Nd:1 E:-3</atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
@@ -521,7 +521,7 @@
 
     <species name="Pr+++">
       <speciesChemFormula> Pr+++ </speciesChemFormula>
-      <atomArray> Pr:1 </atomArray>
+      <atomArray> Pr:1 E:-3</atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
@@ -548,7 +548,7 @@
 
     <species name="Ce+++">
       <speciesChemFormula> Ce+++ </speciesChemFormula>
-      <atomArray> Ce:1 </atomArray>
+      <atomArray> Ce:1 E:-3</atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
@@ -575,7 +575,7 @@
 
     <species name="La+++">
       <speciesChemFormula> La+++ </speciesChemFormula>
-      <atomArray> La:1 </atomArray>
+      <atomArray> La:1 E:-3</atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
@@ -603,7 +603,7 @@
 
     <species name="Dy+++">
       <speciesChemFormula> Dy+++ </speciesChemFormula>
-      <atomArray> Dy:1 </atomArray>
+      <atomArray> Dy:1 E:-3</atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
@@ -630,7 +630,7 @@
 
     <species name="Y+++">
       <speciesChemFormula> Y+++ </speciesChemFormula>
-      <atomArray> Y:1 </atomArray>
+      <atomArray> Y:1 E:-3</atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
@@ -658,7 +658,7 @@
 
     <species name="Sm+++">
       <speciesChemFormula> Sm+++ </speciesChemFormula>
-      <atomArray> Sm:1 </atomArray>
+      <atomArray> Sm:1 E:-3</atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
@@ -685,7 +685,7 @@
 
     <species name="Gd+++">
       <speciesChemFormula> Gd+++ </speciesChemFormula>
-      <atomArray> Gd:1 </atomArray>
+      <atomArray> Gd:1 E:-3</atomArray>
       <charge> +3 </charge>
       <thermo model="HKFT">
         <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
@@ -708,7 +708,25 @@
       </source>
     </species>
     
-    
+    <species name="Na+">
+      <atomArray> Na:1 E:-1 </atomArray>
+      <charge> +1 </charge>
+      <thermo>
+       <Mu0 Pref="100000.0" Tmax="1000.0" Tmin="200.0">
+         <H298 units="cal/mol"> 0.0  </H298>
+         <numPoints> 2            </numPoints>
+         <floatArray size="2" title="Mu0Values" units="Dimensionless">
+             -125.5213,  -125.5213       
+         </floatArray>
+          <floatArray size="2" title="Mu0Temperatures">
+             298.15,    333.15
+          </floatArray>
+       </Mu0>
+      </thermo>
+      <standardState model="constant_incompressible"> 
+         <molarVolume> 1.3 </molarVolume>
+      </standardState>
+    </species>
     
     
   </speciesData>

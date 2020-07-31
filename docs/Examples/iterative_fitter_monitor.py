@@ -8,7 +8,7 @@ parameters = 'slope,intercept,beta0,beta1'.split(',')
 #     if go != 'y':
 #         break
 #     plt.close('all')
-df = pd.read_csv('outputs/iterative_fitter_output.csv')
+df = pd.read_csv('outputs/iterative_fitter_output4.csv')
 info_cols = {parameter: [] for parameter in parameters}
 for col in df.columns:
     for parameter in parameters:
@@ -48,4 +48,4 @@ ax.plot(df['iter'].values[1:],
 ax.set_xlabel('iteration')
 ax.set_ylabel('Value')
 plt.tight_layout()
-plt.savefig('outputs/rel_diff.png')
+# plt.savefig('outputs/rel_diff.png')

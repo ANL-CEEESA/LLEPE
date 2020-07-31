@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/csvs/multicomponent_PC88A_HCL_NdPrCeLaDySmY.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/csvs/no_formiga_or_5_oa_PC88A_HCL_NdPrCeLaDySmY.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/xmls/test_PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Examples/outputs/multi_only_iterative_fitter_output.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Examples/test_eval.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Examples/1_getting_started.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/1_getting_started.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/examples/iterative_fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/xmls/PC88A_HCL_NdPrCeLaDySmY_w_pitzer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Examples/iterative_fitter_eval_grapher.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter_eval_grapher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Examples/iterative_fitter_monitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/iterative_fitter_monitor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Examples/outputs/temp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Examples/outputs/temp.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/llepe/llepe.py" beforeDir="false" afterPath="$PROJECT_DIR$/llepe/llepe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/llepe/optimizers.py" beforeDir="false" afterPath="$PROJECT_DIR$/llepe/optimizers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,11 +51,14 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
-  <component name="RunManager" selected="Python.scratch_1">
+  <component name="RunManager" selected="Python.estimator_eval">
     <configuration name="estimator_eval" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/multi_re_fit" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -66,6 +77,9 @@
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -80,31 +94,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="grapher_r2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="iterative_fitter_eval_grapher" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/figures/graphers" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/figures/graphers/grapher_r2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="iterative_fitter_eval_grapher" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="parameter-estimation" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docs/examples" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -119,7 +115,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scratch_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="iterative_fitter_monitor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parameter-estimation" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -127,11 +123,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docs/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/docs/examples/iterative_fitter_monitor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -140,13 +136,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_eval" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docs/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/docs/examples/test_eval.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.scratch_1" />
-        <item itemvalue="Python.iterative_fitter_eval_grapher" />
-        <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
         <item itemvalue="Python.estimator_eval" />
-        <item itemvalue="Python.grapher_r2" />
+        <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
+        <item itemvalue="Python.iterative_fitter_eval_grapher" />
+        <item itemvalue="Python.estimator_eval" />
+        <item itemvalue="Python.iterative_fitter_monitor" />
       </list>
     </recent_temporary>
   </component>
@@ -442,7 +459,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595883443287</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Changed iterative fit to only fit to multicomponent data.">
+      <created>1595905947459</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1595905947460</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -482,7 +506,8 @@
     <MESSAGE value="Updated iterative_fitter.py to calculate error for all species. Added new test with mean squared error." />
     <MESSAGE value="deleted redundant files" />
     <MESSAGE value="Updated documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated documentation" />
+    <MESSAGE value="Changed iterative fit to only fit to multicomponent data." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed iterative fit to only fit to multicomponent data." />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
@@ -506,10 +531,10 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
-    <state x="-1364" y="115" key="CommitChangelistDialog2" timestamp="1595883440666">
+    <state x="-1364" y="115" key="CommitChangelistDialog2" timestamp="1595905945326">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1364" y="115" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595883440666" />
+    <state x="-1364" y="115" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595905945326" />
     <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1595009194979" />
     <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594913509145" />
     <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
@@ -525,34 +550,34 @@
       <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
     <state x="-1523" y="423" key="GitRewordDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321433648" />
-    <state width="1899" height="278" key="GridCell.Tab.0.bottom" timestamp="1595882107104">
+    <state width="1899" height="278" key="GridCell.Tab.0.bottom" timestamp="1596090397601">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="278" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595882107104" />
+    <state width="1899" height="278" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596090397601" />
     <state width="1899" height="279" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594958896281" />
     <state width="1897" height="281" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386435" />
     <state width="1515" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595614185238" />
     <state width="1899" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594929812457" />
-    <state width="1899" height="278" key="GridCell.Tab.0.center" timestamp="1595882107101">
+    <state width="1899" height="278" key="GridCell.Tab.0.center" timestamp="1596090397600">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="278" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595882107101" />
+    <state width="1899" height="278" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596090397600" />
     <state width="1899" height="279" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594958896281" />
     <state width="1897" height="281" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386434" />
     <state width="1515" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1595614185237" />
     <state width="1899" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594929812457" />
-    <state width="1899" height="278" key="GridCell.Tab.0.left" timestamp="1595882107101">
+    <state width="1899" height="278" key="GridCell.Tab.0.left" timestamp="1596090397599">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="278" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595882107101" />
+    <state width="1899" height="278" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596090397598" />
     <state width="1899" height="279" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594958896281" />
     <state width="1897" height="281" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386433" />
     <state width="1515" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1595614185237" />
     <state width="1899" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594929812457" />
-    <state width="1899" height="278" key="GridCell.Tab.0.right" timestamp="1595882107103">
+    <state width="1899" height="278" key="GridCell.Tab.0.right" timestamp="1596090397600">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="278" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595882107103" />
+    <state width="1899" height="278" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596090397600" />
     <state width="1899" height="279" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594958896281" />
     <state width="1897" height="281" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386434" />
     <state width="1515" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1595614185238" />
@@ -594,11 +619,11 @@
     </state>
     <state x="-1368" y="256" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321242949" />
     <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594770419652" />
-    <state x="-1657" y="182" width="1283" height="717" key="com.intellij.ide.util.TipDialog" timestamp="1595513909435">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state x="-1341" y="299" width="607" height="353" key="com.intellij.ide.util.TipDialog" timestamp="1596210496525">
+      <screen x="-1920" y="2" width="1920" height="1040" />
     </state>
-    <state x="-1657" y="182" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595513909435" />
-    <state x="-1341" y="300" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1593278433547" />
+    <state x="-1657" y="182" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596062175691" />
+    <state x="-1341" y="299" width="607" height="353" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1596210496525" />
     <state x="463" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1592413869252" />
     <state x="263" y="182" width="1283" height="717" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594821704291" />
     <state x="-1151" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591821870917">

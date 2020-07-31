@@ -26,7 +26,7 @@ class LLEPE:
         must be the same order as they appear in the xml, complex_names and
         extracted_species_ion_names.
 
-        For example, say in exp_csv_filename's csv, ES_1 is Nd ES_2 is Pr,
+        For example, say in exp_data, ES_1 is Nd ES_2 is Pr,
         and
 
         .. code-block:: python
@@ -37,7 +37,7 @@ class LLEPE:
 
         Then:
 
-        The csvs column ordering must be:
+        The exp_data column ordering must be (names do not matter):
 
         [h_i, h_eq, z_i, z_eq, Nd_aq_i, Nd_aq_eq, Nd_d_eq,
         Pr_aq_i, Pr_aq_eq, Pr_d_eq]
@@ -372,6 +372,7 @@ class LLEPE:
         self._predicted_dict = None
         self.update_predicted_dict()
 
+    # TODO: move scipy_minimize to optimizers
     @staticmethod
     def scipy_minimize(objective, x_guess, optimizer_kwargs=None):
         """ The default optimizer for LLEPE
@@ -406,6 +407,7 @@ class LLEPE:
         est_parameters = res.x
         return est_parameters, res.fun
 
+    # TODO: move log_mean_squared_error to objectives
     def log_mean_squared_error(self, predicted_dict, meas_df):
         """Default objective function for LLEPE
 
@@ -685,6 +687,11 @@ class LLEPE:
         self._diluant_rho = diluant_rho
         return None
 
+    # TODO: Change input DataFrame structure to contain information about
+    #  other species like NaCl
+    #  TODO: Change DataFrame structure to contain info about O/A ratio
+    # TODO: Generalize code to more than just org and aq phase (3+ phases)
+    # TODO: Handle multiple electrolytes ie. NO3- with Cl-
     def set_in_moles(self, feed_vol):
         """Function that initializes mole fractions to input feed_vol
 
@@ -768,7 +775,7 @@ class LLEPE:
                  for extracted_species in extracted_species_list])
             extracted_species_charge_sum = np.sum(
                 extracted_species_charges * extracted_species_moles)
-            chlorine_moles = extracted_species_charge_sum + h_plus_moles
+            anion_moles = extracted_species_charge_sum + h_plus_moles
             extractant_moles = feed_vol * row['z_i']
             extractant_vol = extractant_moles * extractant_mw / extractant_rho
             diluant_vol = feed_vol - extractant_vol
@@ -778,7 +785,7 @@ class LLEPE:
             species_moles_aq = [aq_phase_solvent_moles,
                                 h_plus_moles,
                                 hydroxide_ions,
-                                chlorine_moles]
+                                anion_moles]
             species_moles_aq.extend(list(extracted_species_moles))
             species_moles_org = [extractant_moles, diluant_moles]
             species_moles_org.extend(list(complex_moles))
@@ -927,6 +934,10 @@ class LLEPE:
         self._custom_objects_dict = custom_objects_dict
         return None
 
+    # TODO: Change DataFrame strucutre to contain info whether to set
+    #  equilibrium pH to measured value. Will be useful for saponification
+    # TODO: Find way to add saponification to model.
+    #  Maybe use fsolve to match experimental equilibrium pH
     def update_predicted_dict(self,
                               phases_xml_filename=None,
                               phase_names=None):
@@ -1342,7 +1353,9 @@ class LLEPE:
                 filtered_meas = filtered_data['meas']
                 filtered_pred = filtered_data['pred']
                 if len(filtered_pred) != 0:
-                    ax.scatter(filtered_meas, filtered_pred, label=label)
+                    ax.scatter(filtered_meas,
+                               filtered_pred,
+                               label=label)
             if legend:
                 ax.legend(loc='best')
 
@@ -1427,6 +1440,8 @@ class LLEPE:
                      z_label=None,
                      c_label=None):
         """
+        THis is for plotting 3d scatter plots.
+        We suggest use matplotlib's ax.scatter to make 3d plots.
 
         :param x_data: (list) list of data for x axis
         :param y_data: (list) list of data for y axis

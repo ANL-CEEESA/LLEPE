@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Setup Script" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="AN" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1cb4dMPbzwchdRM32ufpLaZ6Ir0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../parameter estimation/parameter estimation/fit.py" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+  </component>
+  <component name="RunManager" selected="Python.estimator_eval">
+    <configuration name="estimator_eval" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/multi_re_fit" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/multi_re_fit/estimator_eval.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="eval_mod_lin_params_const_pitzer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code/eval_mod_lin_params_const_pitzer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="iterative_fitter_eval_grapher" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docs/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/docs/examples/iterative_fitter_eval_grapher.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="iterative_fitter_monitor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docs/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/docs/examples/iterative_fitter_monitor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_eval" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parameter-estimation" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docs/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/docs/examples/test_eval.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.estimator_eval" />
+        <item itemvalue="Python.eval_mod_lin_params_const_pitzer" />
+        <item itemvalue="Python.iterative_fitter_eval_grapher" />
+        <item itemvalue="Python.estimator_eval" />
+        <item itemvalue="Python.iterative_fitter_monitor" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED,ALPHA_COMPARATOR" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f4439dc0-6756-4612-8f7d-596d8949f300" name="Default Changelist" comment="" />
+      <created>1590784044993</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590784044993</updated>
+    </task>
+    <task id="LOCAL-00001" summary="started project">
+      <created>1590789450060</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590789450060</updated>
+    </task>
+    <task id="LOCAL-00002" summary="started project">
+      <created>1590789938443</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1590789938443</updated>
+    </task>
+    <task id="LOCAL-00003" summary="started project">
+      <created>1591047592849</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1591047592850</updated>
+    </task>
+    <task id="LOCAL-00004" summary="started project">
+      <created>1591047660677</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1591047660677</updated>
+    </task>
+    <task id="LOCAL-00005" summary="started project">
+      <created>1591057566877</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1591057566877</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Completed one composition parameter estimation">
+      <created>1591119253733</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1591119253733</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Modified reeps to grab charge from REE in xml file for initial chlorine moles calculation">
+      <created>1591130305884</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1591130305884</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Modified reeps to grab charge from REE in xml file for initial chlorine moles calculation">
+      <created>1591209082778</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1591209082779</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Allow user to change optimizer and objective function. Also added r-squared evaluator. Changed temp file location to user temp folder. Added a prediction dictionary to access the values predicted by model.">
+      <created>1591388459379</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1591388459379</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Included package data in data/csvs and data/xmls. Note this only works for sdists. If bdist is needed, research &quot;manifest.in&quot; python setup files.">
+      <created>1591972483195</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1591972483196</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Included package data in data/csvs and data/xmls. Note this only works for sdists. If bdist is needed, research &quot;manifest.in&quot; python setup files.">
+      <created>1592321239574</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1592321239574</updated>
+    </task>
+    <task id="LOCAL-00012" summary="updated to LLEPE">
+      <created>1594739391460</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1594739391460</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fixed setup file by changing LLEPE to llepe">
+      <created>1594739749122</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1594739749122</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added example file to do iterative optimization">
+      <created>1594767749286</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1594767749286</updated>
+    </task>
+    <task id="LOCAL-00015" summary="commented out skopt in optimizers">
+      <created>1594768608466</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1594768608466</updated>
+    </task>
+    <task id="LOCAL-00016" summary="changed xml_path in iterative_fitter.py and added iterative_fitter_monitor.py">
+      <created>1594768804938</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1594768804938</updated>
+    </task>
+    <task id="LOCAL-00017" summary="updated zeroes_removed_PC88A_HCL_NdPrCeLaDySmY.csv to be labeled">
+      <created>1594769933314</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1594769933314</updated>
+    </task>
+    <task id="LOCAL-00018" summary="removed 'r' when accessing package files">
+      <created>1594770234669</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1594770234669</updated>
+    </task>
+    <task id="LOCAL-00019" summary="flipped backslashes for package files">
+      <created>1594770416403</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1594770416403</updated>
+    </task>
+    <task id="LOCAL-00020" summary="flipped backslashes for package files">
+      <created>1594770453193</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1594770453193</updated>
+    </task>
+    <task id="LOCAL-00021" summary="changed temp file to outputs/temp.xml">
+      <created>1594770667575</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1594770667575</updated>
+    </task>
+    <task id="LOCAL-00022" summary="changed temp file to outputs/temp.xml">
+      <created>1594770746301</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1594770746301</updated>
+    </task>
+    <task id="LOCAL-00023" summary="add outputs folder to examples">
+      <created>1594772074449</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1594772074449</updated>
+    </task>
+    <task id="LOCAL-00024" summary="updated iterative_fitter_monitor.py">
+      <created>1594785526950</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1594785526950</updated>
+    </task>
+    <task id="LOCAL-00025" summary="updated iterative_fitter.py to have more feedback">
+      <created>1594785960460</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1594785960460</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added new feature to include custom_object_dicts where user can optimize parameters in the dependent_params_dict.">
+      <created>1594852623912</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1594852623912</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Updated iterative_fitter.py">
+      <created>1594866327563</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1594866327563</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Updated iterative_fitter.py">
+      <created>1594866469947</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1594866469947</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Updated iterative_fitter.py">
+      <created>1594875465079</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1594875465079</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Updated iterative_fitter.py">
+      <created>1594904686321</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1594904686321</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Updated iterative_fitter.py">
+      <created>1594905182139</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1594905182139</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Updated iterative_fitter.py">
+      <created>1594913492795</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1594913492795</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Updated iterative_fitter.py">
+      <created>1594913510497</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1594913510497</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Updated iterative_fitter.py to fix slopes to 3, stop after minimal change in best objective. ALso added last results from iteration_fitter.py">
+      <created>1594962327468</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1594962327468</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Updated iterative_fitter.py to calculate error for all species. Added new test with mean squared error.">
+      <created>1595008865648</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1595008865648</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Updated iterative_fitter.py to calculate error for all species. Added new test with mean squared error.">
+      <created>1595009126224</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1595009126224</updated>
+    </task>
+    <task id="LOCAL-00037" summary="deleted redundant files">
+      <created>1595009200358</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1595009200358</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Updated documentation">
+      <created>1595883443287</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1595883443287</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Changed iterative fit to only fit to multicomponent data.">
+      <created>1595905947459</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1595905947460</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Changed iterative fit to only fit to multicomponent data.">
+      <created>1596211535974</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1596211535974</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Changed iterative fit to only fit to multicomponent data.">
+      <created>1596235195126</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1596235195126</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Updated examples to include basic, filtered, and Pitzer fit methods.">
+      <created>1596235357316</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1596235357316</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="started project" />
+    <MESSAGE value="Completed one composition parameter estimation" />
+    <MESSAGE value="Modified reeps to grab charge from REE in xml file for initial chlorine moles calculation" />
+    <MESSAGE value="Allow user to change optimizer and objective function. Also added r-squared evaluator. Changed temp file location to user temp folder. Added a prediction dictionary to access the values predicted by model." />
+    <MESSAGE value="Edited parity plot to allow color to represent 3rd dimension. Still need to improve colorbar axis name." />
+    <MESSAGE value="updated to LLEPE" />
+    <MESSAGE value="fixed setup file by changing LLEPE to llepe" />
+    <MESSAGE value="added example file to do iterative optimization" />
+    <MESSAGE value="commented out skopt in optimizers" />
+    <MESSAGE value="changed xml_path in iterative_fitter.py and added iterative_fitter_monitor.py" />
+    <MESSAGE value="updated zeroes_removed_PC88A_HCL_NdPrCeLaDySmY.csv to be labeled" />
+    <MESSAGE value="removed 'r' when accessing package files" />
+    <MESSAGE value="flipped backslashes for package files" />
+    <MESSAGE value="changed temp file to outputs/temp.xml" />
+    <MESSAGE value="add outputs folder to examples" />
+    <MESSAGE value="updated iterative_fitter_monitor.py" />
+    <MESSAGE value="updated iterative_fitter.py to have more feedback" />
+    <MESSAGE value="Added new feature to include custom_object_dicts where user can optimize parameters in the dependent_params_dict." />
+    <MESSAGE value="Updated iterative_fitter.py" />
+    <MESSAGE value="Updated iterative_fitter.py to fix slopes to 3, stop after minimal change in best objective. ALso added last results from iteration_fitter.py" />
+    <MESSAGE value="Updated iterative_fitter.py to calculate error for all species. Added new test with mean squared error." />
+    <MESSAGE value="deleted redundant files" />
+    <MESSAGE value="Updated documentation" />
+    <MESSAGE value="Changed iterative fit to only fit to multicomponent data." />
+    <MESSAGE value="Updated examples to include basic, filtered, and Pitzer fit methods." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated examples to include basic, filtered, and Pitzer fit methods." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1330" y="212" key="#Inspections" timestamp="1590787654691">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1330" y="212" key="#Inspections/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787654691" />
+    <state x="-1368" y="181" width="816" height="729" key="#Intentions" timestamp="1591805787309">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1368" y="181" width="816" height="729" key="#Intentions/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591805787309" />
+    <state x="552" y="179" width="816" height="729" key="#Intentions/0.0.1920.1040@0.0.1920.1040" timestamp="1591030394128" />
+    <state x="552" y="178" key="#Notifications" timestamp="1594770433103">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1594770433103" />
+    <state x="-1506" y="178" width="1092" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594852365067">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1506" y="178" width="1092" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852365067" />
+    <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1590787657711">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1213" y="379" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1590787657711" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2" timestamp="1596235633869">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1364" y="115" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595905945326" />
+    <state x="-1364" y="117" key="CommitChangelistDialog2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1596235633869" />
+    <state x="662" y="155" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594913509145" />
+    <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog" timestamp="1591048879404">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1828" y="94" width="1736" height="856" key="DiffContextDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591048879404" />
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1592953302783">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1180" y="278" key="FileChooserDialogImpl/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592851918282" />
+    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1592953302783" />
+    <state x="-1523" y="423" key="GitRewordDialog" timestamp="1592321433648">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1523" y="423" key="GitRewordDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321433648" />
+    <state width="1899" height="278" key="GridCell.Tab.0.bottom" timestamp="1596090397601">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="278" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596090397601" />
+    <state width="1899" height="279" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594958896281" />
+    <state width="1897" height="281" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386435" />
+    <state width="1515" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595614185238" />
+    <state width="1899" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594929812457" />
+    <state width="1899" height="278" key="GridCell.Tab.0.center" timestamp="1596090397600">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="278" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596090397600" />
+    <state width="1899" height="279" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594958896281" />
+    <state width="1897" height="281" key="GridCell.Tab.0.center/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386434" />
+    <state width="1515" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1595614185237" />
+    <state width="1899" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594929812457" />
+    <state width="1899" height="278" key="GridCell.Tab.0.left" timestamp="1596090397599">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="278" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596090397598" />
+    <state width="1899" height="279" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594958896281" />
+    <state width="1897" height="281" key="GridCell.Tab.0.left/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386433" />
+    <state width="1515" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1595614185237" />
+    <state width="1899" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594929812457" />
+    <state width="1899" height="278" key="GridCell.Tab.0.right" timestamp="1596090397600">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="278" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596090397600" />
+    <state width="1899" height="279" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594958896281" />
+    <state width="1897" height="281" key="GridCell.Tab.0.right/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1590795386434" />
+    <state width="1515" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1595614185238" />
+    <state width="1899" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594929812457" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1594852783301">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852783301" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1594852783301">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852783301" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1594852783300">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852783300" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1594852783301">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594852783301" />
+    <state x="-1257" y="233" key="RollbackChangesDialog" timestamp="1594962287671">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1257" y="233" key="RollbackChangesDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594962287671" />
+    <state x="-1460" y="164" key="SettingsEditor" timestamp="1591824476757">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1460" y="164" key="SettingsEditor/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591824476757" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1591822611305">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591822611305" />
+    <state x="-1245" y="438" width="437" height="168" key="VCS.ChangelistChooser" timestamp="1592321346068">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1245" y="438" width="437" height="168" key="VCS.ChangelistChooser/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321346068" />
+    <state x="-1074" y="439" key="VCS.EditChangelistDialog" timestamp="1596235460655">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1074" y="439" key="VCS.EditChangelistDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1596235460655" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1594770419652">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1368" y="256" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1592321242949" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594770419652" />
+    <state x="-1341" y="299" width="607" height="353" key="com.intellij.ide.util.TipDialog" timestamp="1596227393154">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1657" y="182" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1596062175691" />
+    <state x="-1341" y="299" width="607" height="353" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1596227393154" />
+    <state x="463" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.2.1920.1040@0.0.1536.824" timestamp="1592413869252" />
+    <state x="263" y="182" width="1283" height="717" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594821704291" />
+    <state x="-1151" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591821870917">
+      <screen x="-1920" y="2" width="1920" height="1040" />
+    </state>
+    <state x="-1151" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591821870917" />
+    <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591037545358" />
+    <state x="601" y="253" width="700" height="530" key="recent.locations.popup" timestamp="1593450221360">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="601" y="253" width="700" height="530" key="recent.locations.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593450221360" />
+    <state x="701" y="164" key="refactoring.ChangeSignatureDialog" timestamp="1594217920814">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1219" y="166" key="refactoring.ChangeSignatureDialog/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1591059193684" />
+    <state x="701" y="164" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594217920814" />
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1595473667161">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1595473667161" />
+    <state x="-1297" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.2.1920.1040@-1920.2.1920.1040" timestamp="1594092852973" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594763968564" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../../Powell Research/CSTR-RL/ann-pso_ppo_compare_stochastic10/tester_pso_ann_v3.py</url>
+          <line>9</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../anl_box/Box Sync/titus/pitzer_parameter_explore/code/pitzer_lin_param_fit.py</url>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

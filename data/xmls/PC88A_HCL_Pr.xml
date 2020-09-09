@@ -1,0 +1,325 @@
+<ctml>
+  <validate reactions="yes" species="yes" />
+                   
+ 
+  <phase dim="3" id="PC88A_liquid">
+    <elementArray datasrc="elementz.xml">
+        Cl O H C P Pr dummy 
+    </elementArray>
+    <speciesArray datasrc="#species_PC88A_liquid">
+      (HA)2(org) dodecane Pr(H(A)2)3(org)
+    </speciesArray>
+    <state>
+      <temperature units="K"> 298.15 </temperature>
+      <pressure units="Pa"> 100000.0 </pressure>
+      <soluteMolalities>
+        (HA)2(org): 0.25
+      </soluteMolalities>
+    </state>
+    <thermo model="IdealSolidSolution">
+       <standardConc model="molar_volume" />
+    </thermo>
+    <standardConc model="molar_volume" />
+    <transport model="None" />
+    <kinetics model="none" />
+  </phase>
+
+ 
+  <speciesData id="species_PC88A_liquid">
+
+    
+    <species name="(HA)2(org)">
+      <atomArray> C:16 H:35 O:3 P:1 </atomArray>
+      <thermo>
+        <const_cp Tmax="300.0" Tmin="298.0">
+           <t0 units="K">298.14999999999998</t0>
+	   <h0 units="J/mol" updated="Updated at 15:9 7-31-2020">-1460300.0</h0>  
+	   <s0 units="J/mol/K"> 558.9824 </s0>  
+           <cp0 units="J/mol/K"> 0.0</cp0>
+        </const_cp>
+      </thermo>
+     <standardState model="constant_incompressible">
+         <molarVolume updated="yep">0.32</molarVolume>
+      </standardState>
+    </species>
+
+    
+    <species name="Pr(H(A)2)3(org)">
+      <atomArray> C:48 H:102 O:9 P:3 Pr:1 </atomArray>
+      <thermo>
+        <const_cp Tmax="300.0" Tmin="298.0">
+           <t0 units="K">298.14999999999998</t0>
+	    
+	   <h0 units="J/mol" updated="Updated at 15:9 7-31-2020">-5177400.0</h0> 
+	   <s0 units="J/mol/K"> 1117.965 </s0>  
+           <cp0 units="J/mol/K">0.0</cp0>
+        </const_cp>
+      </thermo>
+     <standardState model="constant_incompressible">
+	     <molarVolume updated="yep">0.94</molarVolume>   
+      </standardState>
+    </species>
+
+     
+    
+    <species name="dodecane">
+      <atomArray> dummy:1  </atomArray>  
+      
+      <thermo>
+        <const_cp Tmax="300.0" Tmin="298.0">
+	   <t0 units="K">298.14999999999998</t0> 
+	   <h0 units="J/mol"> 0.0 </h0> 
+	   <s0 units="J/mol/K"> 0.0 </s0>  
+           <cp0 units="J/mol/K">0.0</cp0>
+        </const_cp>
+      </thermo>
+     <standardState model="constant_incompressible">
+	     <molarVolume> 0.227113 </molarVolume>  
+      </standardState>
+    </species>
+
+  </speciesData>
+
+
+
+  <phase dim="3" id="HCl_electrolyte">
+    <speciesArray datasrc="#species_waterSolution">
+      H2O(L) H+ OH- Cl- Pr+++
+    </speciesArray>
+
+    <state>
+      <temperature units="K"> 298.15 </temperature>
+      <pressure units="Pa"> 100000.0 </pressure>
+      <soluteMolalities>
+        Cl-: 1.0E-7
+        H+: 1.0E-7
+      </soluteMolalities>
+    </state>
+
+    <thermo model="HMW">
+      <standardConc model="solvent_volume" />
+      <activityCoefficients TempModel="complex1" model="Pitzer">
+        
+        <A_Debye model="water" />
+        <ionicRadius default="3.042843" units="Angstroms">
+        </ionicRadius>
+        <binarySaltParameters anion="Cl-" cation="H+">
+          <beta0> 0.177000779, 0.000125778, 0.0, -33.4777082, -0.262214535 </beta0>
+          <beta1> 0.292922504, -0.027938838, 0.0, 3402.47027, 19.7936248 </beta1>
+          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
+          <Cphi>  0.000362, -0.00003036, 0.0, -2.91038E-11, 0.0 </Cphi>
+          <Alpha1> 2 </Alpha1>
+          <Alpha2> 12 </Alpha2>
+          <source>
+            refit of Holmes, H.F., Busey, J.M., Simonson, J.M., Mesmer, R.E.,
+            Archer, D.G., and Wood, R.H., 1987, The enthalpy of dilution of HCl(aq)
+            to 648 K and 4p MPa.  Thermodynamic properties, Journal of Chemical
+            Thermodynamics, v. 19, p. 863-890.
+          </source>
+        </binarySaltParameters>
+
+        
+
+        <binarySaltParameters anion="NO3-" cation="H+">
+          <beta0> 0.123757018, 0.0, 0.0, 0.0, 0.0 </beta0>
+          <beta1> 0.31055417, 0.0, 0.0, 0.0, 0.0 </beta1>
+          <beta2> 0.0, 0.0, 0.0, 0.0, 0.0 </beta2>
+          <Cphi>  -0.005539018, 0.0, 0.0, 0.0, 0.0 </Cphi>
+          <Alpha1> 2 </Alpha1>
+          <Alpha2> 12 </Alpha2>
+          <source>
+            02mar (Table 3)
+            Marion, G. M.  (2002) "A molal-based model for strong acid chemistry at low
+            temperatures (less than 200 to 298 K)", Geochimica et Cosmochimica Acta, Vol. 66,
+            No. 14, pp. 2499-2516. These parameters are derived from the mole fraction model of
+            Clegg and Brimblecombe (1990) but were parameterized by Marion (2002) for the Pitzer
+            molality-based model.
+          </source>
+        </binarySaltParameters>
+
+      </activityCoefficients>
+      <solvent> H2O(L) </solvent>
+    </thermo>
+    <elementArray datasrc="elements.xml"> O H Pr C Fe Si N Na Cl Ca P E </elementArray>
+    <kinetics model="none">
+    </kinetics>
+  </phase>
+
+  <speciesData id="species_waterSolution">
+
+    <species name="H2O(L)">
+      
+      <atomArray>H:2 O:1 </atomArray>
+      <thermo>
+        <NASA P0="100000.0" Tmax="600.0" Tmin="273.14999999999998">
+          <floatArray name="coeffs" size="7">
+            7.255750050E+01,  -6.624454020E-01,   2.561987460E-03,  -4.365919230E-06,
+            2.781789810E-09,  -4.188654990E+04,  -2.882801370E+02
+          </floatArray>
+        </NASA>
+      </thermo>
+      <standardState model="waterPDSS">
+        
+        <molarVolume> 0.018068 </molarVolume>
+      </standardState>
+    </species>
+
+
+    <species name="OH-">
+      <speciesChemFormula> OH- </speciesChemFormula>
+      <atomArray> O:1 H:1 </atomArray>
+      <charge> -1 </charge>
+      <thermo model="HKFT">
+        <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
+          <DG0_f_Pr_Tr units="cal/gmol"> -37595 </DG0_f_Pr_Tr>
+          <DH0_f_Pr_Tr units="cal/gmol"> -54977 </DH0_f_Pr_Tr>
+          <S0_Pr_Tr units="cal/gmol/K"> -2.56 </S0_Pr_Tr>
+        </HKFT>
+      </thermo>
+      <standardState model="HKFT">
+        <a1 units="cal/gmol/bar"> 0.12527 </a1>
+        <a2 units="cal/gmol"> 7.38 </a2>
+        <a3 units="cal-K/gmol/bar"> 1.8423 </a3>
+        <a4 units="cal-K/gmol"> -27821 </a4>
+        <c1 units="cal/gmol/K"> 4.15 </c1>
+        <c2 units="cal-K/gmol"> -103460 </c2>
+        <omega_Pr_Tr units="cal/gmol"> 172460 </omega_Pr_Tr>
+      </standardState>
+      <source>
+        ref:G9
+      </source>
+    </species>
+    
+    <species name="NO3-">
+      <speciesChemFormula> NO3- </speciesChemFormula>
+      <atomArray> N:1 O:3 </atomArray>
+      <charge> -1 </charge>
+      <thermo model="HKFT">
+        <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
+          <DG0_f_Pr_Tr units="cal/gmol"> -26507 </DG0_f_Pr_Tr>
+          <DH0_f_Pr_Tr units="cal/gmol"> -49429 </DH0_f_Pr_Tr>
+          <S0_Pr_Tr units="cal/gmol/K"> 35.12 </S0_Pr_Tr>
+        </HKFT>
+      </thermo>
+      <standardState model="HKFT">
+        <a1 units="cal/gmol/bar"> 0.73161 </a1>
+        <a2 units="cal/gmol"> 678.24 </a2>
+        <a3 units="cal-K/gmol/bar"> -4.6838 </a3>
+        <a4 units="cal-K/gmol"> -30594 </a4>
+        <c1 units="cal/gmol/K"> 7.7 </c1>
+        <c2 units="cal-K/gmol"> -67250 </c2>
+        <omega_Pr_Tr units="cal/gmol"> 109770 </omega_Pr_Tr>
+      </standardState>
+      <source>
+        ref:G9
+      </source>
+    </species>
+
+
+    <species name="Na+">
+      <speciesChemFormula> Na+ </speciesChemFormula>
+      <atomArray> Na:1 </atomArray>
+      <charge> 1 </charge>
+      <thermo model="HKFT">
+        <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
+          <DG0_f_Pr_Tr units="cal/gmol"> -62591 </DG0_f_Pr_Tr>
+          <DH0_f_Pr_Tr units="cal/gmol"> -57433 </DH0_f_Pr_Tr>
+          <S0_Pr_Tr units="cal/gmol/K"> 13.96 </S0_Pr_Tr>
+        </HKFT>
+      </thermo>
+      <standardState model="HKFT">
+        <a1 units="cal/gmol/bar"> 0.1839 </a1>
+        <a2 units="cal/gmol"> -228.5 </a2>
+        <a3 units="cal-K/gmol/bar"> 3.256 </a3>
+        <a4 units="cal-K/gmol"> -27260 </a4>
+        <c1 units="cal/gmol/K"> 18.18 </c1>
+        <c2 units="cal-K/gmol"> -29810 </c2>
+        <omega_Pr_Tr units="cal/gmol"> 33060 </omega_Pr_Tr>
+      </standardState>
+      <source>
+        ref:G9
+      </source>
+    </species>
+
+    
+    
+    <species name="Cl-">
+      <speciesChemFormula> Cl- </speciesChemFormula>
+      <atomArray> Cl:1 </atomArray>
+      <charge> -1 </charge>
+      <thermo model="HKFT">
+        <HKFT Pref="1 atm" Tmax="625.15" Tmin="273.15">
+          <DG0_f_Pr_Tr units="cal/gmol"> -31379 </DG0_f_Pr_Tr>
+          <DH0_f_Pr_TR units="cal/gmol"> -39933 </DH0_f_Pr_TR>
+          <S0_Pr_Tr units="cal/gmol/K"> 13.56 </S0_Pr_Tr>
+        </HKFT>
+      </thermo>
+      <standardState model="HKFT">
+        <a1 units="cal/mol/bar"> 0.4032 </a1>
+        <a2 units="cal/mol"> 480.1 </a2>
+        <a3 units="cal-K/mol/bar"> 5.563 </a3>
+        <a4 units="cal-K/mol"> -28470 </a4>
+        <c1 units="cal/mol/K"> -4.4 </c1>
+        <c2 units="cal-K/mol"> -57140 </c2>
+        <omega_Pr_Tr units="cal/mol"> 145600 </omega_Pr_Tr>
+        <molarVolume units="cm3/mol"> 17.79 </molarVolume>
+      </standardState>
+      <source> ref:G9 </source>
+    </species>
+
+    <species name="H+">
+      <speciesChemFormula> H+ </speciesChemFormula>
+      <atomArray> H:1 </atomArray>
+      <charge> +1 </charge>
+      <thermo model="HKFT">
+        <HKFT Pref="1 atm" Tmax="625.15" Tmin="273.15">
+          <DG0_f_Pr_Tr units="cal/gmol"> 0 </DG0_f_Pr_Tr>
+          <DH0_f_Pr_TR units="cal/gmol"> 0 </DH0_f_Pr_TR>
+          <S0_Pr_Tr units="cal/gmol/K"> 0 </S0_Pr_Tr>
+        </HKFT>
+      </thermo>
+      <standardState model="HKFT">
+        <a1 units="cal/mol/bar"> 0 </a1>
+        <a2 units="cal/mol"> 0 </a2>
+        <a3 units="cal-K/mol/bar"> 0 </a3>
+        <a4 units="cal-K/mol"> 0 </a4>
+        <c1 units="cal/mol/K"> 0 </c1>
+        <c2 units="cal-K/mol"> 0 </c2>
+        <omega_Pr_Tr units="cal/mol"> 0 </omega_Pr_Tr>
+        <molarVolume units="cm3/mol"> 0 </molarVolume>
+      </standardState>
+      <source> ref:G9 </source>
+    </species>
+
+
+    <species name="Pr+++">
+      <speciesChemFormula> Pr+++ </speciesChemFormula>
+      <atomArray> Pr:1 </atomArray>
+      <charge> +3 </charge>
+      <thermo model="HKFT">
+        <HKFT Pref="1 atm" Tmax="625.15" Tmin="298.15">
+          <DG0_f_Pr_Tr units="cal/gmol"> -162600 </DG0_f_Pr_Tr>
+          <DH0_f_Pr_Tr units="cal/gmol"> -168800 </DH0_f_Pr_Tr>
+          <S0_Pr_Tr units="cal/gmol/K"> -50 </S0_Pr_Tr>
+        </HKFT>
+      </thermo>
+      <standardState model="HKFT">
+        <a1 units="cal/gmol/bar"> -0.32406 </a1>
+        <a2 units="cal/gmol"> -1419.98 </a2>
+        <a3 units="cal-K/gmol/bar"> 8.1257 </a3>
+        <a4 units="cal-K/gmol"> -21920 </a4>
+        <c1 units="cal/gmol/K"> -1.1975 </c1>
+        <c2 units="cal-K/gmol"> -127511 </c2>
+        <omega_Pr_Tr units="cal/gmol"> 223500 </omega_Pr_Tr>
+        <molarVolume units="cm3/mol"> -42.1 </molarVolume>
+      </standardState>
+      <source>
+        ref:G9
+      </source>
+    </species>
+
+
+
+  </speciesData>
+
+</ctml>

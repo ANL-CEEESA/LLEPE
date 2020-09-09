@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 project = 'LLEPE'
 copyright = '2020, Titus Quah, Nwike Iloeje'
 author = 'Titus Quah, Nwike Iloeje'
+master_doc = 'index'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'

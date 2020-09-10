@@ -21,6 +21,7 @@ project = 'LLEPE'
 copyright = '2020, Titus Quah, Nwike Iloeje'
 author = 'Titus Quah, Nwike Iloeje'
 master_doc = 'index'
+autodoc_mock_imports = ["cantera"]
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'

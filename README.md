@@ -29,7 +29,7 @@ llepe uses packages: cantera (https://cantera.org/), pandas, numpy, scipy, xml, 
 ## Usage
 Check out examples in docs/examples
 
-Readthedocs documentation are in docs/build/html/index.html
+Readthedocs documentation are here: https://llepe.readthedocs.io/en/latest/index.html
 ```python
 from llepe import LLEPE
 opt_dict = {'Nd(H(A)2)3(org)_h0': {'upper_element_name': 'species',

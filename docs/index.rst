@@ -22,7 +22,7 @@ Error between predicted and experimental data is then minimized.
    
 .. toctree::
    :maxdepth: 1
-   :caption: Searchers
+   :caption: Estimators
    
    modules/reeps
    

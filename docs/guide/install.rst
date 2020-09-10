@@ -34,7 +34,7 @@ To contribute to Stable-Baselines, with support for running tests and building t
 
 .. code-block:: bash
 
-    git clone https://github.com/ANL-CEEESA/LLEPE.git
+    git clone https://github.com/titusquah/LLEPE.git && cd LLEPE
     pip install -e .[docs,tests]
 
 

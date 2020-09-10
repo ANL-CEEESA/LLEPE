@@ -24,7 +24,7 @@ To install the latest master version:
 
 .. code-block:: bash
 
-	pip install git+https://github.com/titusquah/LLEPE.git
+	pip install git+https://github.com/ANL-CEEESA/LLEPE.git
 
 
 Development version
@@ -34,7 +34,7 @@ To contribute to Stable-Baselines, with support for running tests and building t
 
 .. code-block:: bash
 
-    git clone https://github.com/titusquah/LLEPE.git && cd parameter-estimation
+    git clone https://github.com/ANL-CEEESA/LLEPE.git
     pip install -e .[docs,tests]
 
 

@@ -24,7 +24,7 @@ To install the latest master version:
 
 .. code-block:: bash
 
-	pip install git+https://xgitlab.cels.anl.gov/summer-2020/parameter-estimation.git
+	pip install git https://github.com/titusquah/LLEPE.git
 
 
 Development version
@@ -34,7 +34,7 @@ To contribute to Stable-Baselines, with support for running tests and building t
 
 .. code-block:: bash
 
-    git clone https://xgitlab.cels.anl.gov/summer-2020/parameter-estimation.git && cd parameter-estimation
+    git clone https://github.com/titusquah/LLEPE.git && cd parameter-estimation
     pip install -e .[docs,tests]
 
 

@@ -24,7 +24,7 @@ To install the latest master version:
 
 .. code-block:: bash
 
-	pip install git https://github.com/titusquah/LLEPE.git
+	pip install git+https://github.com/titusquah/LLEPE.git
 
 
 Development version

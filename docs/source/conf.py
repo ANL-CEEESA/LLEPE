@@ -13,7 +13,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../../'))
 
 # -- Project information -----------------------------------------------------
 
@@ -21,7 +21,6 @@ project = 'LLEPE'
 copyright = '2020, Argonne National Laboratory'
 author = 'Argonne National Laboratory'
 master_doc = 'index'
-autodoc_mock_imports = ["cantera"]
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'

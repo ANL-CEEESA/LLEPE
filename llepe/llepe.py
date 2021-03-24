@@ -780,6 +780,8 @@ class LLEPE:
             extracted_species_charge_sum = np.sum(
                 extracted_species_charges * extracted_species_moles)
             anion_moles = extracted_species_charge_sum + h_plus_moles
+            #  TODO: Replace feed_vol in line 785 and line 787 with
+            #   oa_ratio*feed_vol (oa_ratio from restructured DataFrame)
             extractant_moles = feed_vol * row['z_i']
             extractant_vol = extractant_moles * extractant_mw / extractant_rho
             diluant_vol = feed_vol - extractant_vol

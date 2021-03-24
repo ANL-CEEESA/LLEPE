@@ -1,4 +1,4 @@
-.. _reeps:
+.. _LLEPE:
 
 .. automodule:: llepe
 

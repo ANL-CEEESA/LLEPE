@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../../'))
 # -- Project information -----------------------------------------------------
 
 project = 'LLEPE'
-copyright = '2020, Argonne National Laboratory'
-author = 'Argonne National Laboratory'
+copyright = '2020, UChicago Argonne, LLC.'
+author = 'UChicago Argonne, LLC.'
 master_doc = 'index'
 
 # The full version, including alpha/beta/rc tags

@@ -1,3 +1,7 @@
+#  LLEPE: Liquid-Liquid Equilibrium Parameter Estimator
+#  Copyright (C) 2020, UChicago Argonne, LLC. All rights reserved.
+#  Released under the modified BSD license. See LICENSE for more details.
+
 # This file tests adding 0.1 M NaCl to the feed.
 import llepe
 import pandas as pd

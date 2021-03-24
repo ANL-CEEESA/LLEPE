@@ -8,12 +8,12 @@ LLEPE (Liquid-Liquid Extraction Parameter Estimator) is a toolkit for estimating
 To install llepe, clone the repository with the command
 
 ```
-$ git clone https://xgitlab.cels.anl.gov/summer-2020/parameter-estimation.git
+$ git clone https://github.com/ANL-CEEESA/LLEPE.git
 ```
 
 Navigate into the parameter-estimation folder with 
 ```
-cd parameter-estimation
+cd LLEPE
 ```
 and run the command below in your terminal
 ```
@@ -27,9 +27,8 @@ $ pip install -e .[docs,tests]
 llepe uses packages: cantera (https://cantera.org/), pandas, numpy, scipy, xml, seaborn, and matplotlib
 
 ## Usage
-Check out examples in docs/examples
-
-Readthedocs documentation are here: https://llepe.readthedocs.io/en/latest/index.html
+Check out examples in docs/_Examples
+## Example 
 ```python
 from llepe import LLEPE
 opt_dict = {'Nd(H(A)2)3(org)_h0': {'upper_element_name': 'species',
@@ -58,3 +57,13 @@ est_enthalpy = searcher.fit()
 searcher.update_xml(est_enthalpy)
 searcher.parity_plot(print_r_squared=True)
 ```
+##Documentation
+Readthedocs documentation are here: https://llepe.readthedocs.io/en/latest/index.html
+
+## Acknowledgements
+Based upon work supported by funding from Argonne National Laboratory provided by the U.S. Department of Energy, Office of Energy Efficiency and Renewable Energy (EERE), under contract DE-AC02-06CH11357
+
+##Citing LLEPE
+If you use LLEPE in your research , we kindly request that you cite the package as follows:
+
+T. Quah and C. O. Iloeje, “Liquid--Liquid Extraction Thermodynamic Parameter Estimator (LLEPE) for Multicomponent Separation Systems,” in Materials Processing Fundamentals 2021, 2021, pp. 107–120, doi: https://doi.org/10.1007/978-3-030-65253-1_9.

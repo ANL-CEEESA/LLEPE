@@ -1,3 +1,7 @@
+#  LLEPE: Liquid-Liquid Equilibrium Parameter Estimator
+#  Copyright (C) 2020, UChicago Argonne, LLC. All rights reserved.
+#  Released under the modified BSD license. See LICENSE for more details.
+
 from setuptools import setup
 
 setup(
@@ -12,8 +16,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     url='',
-    license='',
-    author='Titus Quah',
+    license='modified BSD license',
+    author='UChicago Argonne, LLC.',
     author_email='',
     description='Liquid-liquid extraction parameter searcher',
     install_requires=['cantera==2.4.0',

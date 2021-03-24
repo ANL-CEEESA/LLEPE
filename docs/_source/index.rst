@@ -1,9 +1,8 @@
-.. reeps documentation master file, created by Titus Quah
-   sphinx-quickstart on Tue Jun  9 10:13:23 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. LLEPE: Liquid-Liquid Equilibrium Parameter Estimator
+   Copyright (C) 2020, UChicago Argonne, LLC. All rights reserved.
+   Released under the modified BSD license. See LICENSE for more details.
 
-Welcome to llepe's docs! - the Liquid-Liquid Extraction Parameter Estimator
+Welcome to LLEPE's docs! - the Liquid-Liquid Extraction Parameter Estimator
 ===========================================================================
 LLEPE is a package for thermodynamic parameter estimation for liquid-liquid extraction modeling
 

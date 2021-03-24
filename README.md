@@ -57,13 +57,13 @@ est_enthalpy = searcher.fit()
 searcher.update_xml(est_enthalpy)
 searcher.parity_plot(print_r_squared=True)
 ```
-##Documentation
+## Documentation
 Readthedocs documentation are here: https://llepe.readthedocs.io/en/latest/index.html
 
 ## Acknowledgements
 Based upon work supported by funding from Argonne National Laboratory provided by the U.S. Department of Energy, Office of Energy Efficiency and Renewable Energy (EERE), under contract DE-AC02-06CH11357
 
-##Citing LLEPE
+## Citing LLEPE
 If you use LLEPE in your research , we kindly request that you cite the package as follows:
 
 T. Quah and C. O. Iloeje, “Liquid--Liquid Extraction Thermodynamic Parameter Estimator (LLEPE) for Multicomponent Separation Systems,” in Materials Processing Fundamentals 2021, 2021, pp. 107–120, doi: https://doi.org/10.1007/978-3-030-65253-1_9.

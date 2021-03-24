@@ -11,7 +11,7 @@ To install llepe, clone the repository with the command
 $ git clone https://github.com/ANL-CEEESA/LLEPE.git
 ```
 
-Navigate into the parameter-estimation folder with 
+Navigate into the LLEPE folder with 
 ```
 cd LLEPE
 ```

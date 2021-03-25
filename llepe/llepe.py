@@ -74,7 +74,7 @@ class LLEPE:
         Naming does not matter, just the order.
 
         Where {ES_1}-{ES_N} are the extracted species names of interest
-        i.e. Nd, Pr, La, etc.
+        e.g. Nd, Pr, La, etc.
 
         Below is an explanation of the columns.
 
@@ -111,12 +111,12 @@ class LLEPE:
 
         In aqueous phase: aq_solvent_name, H+, OH-, Cl-, ES_1, ES_2, ..., ES_N
 
-        (ES_1-ES_N) represent ES ion names i.e. Nd+++, Pr+++
+        (ES_1-ES_N) represent ES ion names e.g. Nd+++, Pr+++
 
         In organic phase : extractant_name, diluant_name, ES_1, ES_2, ..., ES_N
 
         (ES_1-ES_N) represent ES complex names
-        i.e. Nd(H(A)2)3(org), Pr(H(A)2)3(org)
+        e.g. Nd(H(A)2)3(org), Pr(H(A)2)3(org)
 
     :param phase_names: (list) names of phases in xml file
 
@@ -131,7 +131,7 @@ class LLEPE:
     :param extracted_species_list: (list) names of extracted species elements.
 
         If ``None``, extracted_species_list will be extracted_species_ion_names
-        without '+' i.e. 'Nd+++'->'Nd'
+        without '+' e.g. 'Nd+++'->'Nd'
 
     :param aq_solvent_rho: (float) density of solvent (g/L)
 
@@ -202,7 +202,7 @@ class LLEPE:
         | ES distribution ratio     | predicted_dict['{ES}_d_eq']    |
         +---------------------------+--------------------------------+
 
-        Replace "{ES}" with extracted species element i.e. Nd, La, etc.
+        Replace "{ES}" with extracted species element e.g. Nd, La, etc.
 
         For measured values, use the same names, but
         replace ``predicted_dict`` with ``measured_df``
@@ -781,7 +781,7 @@ class LLEPE:
                 extracted_species_charges * extracted_species_moles)
             anion_moles = extracted_species_charge_sum + h_plus_moles
             #  TODO: Replace feed_vol in line 785 and line 787 with
-            #   oa_ratio*feed_vol (oa_ratio from restructured DataFrame)
+            #   row['oa_ratio']*feed_vol (oa_ratio from restructured DataFrame)
             extractant_moles = feed_vol * row['z_i']
             extractant_vol = extractant_moles * extractant_mw / extractant_rho
             diluant_vol = feed_vol - extractant_vol
@@ -940,7 +940,7 @@ class LLEPE:
         self._custom_objects_dict = custom_objects_dict
         return None
 
-    # TODO: Change DataFrame strucutre to contain info whether to set
+    # TODO: Change DataFrame structure to contain info whether to set
     #  equilibrium pH to measured value. Will be useful for saponification
     # TODO: Find way to add saponification to model.
     #  Maybe use fsolve to match experimental equilibrium pH
@@ -1264,7 +1264,7 @@ class LLEPE:
         Default compared value is {ES_1}_aq_eq
 
         :param compared_value: (str) Quantity to compare predicted and
-            experimental data. Can be any column containing "eq" in exp_df i.e.
+            experimental data. Can be any column containing "eq" in exp_df e.g.
             h_eq, z_eq, {ES}_d_eq, etc.
         :param plot_title: (str or boolean)
 
@@ -1402,7 +1402,7 @@ class LLEPE:
         Closer to 1, the better the model's predictions.
 
         :param compared_value: (str) Quantity to compare predicted and
-            experimental data. Can be any column containing "eq" in exp_df i.e.
+            experimental data. Can be any column containing "eq" in exp_df e.g.
             h_eq, z_eq, {ES}_d_eq, etc. default is {ES}_aq_eq
              """
         exp_df = self.get_exp_df()

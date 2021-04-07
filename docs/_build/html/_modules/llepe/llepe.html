@@ -85,10 +85,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../guide/install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../guide/quickstart.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guide/about.html">About</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Searchers</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules/reeps.html">LLEPE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/LLEPE.html">LLEPE</a></li>
 </ul>
 
             
@@ -152,7 +153,11 @@
            <div itemprop="articleBody">
             
   <h1>Source code for llepe.llepe</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span></span><span class="c1">#  LLEPE: Liquid-Liquid Equilibrium Parameter Estimator</span>
+<span class="c1">#  Copyright (C) 2020, UChicago Argonne, LLC. All rights reserved.</span>
+<span class="c1">#  Released under the modified BSD license. See LICENSE for more details.</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">import</span> <span class="nn">cantera</span> <span class="k">as</span> <span class="nn">ct</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -169,7 +174,7 @@
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">set_size</span>
 
 
-<div class="viewcode-block" id="LLEPE"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE">[docs]</a><span class="k">class</span> <span class="nc">LLEPE</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE">[docs]</a><span class="k">class</span> <span class="nc">LLEPE</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Liquid-Liquid Extraction Parameter estimator</span>
 
@@ -180,7 +185,7 @@
 <span class="sd">        must be the same order as they appear in the xml, complex_names and</span>
 <span class="sd">        extracted_species_ion_names.</span>
 
-<span class="sd">        For example, say in exp_csv_filename&#39;s csv, ES_1 is Nd ES_2 is Pr,</span>
+<span class="sd">        For example, say in exp_data, ES_1 is Nd ES_2 is Pr,</span>
 <span class="sd">        and</span>
 
 <span class="sd">        .. code-block:: python</span>
@@ -191,7 +196,7 @@
 
 <span class="sd">        Then:</span>
 
-<span class="sd">        The csvs column ordering must be:</span>
+<span class="sd">        The exp_data column ordering must be (names do not matter):</span>
 
 <span class="sd">        [h_i, h_eq, z_i, z_eq, Nd_aq_i, Nd_aq_eq, Nd_d_eq,</span>
 <span class="sd">        Pr_aq_i, Pr_aq_eq, Pr_d_eq]</span>
@@ -224,7 +229,7 @@
 <span class="sd">        Naming does not matter, just the order.</span>
 
 <span class="sd">        Where {ES_1}-{ES_N} are the extracted species names of interest</span>
-<span class="sd">        i.e. Nd, Pr, La, etc.</span>
+<span class="sd">        e.g. Nd, Pr, La, etc.</span>
 
 <span class="sd">        Below is an explanation of the columns.</span>
 
@@ -261,12 +266,12 @@
 
 <span class="sd">        In aqueous phase: aq_solvent_name, H+, OH-, Cl-, ES_1, ES_2, ..., ES_N</span>
 
-<span class="sd">        (ES_1-ES_N) represent ES ion names i.e. Nd+++, Pr+++</span>
+<span class="sd">        (ES_1-ES_N) represent ES ion names e.g. Nd+++, Pr+++</span>
 
 <span class="sd">        In organic phase : extractant_name, diluant_name, ES_1, ES_2, ..., ES_N</span>
 
 <span class="sd">        (ES_1-ES_N) represent ES complex names</span>
-<span class="sd">        i.e. Nd(H(A)2)3(org), Pr(H(A)2)3(org)</span>
+<span class="sd">        e.g. Nd(H(A)2)3(org), Pr(H(A)2)3(org)</span>
 
 <span class="sd">    :param phase_names: (list) names of phases in xml file</span>
 
@@ -281,7 +286,7 @@
 <span class="sd">    :param extracted_species_list: (list) names of extracted species elements.</span>
 
 <span class="sd">        If ``None``, extracted_species_list will be extracted_species_ion_names</span>
-<span class="sd">        without &#39;+&#39; i.e. &#39;Nd+++&#39;-&gt;&#39;Nd&#39;</span>
+<span class="sd">        without &#39;+&#39; e.g. &#39;Nd+++&#39;-&gt;&#39;Nd&#39;</span>
 
 <span class="sd">    :param aq_solvent_rho: (float) density of solvent (g/L)</span>
 
@@ -352,7 +357,7 @@
 <span class="sd">        | ES distribution ratio     | predicted_dict[&#39;{ES}_d_eq&#39;]    |</span>
 <span class="sd">        +---------------------------+--------------------------------+</span>
 
-<span class="sd">        Replace &quot;{ES}&quot; with extracted species element i.e. Nd, La, etc.</span>
+<span class="sd">        Replace &quot;{ES}&quot; with extracted species element e.g. Nd, La, etc.</span>
 
 <span class="sd">        For measured values, use the same names, but</span>
 <span class="sd">        replace ``predicted_dict`` with ``measured_df``</span>
@@ -526,7 +531,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_predicted_dict</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">()</span>
 
-<div class="viewcode-block" id="LLEPE.scipy_minimize"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.scipy_minimize">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="c1"># TODO: move scipy_minimize to optimizers</span>
+<div class="viewcode-block" id="LLEPE.scipy_minimize"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.scipy_minimize">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">scipy_minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">x_guess</span><span class="p">,</span> <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; The default optimizer for LLEPE</span>
 
@@ -560,7 +566,8 @@
         <span class="n">est_parameters</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
         <span class="k">return</span> <span class="n">est_parameters</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">fun</span></div>
 
-<div class="viewcode-block" id="LLEPE.log_mean_squared_error"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.log_mean_squared_error">[docs]</a>    <span class="k">def</span> <span class="nf">log_mean_squared_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicted_dict</span><span class="p">,</span> <span class="n">meas_df</span><span class="p">):</span>
+    <span class="c1"># TODO: move log_mean_squared_error to objectives</span>
+<div class="viewcode-block" id="LLEPE.log_mean_squared_error"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.log_mean_squared_error">[docs]</a>    <span class="k">def</span> <span class="nf">log_mean_squared_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicted_dict</span><span class="p">,</span> <span class="n">meas_df</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Default objective function for LLEPE</span>
 
 <span class="sd">        Returns the log mean squared error of</span>
@@ -584,14 +591,14 @@
         <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">log_diff</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">obj</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_exp_df"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_exp_df">[docs]</a>    <span class="k">def</span> <span class="nf">get_exp_df</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_exp_df"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_exp_df">[docs]</a>    <span class="k">def</span> <span class="nf">get_exp_df</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns the experimental DataFrame</span>
 
 <span class="sd">        :return: (pd.DataFrame) Experimental data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_exp_df"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_exp_df">[docs]</a>    <span class="k">def</span> <span class="nf">set_exp_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp_data</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_exp_df"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_exp_df">[docs]</a>    <span class="k">def</span> <span class="nf">set_exp_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp_data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes the experimental DataFrame to input exp_csv_filename data</span>
 <span class="sd">        and renames columns to internal LLEPE names</span>
 
@@ -632,7 +639,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">()</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_phases"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_phases">[docs]</a>    <span class="k">def</span> <span class="nf">get_phases</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_phases"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_phases">[docs]</a>    <span class="k">def</span> <span class="nf">get_phases</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the list of Cantera solutions</span>
 
@@ -640,7 +647,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phases</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_phases"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_phases">[docs]</a>    <span class="k">def</span> <span class="nf">set_phases</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phases_xml_filename</span><span class="p">,</span> <span class="n">phase_names</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_phases"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_phases">[docs]</a>    <span class="k">def</span> <span class="nf">set_phases</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phases_xml_filename</span><span class="p">,</span> <span class="n">phase_names</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change list of Cantera solutions by inputting</span>
 <span class="sd">        new xml file name and phase names</span>
 
@@ -673,7 +680,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">()</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_opt_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_opt_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_opt_dict"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_opt_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the dictionary containing optimization information</span>
 
@@ -682,7 +689,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_opt_dict</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_opt_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_opt_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_opt_dict"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_opt_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change the dictionary to input opt_dict.</span>
 
@@ -698,14 +705,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_opt_dict</span> <span class="o">=</span> <span class="n">opt_dict</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_aq_solvent_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_aq_solvent_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_aq_solvent_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_aq_solvent_name"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_aq_solvent_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_aq_solvent_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns aq_solvent_name</span>
 
 <span class="sd">        :return: aq_solvent_name: (str) name of aqueous solvent in xml file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_name</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_aq_solvent_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_aq_solvent_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_aq_solvent_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aq_solvent_name</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_aq_solvent_name"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_aq_solvent_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_aq_solvent_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aq_solvent_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Change aq_solvent_name to input aq_solvent_name</span>
 
 <span class="sd">        :param aq_solvent_name: (str) name of aqueous solvent in xml file</span>
@@ -713,14 +720,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_name</span> <span class="o">=</span> <span class="n">aq_solvent_name</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_extractant_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_extractant_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_extractant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_extractant_name"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_extractant_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_extractant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns extractant name</span>
 
 <span class="sd">        :return: extractant_name: (str) name of extractant in xml file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_name</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_extractant_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_extractant_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_extractant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extractant_name</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_extractant_name"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_extractant_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_extractant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extractant_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change extractant_name to input extractant_name</span>
 <span class="sd">        :param extractant_name: (str) name of extractant in xml file</span>
@@ -728,13 +735,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_name</span> <span class="o">=</span> <span class="n">extractant_name</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_diluant_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_diluant_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_diluant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_diluant_name"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_diluant_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_diluant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Returns diluant name</span>
 <span class="sd">        :return:  diluant_name: (str) name of diluant in xml file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_name</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_diluant_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_diluant_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_diluant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diluant_name</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_diluant_name"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_diluant_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_diluant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diluant_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change diluant_name to input diluant_name</span>
 
@@ -743,14 +750,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_name</span> <span class="o">=</span> <span class="n">diluant_name</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_complex_names"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_complex_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_complex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_complex_names"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_complex_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_complex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns list of complex names</span>
 
 <span class="sd">        :return: complex_names: (list) names of complexes in xml file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_complex_names</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_complex_names"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_complex_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_complex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complex_names</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_complex_names"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_complex_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_complex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complex_names</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change complex names list to input complex_names</span>
 
 <span class="sd">        :param complex_names: (list) names of complexes in xml file.</span>
@@ -758,7 +765,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_complex_names</span> <span class="o">=</span> <span class="n">complex_names</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_extracted_species_ion_names"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_extracted_species_ion_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_extracted_species_ion_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_extracted_species_ion_names"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_extracted_species_ion_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_extracted_species_ion_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns list of extracted species ion names</span>
 
 <span class="sd">        :return: extracted_species_ion_names: (list) names of</span>
@@ -766,7 +773,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_ion_names</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_extracted_species_ion_names"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_extracted_species_ion_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_extracted_species_ion_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_species_ion_names</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_extracted_species_ion_names"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_extracted_species_ion_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_extracted_species_ion_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_species_ion_names</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change list of extracted species ion names to input</span>
 <span class="sd">            extracted_species_ion_names</span>
 
@@ -776,7 +783,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_ion_names</span> <span class="o">=</span> <span class="n">extracted_species_ion_names</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_extracted_species_list"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_extracted_species_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_extracted_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_extracted_species_list"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_extracted_species_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_extracted_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns list of extracted species names</span>
 
 <span class="sd">        :return: extracted_species_list: (list) names of extracted species in</span>
@@ -784,7 +791,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_extracted_species_list"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_extracted_species_list">[docs]</a>    <span class="k">def</span> <span class="nf">set_extracted_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_species_list</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_extracted_species_list"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_extracted_species_list">[docs]</a>    <span class="k">def</span> <span class="nf">set_extracted_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_species_list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change list of extracted species ion names to input</span>
 <span class="sd">            extracted_species_ion_names</span>
 
@@ -794,14 +801,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span> <span class="o">=</span> <span class="n">extracted_species_list</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_aq_solvent_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_aq_solvent_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_aq_solvent_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_aq_solvent_rho"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_aq_solvent_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_aq_solvent_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns aqueous solvent density (g/L)</span>
 
 <span class="sd">        :return: aq_solvent_rho: (float) density of aqueous solvent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_rho</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_aq_solvent_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_aq_solvent_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_aq_solvent_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aq_solvent_rho</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_aq_solvent_rho"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_aq_solvent_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_aq_solvent_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aq_solvent_rho</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes aqueous solvent density (g/L) to input aq_solvent_rho</span>
 
 <span class="sd">        :param aq_solvent_rho: (float) density of aqueous solvent</span>
@@ -809,14 +816,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_rho</span> <span class="o">=</span> <span class="n">aq_solvent_rho</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_extractant_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_extractant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_extractant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_extractant_rho"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_extractant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_extractant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns extractant density (g/L)</span>
 
 <span class="sd">        :return: extractant_rho: (float) density of extractant</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_rho</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_extractant_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_extractant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_extractant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extractant_rho</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_extractant_rho"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_extractant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_extractant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extractant_rho</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes extractant density (g/L) to input extractant_rho</span>
 
 <span class="sd">        :param extractant_rho: (float) density of extractant</span>
@@ -824,14 +831,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_rho</span> <span class="o">=</span> <span class="n">extractant_rho</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_diluant_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_diluant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_diluant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_diluant_rho"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_diluant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_diluant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns diluant density (g/L)</span>
 
 <span class="sd">        :return: diluant_rho: (float) density of diluant</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_rho</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_diluant_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_diluant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_diluant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diluant_rho</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_diluant_rho"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_diluant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_diluant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diluant_rho</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes diluant density (g/L) to input diluant_rho</span>
 
 <span class="sd">        :param diluant_rho: (float) density of diluant</span>
@@ -839,7 +846,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_rho</span> <span class="o">=</span> <span class="n">diluant_rho</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_in_moles"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_in_moles">[docs]</a>    <span class="k">def</span> <span class="nf">set_in_moles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feed_vol</span><span class="p">):</span>
+    <span class="c1"># TODO: Change input DataFrame structure to contain information about</span>
+    <span class="c1">#  other species like NaCl</span>
+    <span class="c1">#  TODO: Change DataFrame structure to contain info about O/A ratio</span>
+    <span class="c1"># TODO: Generalize code to more than just org and aq phase (3+ phases)</span>
+    <span class="c1"># TODO: Handle multiple electrolytes ie. NO3- with Cl-</span>
+<div class="viewcode-block" id="LLEPE.set_in_moles"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_in_moles">[docs]</a>    <span class="k">def</span> <span class="nf">set_in_moles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feed_vol</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function that initializes mole fractions to input feed_vol</span>
 
 <span class="sd">        This function is called at initialization</span>
@@ -922,7 +934,9 @@
                  <span class="k">for</span> <span class="n">extracted_species</span> <span class="ow">in</span> <span class="n">extracted_species_list</span><span class="p">])</span>
             <span class="n">extracted_species_charge_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
                 <span class="n">extracted_species_charges</span> <span class="o">*</span> <span class="n">extracted_species_moles</span><span class="p">)</span>
-            <span class="n">chlorine_moles</span> <span class="o">=</span> <span class="n">extracted_species_charge_sum</span> <span class="o">+</span> <span class="n">h_plus_moles</span>
+            <span class="n">anion_moles</span> <span class="o">=</span> <span class="n">extracted_species_charge_sum</span> <span class="o">+</span> <span class="n">h_plus_moles</span>
+            <span class="c1">#  TODO: Replace feed_vol in line 785 and line 787 with</span>
+            <span class="c1">#   row[&#39;oa_ratio&#39;]*feed_vol (oa_ratio from restructured DataFrame)</span>
             <span class="n">extractant_moles</span> <span class="o">=</span> <span class="n">feed_vol</span> <span class="o">*</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;z_i&#39;</span><span class="p">]</span>
             <span class="n">extractant_vol</span> <span class="o">=</span> <span class="n">extractant_moles</span> <span class="o">*</span> <span class="n">extractant_mw</span> <span class="o">/</span> <span class="n">extractant_rho</span>
             <span class="n">diluant_vol</span> <span class="o">=</span> <span class="n">feed_vol</span> <span class="o">-</span> <span class="n">extractant_vol</span>
@@ -932,7 +946,7 @@
             <span class="n">species_moles_aq</span> <span class="o">=</span> <span class="p">[</span><span class="n">aq_phase_solvent_moles</span><span class="p">,</span>
                                 <span class="n">h_plus_moles</span><span class="p">,</span>
                                 <span class="n">hydroxide_ions</span><span class="p">,</span>
-                                <span class="n">chlorine_moles</span><span class="p">]</span>
+                                <span class="n">anion_moles</span><span class="p">]</span>
             <span class="n">species_moles_aq</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">extracted_species_moles</span><span class="p">))</span>
             <span class="n">species_moles_org</span> <span class="o">=</span> <span class="p">[</span><span class="n">extractant_moles</span><span class="p">,</span> <span class="n">diluant_moles</span><span class="p">]</span>
             <span class="n">species_moles_org</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">complex_moles</span><span class="p">))</span>
@@ -946,7 +960,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">()</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_in_moles"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_in_moles">[docs]</a>    <span class="k">def</span> <span class="nf">get_in_moles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="LLEPE.get_in_moles"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_in_moles">[docs]</a>    <span class="k">def</span> <span class="nf">get_in_moles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns the in_moles DataFrame which contains the initial mole</span>
 <span class="sd">        fractions of each species for each experiment</span>
 
@@ -954,7 +968,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_moles</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_objective_function"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_objective_function">[docs]</a>    <span class="k">def</span> <span class="nf">set_objective_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objective_function</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_objective_function"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_objective_function">[docs]</a>    <span class="k">def</span> <span class="nf">set_objective_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objective_function</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change objective function to input objective_function.</span>
 
 <span class="sd">         See class docstring on &quot;objective_function&quot; for instructions</span>
@@ -979,7 +993,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_objective_function</span> <span class="o">=</span> <span class="n">objective_function</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_objective_function"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_objective_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_objective_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.get_objective_function"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_objective_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_objective_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns objective function</span>
 
 <span class="sd">        :return: objective_function: (func) Objective function to quantify</span>
@@ -987,7 +1001,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_objective_function</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_optimizer"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_optimizer">[docs]</a>    <span class="k">def</span> <span class="nf">set_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_optimizer"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_optimizer">[docs]</a>    <span class="k">def</span> <span class="nf">set_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change optimizer function to input optimizer.</span>
 
 <span class="sd">         See class docstring on &quot;optimizer&quot; for instructions</span>
@@ -1012,7 +1026,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="n">optimizer</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_optimizer"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_optimizer">[docs]</a>    <span class="k">def</span> <span class="nf">get_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.get_optimizer"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_optimizer">[docs]</a>    <span class="k">def</span> <span class="nf">get_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns objective function</span>
 
 <span class="sd">        :return: optimizer: (func) Optimizer function to minimize objective</span>
@@ -1020,7 +1034,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_temp_xml_file_path"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_temp_xml_file_path">[docs]</a>    <span class="k">def</span> <span class="nf">get_temp_xml_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.get_temp_xml_file_path"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_temp_xml_file_path">[docs]</a>    <span class="k">def</span> <span class="nf">get_temp_xml_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns path to temporary xml file.</span>
 
 <span class="sd">        This xml file is a duplicate of the phases_xml_file name and is</span>
@@ -1031,7 +1045,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_temp_xml_file_path</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_temp_xml_file_path"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_temp_xml_file_path">[docs]</a>    <span class="k">def</span> <span class="nf">set_temp_xml_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp_xml_file_path</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_temp_xml_file_path"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_temp_xml_file_path">[docs]</a>    <span class="k">def</span> <span class="nf">set_temp_xml_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp_xml_file_path</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes temporary xml file path to input temp_xml_file_path.</span>
 
 <span class="sd">        This xml file is a duplicate of the phases_xml_file name and is</span>
@@ -1043,7 +1057,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_temp_xml_file_path</span> <span class="o">=</span> <span class="n">temp_xml_file_path</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_dependant_params_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_dependant_params_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_dependant_params_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.get_dependant_params_dict"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_dependant_params_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_dependant_params_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the dependant_params_dict</span>
 
@@ -1052,7 +1066,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dependant_params_dict</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_dependant_params_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_dependant_params_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_dependant_params_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dependant_params_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_dependant_params_dict"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_dependant_params_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_dependant_params_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dependant_params_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the dependant_params_dict</span>
 
@@ -1062,7 +1076,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_dependant_params_dict</span> <span class="o">=</span> <span class="n">dependant_params_dict</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_custom_objects_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_custom_objects_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_custom_objects_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.get_custom_objects_dict"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_custom_objects_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_custom_objects_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the custom_objects_dict</span>
 
@@ -1071,7 +1085,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_custom_objects_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_custom_objects_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_custom_objects_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_objects_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.set_custom_objects_dict"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.set_custom_objects_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_custom_objects_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_objects_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the custom_objects_dict</span>
 
@@ -1081,7 +1095,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span> <span class="o">=</span> <span class="n">custom_objects_dict</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.update_predicted_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.update_predicted_dict">[docs]</a>    <span class="k">def</span> <span class="nf">update_predicted_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="c1"># TODO: Change DataFrame structure to contain info whether to set</span>
+    <span class="c1">#  equilibrium pH to measured value. Will be useful for saponification</span>
+    <span class="c1"># TODO: Find way to add saponification to model.</span>
+    <span class="c1">#  Maybe use fsolve to match experimental equilibrium pH</span>
+<div class="viewcode-block" id="LLEPE.update_predicted_dict"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.update_predicted_dict">[docs]</a>    <span class="k">def</span> <span class="nf">update_predicted_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                               <span class="n">phases_xml_filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">phase_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function that computes the predicted equilibrium concentrations</span>
@@ -1148,7 +1166,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_predicted_dict</span> <span class="o">=</span> <span class="n">predicted_dict</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_predicted_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_predicted_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_predicted_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.get_predicted_dict"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.get_predicted_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_predicted_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns predicted dictionary of species concentrations</span>
 <span class="sd">        that xml parameters predicts given current in_moles</span>
 
@@ -1212,7 +1230,7 @@
             <span class="n">objective_values</span> <span class="o">=</span> <span class="n">objective_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">objective_values</span>
 
-<div class="viewcode-block" id="LLEPE.fit"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="LLEPE.fit"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
             <span class="n">objective_function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">optimizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">objective_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1255,7 +1273,7 @@
 
         <span class="k">return</span> <span class="n">opt_dict</span><span class="p">,</span> <span class="n">obj_value</span></div>
 
-<div class="viewcode-block" id="LLEPE.update_xml"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.update_xml">[docs]</a>    <span class="k">def</span> <span class="nf">update_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="LLEPE.update_xml"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.update_xml">[docs]</a>    <span class="k">def</span> <span class="nf">update_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                    <span class="n">info_dict</span><span class="p">,</span>
                    <span class="n">phases_xml_filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">dependant_params_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1362,7 +1380,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">set_phases</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phase_names</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.update_custom_objects_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.update_custom_objects_dict">[docs]</a>    <span class="k">def</span> <span class="nf">update_custom_objects_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.update_custom_objects_dict"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.update_custom_objects_dict">[docs]</a>    <span class="k">def</span> <span class="nf">update_custom_objects_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        updates internal custom_objects_dict with info_dict</span>
 
@@ -1387,7 +1405,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span> <span class="o">=</span> <span class="n">custom_objects_dict</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.parity_plot"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.parity_plot">[docs]</a>    <span class="k">def</span> <span class="nf">parity_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="LLEPE.parity_plot"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.parity_plot">[docs]</a>    <span class="k">def</span> <span class="nf">parity_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                     <span class="n">compared_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">c_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">c_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1401,7 +1419,7 @@
 <span class="sd">        Default compared value is {ES_1}_aq_eq</span>
 
 <span class="sd">        :param compared_value: (str) Quantity to compare predicted and</span>
-<span class="sd">            experimental data. Can be any column containing &quot;eq&quot; in exp_df i.e.</span>
+<span class="sd">            experimental data. Can be any column containing &quot;eq&quot; in exp_df e.g.</span>
 <span class="sd">            h_eq, z_eq, {ES}_d_eq, etc.</span>
 <span class="sd">        :param plot_title: (str or boolean)</span>
 
@@ -1496,7 +1514,9 @@
                 <span class="n">filtered_meas</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;meas&#39;</span><span class="p">]</span>
                 <span class="n">filtered_pred</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_pred</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">filtered_meas</span><span class="p">,</span> <span class="n">filtered_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">filtered_meas</span><span class="p">,</span>
+                               <span class="n">filtered_pred</span><span class="p">,</span>
+                               <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
                 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
 
@@ -1531,13 +1551,13 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span></div>
 
-<div class="viewcode-block" id="LLEPE.r_squared"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.r_squared">[docs]</a>    <span class="k">def</span> <span class="nf">r_squared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compared_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="LLEPE.r_squared"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.r_squared">[docs]</a>    <span class="k">def</span> <span class="nf">r_squared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compared_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;r-squared value comparing measured and predicted compared value</span>
 
 <span class="sd">        Closer to 1, the better the model&#39;s predictions.</span>
 
 <span class="sd">        :param compared_value: (str) Quantity to compare predicted and</span>
-<span class="sd">            experimental data. Can be any column containing &quot;eq&quot; in exp_df i.e.</span>
+<span class="sd">            experimental data. Can be any column containing &quot;eq&quot; in exp_df e.g.</span>
 <span class="sd">            h_eq, z_eq, {ES}_d_eq, etc. default is {ES}_aq_eq</span>
 <span class="sd">             &quot;&quot;&quot;</span>
         <span class="n">exp_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_df</span><span class="p">()</span>
@@ -1571,7 +1591,7 @@
             <span class="n">r_2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">num</span> <span class="o">/</span> <span class="n">den</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">r_2</span></div>
 
-<div class="viewcode-block" id="LLEPE.plot_3d_data"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.plot_3d_data">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="LLEPE.plot_3d_data"><a class="viewcode-back" href="../../modules/LLEPE.html#llepe.LLEPE.plot_3d_data">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">plot_3d_data</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span>
                      <span class="n">y_data</span><span class="p">,</span>
                      <span class="n">z_data</span><span class="p">,</span>
@@ -1581,6 +1601,8 @@
                      <span class="n">z_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">c_label</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        THis is for plotting 3d scatter plots.</span>
+<span class="sd">        We suggest use matplotlib&#39;s ax.scatter to make 3d plots.</span>
 
 <span class="sd">        :param x_data: (list) list of data for x axis</span>
 <span class="sd">        :param y_data: (list) list of data for y axis</span>
@@ -1631,7 +1653,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Titus Quah, Nwike Iloeje
+        &copy; Copyright 2020, UChicago Argonne, LLC.
 
     </p>
   </div>

@@ -1,3 +1,6 @@
+#  LLEPE: Liquid-Liquid Equilibrium Parameter Estimator
+#  Copyright (C) 2020, UChicago Argonne, LLC. All rights reserved.
+#  Released under the modified BSD license. See LICENSE for more details.
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full

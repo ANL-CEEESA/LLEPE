@@ -34,7 +34,8 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Getting Started" href="../guide/quickstart.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,6 +86,13 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../guide/install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guide/quickstart.html">Getting Started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Searchers</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">LLEPE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -149,8 +157,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <span class="target" id="module-llepe"><span id="llepe"></span></span><div class="section" id="id1">
-<h1>LLEPE<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+  <span class="target" id="module-llepe"><span id="reeps"></span></span><div class="section" id="llepe">
+<h1>LLEPE<a class="headerlink" href="#llepe" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
@@ -162,7 +170,7 @@
 <p>The order in which the extracted species (ES) appear in the csv file
 must be the same order as they appear in the xml, complex_names and
 extracted_species_ion_names.</p>
-<p>For example, say in exp_data, ES_1 is Nd ES_2 is Pr,
+<p>For example, say in exp_csv_filename's csv, ES_1 is Nd ES_2 is Pr,
 and</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">aq_solvent_name</span> <span class="o">=</span> <span class="s1">&#39;H2O(L)&#39;</span>
 <span class="n">extractant_name</span> <span class="o">=</span> <span class="s1">&#39;(HA)2(org)&#39;</span>
@@ -170,7 +178,7 @@ and</p>
 </pre></div>
 </div>
 <p>Then:</p>
-<p>The exp_data column ordering must be (names do not matter):</p>
+<p>The csvs column ordering must be:</p>
 <p>[h_i, h_eq, z_i, z_eq, Nd_aq_i, Nd_aq_eq, Nd_d_eq,
 Pr_aq_i, Pr_aq_eq, Pr_d_eq]</p>
 <p>The aqueous speciesArray must be
@@ -710,9 +718,7 @@ effect if data_labels is None</p></li>
 <dl class="py method">
 <dt id="llepe.LLEPE.plot_3d_data">
 <em class="property">static </em><code class="sig-name descname">plot_3d_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_data</span></em>, <em class="sig-param"><span class="n">y_data</span></em>, <em class="sig-param"><span class="n">z_data</span></em>, <em class="sig-param"><span class="n">c_data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">x_label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">y_label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">z_label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">c_label</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/llepe/llepe.html#LLEPE.plot_3d_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#llepe.LLEPE.plot_3d_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>THis is for plotting 3d scatter plots.
-We suggest use matplotlib's ax.scatter to make 3d plots.</p>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x_data</strong> -- (list) list of data for x axis</p></li>
@@ -1071,12 +1077,19 @@ about parameters dependant on info_dict</p></li>
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../guide/quickstart.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, UChicago Argonne, LLC.
+        &copy; Copyright 2020, Titus Quah, Nwike Iloeje
 
     </p>
   </div>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>llepe.llepe &mdash; LLEPE 1.0.0 documentation</title>
+  <title>reeps.reeps &mdash; LLEPE 1.0.0 documentation</title>
   
 
   
@@ -136,7 +136,7 @@
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
-      <li>llepe.llepe</li>
+      <li>reeps.reeps</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -151,7 +151,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for llepe.llepe</h1><div class="highlight"><pre>
+  <h1>Source code for reeps.reeps</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">import</span> <span class="nn">cantera</span> <span class="k">as</span> <span class="nn">ct</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -159,6 +159,7 @@
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
 <span class="c1"># noinspection PyPep8Naming</span>
 <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">copy</span>
@@ -168,19 +169,22 @@
 <span class="kn">import</span> <span class="nn">pkg_resources</span>
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">set_size</span>
 
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.6</span><span class="p">)</span>
 
-<div class="viewcode-block" id="LLEPE"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE">[docs]</a><span class="k">class</span> <span class="nc">LLEPE</span><span class="p">:</span>
+
+<div class="viewcode-block" id="REEPS"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS">[docs]</a><span class="k">class</span> <span class="nc">REEPS</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Liquid-Liquid Extraction Parameter estimator</span>
-
+<span class="sd">    Rare earth elements (REE or RE) Takes in experimental data</span>
+<span class="sd">    Returns parameters for GEM</span>
 
 <span class="sd">    .. note::</span>
 
-<span class="sd">        The order in which the extracted species (ES) appear in the csv file</span>
-<span class="sd">        must be the same order as they appear in the xml, complex_names and</span>
-<span class="sd">        extracted_species_ion_names.</span>
+<span class="sd">        The order in which the REEs appear in the csv file must be the same</span>
+<span class="sd">        order as they appear in the xml, complex_names and</span>
+<span class="sd">        rare_earth_ion_names.</span>
 
-<span class="sd">        For example, say in exp_csv_filename&#39;s csv, ES_1 is Nd ES_2 is Pr,</span>
+<span class="sd">        For example, say in exp_csv_filename&#39;s csv, RE_1 is Nd RE_2 is Pr,</span>
 <span class="sd">        and</span>
 
 <span class="sd">        .. code-block:: python</span>
@@ -205,11 +209,10 @@
 <span class="sd">        .. code-block:: python</span>
 
 <span class="sd">            complex_names = [&#39;Nd(H(A)2)3(org)&#39;, &#39;Pr(H(A)2)3(org)&#39;]</span>
-<span class="sd">            extracted_species_ion_names = [&#39;Nd+++&#39;, &#39;Pr+++&#39;]</span>
+<span class="sd">            rare_earth_ion_names = [&#39;Nd+++&#39;, &#39;Pr+++&#39;]</span>
 
 
-<span class="sd">    :param exp_data: (str or pd.DataFrame) csv file name</span>
-<span class="sd">        or DataFrame with experimental data</span>
+<span class="sd">    :param exp_data: (str) csv file name with experimental data</span>
 
 <span class="sd">        In the .csv file, the rows are different experiments and</span>
 <span class="sd">        columns are the measured quantities.</span>
@@ -217,13 +220,13 @@
 <span class="sd">        The ordering of the columns needs to be:</span>
 
 <span class="sd">        [h_i, h_eq, z_i, z_eq,</span>
-<span class="sd">        {ES_1}_aq_i, {ES_1}_aq_eq, {ES_1}_d_eq,</span>
-<span class="sd">        {ES_2}_aq_i, {ES_2}_aq_eq, {ES_2}_d_eq,...</span>
-<span class="sd">        {ES_N}_aq_i, {ES_N}_aq_eq, {ES_N}_d_eq]</span>
+<span class="sd">        {RE_1}_aq_i, {RE_1}_aq_eq, {RE_1}_d_eq,</span>
+<span class="sd">        {RE_2}_aq_i, {RE_2}_aq_eq, {RE_2}_d_eq,...</span>
+<span class="sd">        {RE_N}_aq_i, {RE_N}_aq_eq, {RE_N}_d_eq]</span>
 
 <span class="sd">        Naming does not matter, just the order.</span>
 
-<span class="sd">        Where {ES_1}-{ES_N} are the extracted species names of interest</span>
+<span class="sd">        Where {RE_1}-{RE_N} are the rare earth element names of interest</span>
 <span class="sd">        i.e. Nd, Pr, La, etc.</span>
 
 <span class="sd">        Below is an explanation of the columns.</span>
@@ -243,13 +246,13 @@
 <span class="sd">        | 3     | z_eq       | Equilibrium concentration of             |</span>
 <span class="sd">        |       |            | extractant (mol/L)                       |</span>
 <span class="sd">        +-------+------------+------------------------------------------+</span>
-<span class="sd">        | 4     | {ES}_aq_i  | Initial concentration of ES ions (mol/L) |</span>
+<span class="sd">        | 4     | {RE}_aq_i  | Initial concentration of RE ions (mol/L) |</span>
 <span class="sd">        +-------+------------+------------------------------------------+</span>
-<span class="sd">        | 5     | {ES}_aq_eq | Equilibrium concentration of ES ions     |</span>
+<span class="sd">        | 5     | {RE}_aq_eq | Equilibrium concentration of RE ions     |</span>
 <span class="sd">        |       |            | in aqueous phase (mol/L)                 |</span>
 <span class="sd">        +-------+------------+------------------------------------------+</span>
-<span class="sd">        | 6     | {ES}_d_eq  | Equilibrium Ratio between amount of      |</span>
-<span class="sd">        |       |            | ES atoms in organic to aqueous           |</span>
+<span class="sd">        | 6     | {RE}_d_eq  | Equilibrium Ratio between amount of      |</span>
+<span class="sd">        |       |            | RE atoms in organic to aqueous           |</span>
 <span class="sd">        +-------+------------+------------------------------------------+</span>
 <span class="sd">    :param phases_xml_filename: (str) xml file with parameters</span>
 <span class="sd">        for equilibrium calc</span>
@@ -259,13 +262,13 @@
 
 <span class="sd">        speciesArray fields need specific ordering.</span>
 
-<span class="sd">        In aqueous phase: aq_solvent_name, H+, OH-, Cl-, ES_1, ES_2, ..., ES_N</span>
+<span class="sd">        In aqueous phase: aq_solvent_name, H+, OH-, Cl-, RE_1, RE_2, ..., RE_N</span>
 
-<span class="sd">        (ES_1-ES_N) represent ES ion names i.e. Nd+++, Pr+++</span>
+<span class="sd">        For aqueous phase, RE_1-RE_N represent RE ion names i.e. Nd+++, Pr+++</span>
 
-<span class="sd">        In organic phase : extractant_name, diluant_name, ES_1, ES_2, ..., ES_N</span>
+<span class="sd">        In organic phase : extractant_name, diluant_name, RE_1, RE_2, ..., RE_N</span>
 
-<span class="sd">        (ES_1-ES_N) represent ES complex names</span>
+<span class="sd">        For organic phase, RE_1-RE_N represent RE complex names</span>
 <span class="sd">        i.e. Nd(H(A)2)3(org), Pr(H(A)2)3(org)</span>
 
 <span class="sd">    :param phase_names: (list) names of phases in xml file</span>
@@ -276,13 +279,17 @@
 <span class="sd">    :param extractant_name: (str) name of extractant in xml file</span>
 <span class="sd">    :param diluant_name: (str) name of diluant in xml file</span>
 <span class="sd">    :param complex_names: (list) names of complexes in xml file.</span>
-<span class="sd">    :param extracted_species_ion_names: (list) names of extracted species ions</span>
-<span class="sd">        in xml file</span>
-<span class="sd">    :param extracted_species_list: (list) names of extracted species elements.</span>
 
-<span class="sd">        If ``None``, extracted_species_list will be extracted_species_ion_names</span>
-<span class="sd">        without &#39;+&#39; i.e. &#39;Nd+++&#39;-&gt;&#39;Nd&#39;</span>
+<span class="sd">        Ensure the ordering is correct</span>
+<span class="sd">    :param rare_earth_ion_names: (list) names of rare earth ions in xml file</span>
 
+<span class="sd">        Ensure the ordering is correct</span>
+<span class="sd">    :param re_species_list: (list) names of rare earth elements.</span>
+
+<span class="sd">        If ``None``, re_species_list will be rare_earth_ion_names without &#39;+&#39;</span>
+<span class="sd">            i.e. &#39;Nd+++&#39;-&gt;&#39;Nd&#39;</span>
+
+<span class="sd">        Ensure the ordering is correct</span>
 <span class="sd">    :param aq_solvent_rho: (float) density of solvent (g/L)</span>
 
 <span class="sd">        If ``None``, molar volume/molecular weight is used from xml</span>
@@ -315,8 +322,6 @@
 <span class="sd">                                        ...</span>
 <span class="sd">                        ...</span>
 <span class="sd">                        }</span>
-
-<span class="sd">        See example files for more examples.</span>
 <span class="sd">    :param objective_function: (function or str) function to compute objective</span>
 
 <span class="sd">        By default, the objective function is log mean squared error</span>
@@ -345,14 +350,14 @@
 <span class="sd">        +---------------------------+--------------------------------+</span>
 <span class="sd">        | extractant conc in org    | predicted_dict[&#39;z_eq&#39;]         |</span>
 <span class="sd">        +---------------------------+--------------------------------+</span>
-<span class="sd">        | ES ion eq conc in aq      | predicted_dict[&#39;{ES}_aq_eq&#39;]   |</span>
+<span class="sd">        | RE ion eq conc in aq      | predicted_dict[&#39;{RE}_aq_eq&#39;]   |</span>
 <span class="sd">        +---------------------------+--------------------------------+</span>
-<span class="sd">        | ES complex eq conc in org | predicted_dict[&#39;{ES}_org_eq&#39;]  |</span>
+<span class="sd">        | RE complex eq conc in org | predicted_dict[&#39;{RE}_org_eq&#39;]  |</span>
 <span class="sd">        +---------------------------+--------------------------------+</span>
-<span class="sd">        | ES distribution ratio     | predicted_dict[&#39;{ES}_d_eq&#39;]    |</span>
+<span class="sd">        | RE distribution ratio     | predicted_dict[&#39;{RE}_d_eq&#39;]    |</span>
 <span class="sd">        +---------------------------+--------------------------------+</span>
 
-<span class="sd">        Replace &quot;{ES}&quot; with extracted species element i.e. Nd, La, etc.</span>
+<span class="sd">        Replace &quot;{RE}&quot; with rare earth element i.e. Nd, La, etc.</span>
 
 <span class="sd">        For measured values, use the same names, but</span>
 <span class="sd">        replace ``predicted_dict`` with ``measured_df``</span>
@@ -405,27 +410,7 @@
 <span class="sd">        default is local temp folder</span>
 
 <span class="sd">    :param dependant_params_dict: (dict) dictionary containing information</span>
-<span class="sd">        about parameters dependant on opt_dict. Has a similar structure to</span>
-<span class="sd">        opt_dict except instead of input values, it has 3 other fields:</span>
-<span class="sd">        &#39;function&#39;, &#39;kwargs&#39;, and &#39;independent_params.</span>
-
-<span class="sd">        &#39;function&#39; is a function of the form</span>
-
-<span class="sd">        ``function(independent_param__value_list, custom_objects_dict,</span>
-<span class="sd">        **kwargs)``</span>
-
-<span class="sd">        &#39;kwargs&#39; are the extra arguments to pass to function</span>
-
-<span class="sd">        &#39;independent_params&#39; is a list of parameter names in opt_dict that the</span>
-<span class="sd">        dependent_param is a function of.</span>
-
-<span class="sd">        &#39;custom_objects_dict&#39; is for accessing the estimator&#39;s internal</span>
-<span class="sd">        custom_objects_dict and must be included in the arguments, even if the</span>
-<span class="sd">        custom_objects_dict is not set and is None.</span>
-
-<span class="sd">        See example code for usage.</span>
-<span class="sd">    :param custom_objects_dict: (dict) dictionary containing custom objects</span>
-<span class="sd">        format: {&lt;object_name_string&gt;: &lt;object&gt;,...}</span>
+<span class="sd">        about parameters dependant on opt_dict</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -436,20 +421,19 @@
                  <span class="n">extractant_name</span><span class="p">,</span>
                  <span class="n">diluant_name</span><span class="p">,</span>
                  <span class="n">complex_names</span><span class="p">,</span>
-                 <span class="n">extracted_species_ion_names</span><span class="p">,</span>
-                 <span class="n">extracted_species_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">rare_earth_ion_names</span><span class="p">,</span>
+                 <span class="n">re_species_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">aq_solvent_rho</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">extractant_rho</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">diluant_rho</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">opt_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">objective_function</span><span class="o">=</span><span class="s1">&#39;Log-MSE&#39;</span><span class="p">,</span>
-                 <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;scipy_minimize&#39;</span><span class="p">,</span>
+                 <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
                  <span class="n">temp_xml_file_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">dependant_params_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">custom_objects_dict</span><span class="o">=</span><span class="kc">None</span>
                  <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_built_in_obj_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Log-MSE&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_built_in_opt_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;scipy_minimize&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_built_in_opt_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span> <span class="o">=</span> <span class="n">exp_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span> <span class="o">=</span> <span class="n">phases_xml_filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_opt_dict</span> <span class="o">=</span> <span class="n">opt_dict</span>
@@ -458,20 +442,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_name</span> <span class="o">=</span> <span class="n">extractant_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_name</span> <span class="o">=</span> <span class="n">diluant_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_complex_names</span> <span class="o">=</span> <span class="n">complex_names</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_ion_names</span> <span class="o">=</span> <span class="n">extracted_species_ion_names</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rare_earth_ion_names</span> <span class="o">=</span> <span class="n">rare_earth_ion_names</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_rho</span> <span class="o">=</span> <span class="n">aq_solvent_rho</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_rho</span> <span class="o">=</span> <span class="n">extractant_rho</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_rho</span> <span class="o">=</span> <span class="n">diluant_rho</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_objective_function</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_objective_function</span><span class="p">(</span><span class="n">objective_function</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span> <span class="o">=</span> <span class="n">extracted_species_list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span> <span class="o">=</span> <span class="n">re_species_list</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_optimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">temp_xml_file_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">temp_xml_file_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/temp.xml&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;TEMP&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_temp_xml_file_path</span> <span class="o">=</span> <span class="n">temp_xml_file_path</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dependant_params_dict</span> <span class="o">=</span> <span class="n">dependant_params_dict</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span> <span class="o">=</span> <span class="n">custom_objects_dict</span>
         <span class="c1"># Try and except for adding package data to path.</span>
         <span class="c1"># This only works for sdist, not bdist</span>
         <span class="c1"># If bdist is needed, research &quot;manifest.in&quot; python setup files</span>
@@ -482,8 +465,8 @@
                                             <span class="n">phase_names</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span> <span class="o">=</span> \
-                <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;llepe&#39;</span><span class="p">,</span>
-                                                <span class="s1">&#39;../data/xmls/</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;reeps&#39;</span><span class="p">,</span>
+                                                <span class="sa">r</span><span class="s1">&#39;..\data\xmls\</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                                                     <span class="n">phases_xml_filename</span><span class="p">))</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span><span class="p">,</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">_temp_xml_file_path</span><span class="p">)</span>
@@ -494,24 +477,24 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span>
-                    <span class="s1">&#39;llepe&#39;</span><span class="p">,</span> <span class="s1">&#39;../data/csvs/</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span><span class="p">))</span>
+                    <span class="s1">&#39;reeps&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;..\data\csvs\</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;h_i&#39;</span><span class="p">,</span> <span class="s1">&#39;h_eq&#39;</span><span class="p">,</span> <span class="s1">&#39;z_i&#39;</span><span class="p">,</span> <span class="s1">&#39;z_eq&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_ion_names</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rare_earth_ion_names</span><span class="p">:</span>
                 <span class="n">species</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_i&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_d_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span>
-        <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_org_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">)]</span> <span class="o">=</span> \
                 <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">)]</span> \
                 <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_d_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">)]</span>
@@ -520,15 +503,15 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_aq_ind</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_org_ind</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_charges</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_re_charges</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_in_moles</span><span class="p">(</span><span class="n">feed_vol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_predicted_dict</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">()</span>
 
-<div class="viewcode-block" id="LLEPE.scipy_minimize"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.scipy_minimize">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="REEPS.scipy_minimize"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.scipy_minimize">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">scipy_minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">x_guess</span><span class="p">,</span> <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The default optimizer for LLEPE</span>
+        <span class="sd">&quot;&quot;&quot; The default optimizer for REEPS</span>
 
 <span class="sd">        Uses scipy.minimize</span>
 
@@ -560,8 +543,8 @@
         <span class="n">est_parameters</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
         <span class="k">return</span> <span class="n">est_parameters</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">fun</span></div>
 
-<div class="viewcode-block" id="LLEPE.log_mean_squared_error"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.log_mean_squared_error">[docs]</a>    <span class="k">def</span> <span class="nf">log_mean_squared_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicted_dict</span><span class="p">,</span> <span class="n">meas_df</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Default objective function for LLEPE</span>
+<div class="viewcode-block" id="REEPS.log_mean_squared_error"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.log_mean_squared_error">[docs]</a>    <span class="k">def</span> <span class="nf">log_mean_squared_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicted_dict</span><span class="p">,</span> <span class="n">meas_df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Default objective function for REEPS</span>
 
 <span class="sd">        Returns the log mean squared error of</span>
 <span class="sd">        predicted distribution ratios  (d=n_org/n_aq)</span>
@@ -574,29 +557,29 @@
 <span class="sd">        :return: (float) log mean squared error between predicted and measured</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">meas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">meas_df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_d_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">)]</span><span class="o">.</span><span class="n">values</span>
-                               <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span><span class="p">])</span>
+                               <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span><span class="p">])</span>
         <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
             <span class="n">predicted_dict</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_d_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">)]</span>
-            <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span><span class="p">])</span>
         <span class="n">log_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
         <span class="n">log_meas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">meas</span><span class="p">)</span>
         <span class="n">log_diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">log_pred</span> <span class="o">-</span> <span class="n">log_meas</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">log_diff</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">obj</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_exp_df"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_exp_df">[docs]</a>    <span class="k">def</span> <span class="nf">get_exp_df</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_exp_df"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_exp_df">[docs]</a>    <span class="k">def</span> <span class="nf">get_exp_df</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns the experimental DataFrame</span>
 
 <span class="sd">        :return: (pd.DataFrame) Experimental data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_exp_df"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_exp_df">[docs]</a>    <span class="k">def</span> <span class="nf">set_exp_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp_data</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_exp_df"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_exp_df">[docs]</a>    <span class="k">def</span> <span class="nf">set_exp_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp_data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes the experimental DataFrame to input exp_csv_filename data</span>
-<span class="sd">        and renames columns to internal LLEPE names</span>
+<span class="sd">        and renames columns to internal REEPS names</span>
 
 
-<span class="sd">        h_i, h_eq, z_i, z_eq, {ES}_aq_i, {ES}_aq_eq, {ES}_d</span>
+<span class="sd">        h_i, h_eq, z_i, z_eq, {RE}_aq_i, {RE}_aq_eq, {RE}_d</span>
 
 <span class="sd">        See class docstring on &quot;exp_csv_filename&quot; for further explanations.</span>
 
@@ -609,22 +592,22 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span>
-                    <span class="s1">&#39;llepe&#39;</span><span class="p">,</span> <span class="s1">&#39;../data/csvs/</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span><span class="p">))</span>
+                    <span class="s1">&#39;reeps&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;..\data\csvs\</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exp_data</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span> <span class="o">=</span> <span class="n">exp_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;h_i&#39;</span><span class="p">,</span> <span class="s1">&#39;h_eq&#39;</span><span class="p">,</span> <span class="s1">&#39;z_i&#39;</span><span class="p">,</span> <span class="s1">&#39;z_eq&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_ion_names</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rare_earth_ion_names</span><span class="p">:</span>
                 <span class="n">species</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_i&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_d_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df_columns</span>
-        <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_org_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">)]</span> <span class="o">=</span> \
                 <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">)]</span> \
                 <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_d_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">species</span><span class="p">)]</span>
@@ -632,7 +615,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">()</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_phases"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_phases">[docs]</a>    <span class="k">def</span> <span class="nf">get_phases</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_phases"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_phases">[docs]</a>    <span class="k">def</span> <span class="nf">get_phases</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the list of Cantera solutions</span>
 
@@ -640,7 +623,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phases</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_phases"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_phases">[docs]</a>    <span class="k">def</span> <span class="nf">set_phases</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phases_xml_filename</span><span class="p">,</span> <span class="n">phase_names</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_phases"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_phases">[docs]</a>    <span class="k">def</span> <span class="nf">set_phases</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phases_xml_filename</span><span class="p">,</span> <span class="n">phase_names</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change list of Cantera solutions by inputting</span>
 <span class="sd">        new xml file name and phase names</span>
 
@@ -662,8 +645,8 @@
                                             <span class="n">phase_names</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span> <span class="o">=</span> \
-                <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;llepe&#39;</span><span class="p">,</span>
-                                                <span class="s1">&#39;../data/xmls/</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;reeps&#39;</span><span class="p">,</span>
+                                                <span class="sa">r</span><span class="s1">&#39;..\data\xmls\</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                                                     <span class="n">phases_xml_filename</span><span class="p">))</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span><span class="p">,</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">_temp_xml_file_path</span><span class="p">)</span>
@@ -673,7 +656,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">()</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_opt_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_opt_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_opt_dict"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_opt_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the dictionary containing optimization information</span>
 
@@ -682,7 +665,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_opt_dict</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_opt_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_opt_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_opt_dict"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_opt_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_opt_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change the dictionary to input opt_dict.</span>
 
@@ -698,14 +681,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_opt_dict</span> <span class="o">=</span> <span class="n">opt_dict</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_aq_solvent_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_aq_solvent_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_aq_solvent_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_aq_solvent_name"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_aq_solvent_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_aq_solvent_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns aq_solvent_name</span>
 
 <span class="sd">        :return: aq_solvent_name: (str) name of aqueous solvent in xml file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_name</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_aq_solvent_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_aq_solvent_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_aq_solvent_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aq_solvent_name</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_aq_solvent_name"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_aq_solvent_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_aq_solvent_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aq_solvent_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Change aq_solvent_name to input aq_solvent_name</span>
 
 <span class="sd">        :param aq_solvent_name: (str) name of aqueous solvent in xml file</span>
@@ -713,14 +696,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_name</span> <span class="o">=</span> <span class="n">aq_solvent_name</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_extractant_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_extractant_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_extractant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_extractant_name"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_extractant_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_extractant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns extractant name</span>
 
 <span class="sd">        :return: extractant_name: (str) name of extractant in xml file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_name</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_extractant_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_extractant_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_extractant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extractant_name</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_extractant_name"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_extractant_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_extractant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extractant_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change extractant_name to input extractant_name</span>
 <span class="sd">        :param extractant_name: (str) name of extractant in xml file</span>
@@ -728,13 +711,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_name</span> <span class="o">=</span> <span class="n">extractant_name</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_diluant_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_diluant_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_diluant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_diluant_name"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_diluant_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_diluant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot; Returns diluant name</span>
 <span class="sd">        :return:  diluant_name: (str) name of diluant in xml file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_name</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_diluant_name"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_diluant_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_diluant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diluant_name</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_diluant_name"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_diluant_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_diluant_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diluant_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change diluant_name to input diluant_name</span>
 
@@ -743,14 +726,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_name</span> <span class="o">=</span> <span class="n">diluant_name</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_complex_names"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_complex_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_complex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_complex_names"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_complex_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_complex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns list of complex names</span>
 
 <span class="sd">        :return: complex_names: (list) names of complexes in xml file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_complex_names</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_complex_names"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_complex_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_complex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complex_names</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_complex_names"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_complex_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_complex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complex_names</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change complex names list to input complex_names</span>
 
 <span class="sd">        :param complex_names: (list) names of complexes in xml file.</span>
@@ -758,50 +741,50 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_complex_names</span> <span class="o">=</span> <span class="n">complex_names</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_extracted_species_ion_names"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_extracted_species_ion_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_extracted_species_ion_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns list of extracted species ion names</span>
+<div class="viewcode-block" id="REEPS.get_rare_earth_ion_names"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_rare_earth_ion_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_rare_earth_ion_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns list of rare earth ion names</span>
 
-<span class="sd">        :return: extracted_species_ion_names: (list) names of</span>
-<span class="sd">            extracted species ions in xml file</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_ion_names</span></div>
-
-<div class="viewcode-block" id="LLEPE.set_extracted_species_ion_names"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_extracted_species_ion_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_extracted_species_ion_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_species_ion_names</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Change list of extracted species ion names to input</span>
-<span class="sd">            extracted_species_ion_names</span>
-
-<span class="sd">        :param extracted_species_ion_names: (list) names of extracted species</span>
-<span class="sd">            ions in xml file</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_ion_names</span> <span class="o">=</span> <span class="n">extracted_species_ion_names</span>
-        <span class="k">return</span> <span class="kc">None</span></div>
-
-<div class="viewcode-block" id="LLEPE.get_extracted_species_list"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_extracted_species_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_extracted_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns list of extracted species names</span>
-
-<span class="sd">        :return: extracted_species_list: (list) names of extracted species in</span>
+<span class="sd">        :return: rare_earth_ion_names: (list) names of rare earth ions in</span>
 <span class="sd">            xml file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rare_earth_ion_names</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_extracted_species_list"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_extracted_species_list">[docs]</a>    <span class="k">def</span> <span class="nf">set_extracted_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extracted_species_list</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Change list of extracted species ion names to input</span>
-<span class="sd">            extracted_species_ion_names</span>
+<div class="viewcode-block" id="REEPS.set_rare_earth_ion_names"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_rare_earth_ion_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_rare_earth_ion_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rare_earth_ion_names</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change list of rare earth ion names to input</span>
+<span class="sd">            rare_earth_ion_names</span>
 
-<span class="sd">        :param extracted_species_list: (list) names of extracted species in</span>
+<span class="sd">        :param rare_earth_ion_names: (list) names of rare earth ions in</span>
 <span class="sd">            xml file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span> <span class="o">=</span> <span class="n">extracted_species_list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rare_earth_ion_names</span> <span class="o">=</span> <span class="n">rare_earth_ion_names</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_aq_solvent_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_aq_solvent_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_aq_solvent_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_re_species_list"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_re_species_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_re_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns list of rare earth element names</span>
+
+<span class="sd">        :return: re_species_list: (list) names of rare earth elements in</span>
+<span class="sd">            xml file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span></div>
+
+<div class="viewcode-block" id="REEPS.set_re_species_list"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_re_species_list">[docs]</a>    <span class="k">def</span> <span class="nf">set_re_species_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">re_species_list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change list of rare earth ion names to input</span>
+<span class="sd">            rare_earth_ion_names</span>
+
+<span class="sd">        :param re_species_list: (list) names of rare earth elements in</span>
+<span class="sd">            xml file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span> <span class="o">=</span> <span class="n">re_species_list</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="REEPS.get_aq_solvent_rho"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_aq_solvent_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_aq_solvent_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns aqueous solvent density (g/L)</span>
 
 <span class="sd">        :return: aq_solvent_rho: (float) density of aqueous solvent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_rho</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_aq_solvent_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_aq_solvent_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_aq_solvent_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aq_solvent_rho</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_aq_solvent_rho"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_aq_solvent_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_aq_solvent_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aq_solvent_rho</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes aqueous solvent density (g/L) to input aq_solvent_rho</span>
 
 <span class="sd">        :param aq_solvent_rho: (float) density of aqueous solvent</span>
@@ -809,14 +792,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_rho</span> <span class="o">=</span> <span class="n">aq_solvent_rho</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_extractant_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_extractant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_extractant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_extractant_rho"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_extractant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_extractant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns extractant density (g/L)</span>
 
 <span class="sd">        :return: extractant_rho: (float) density of extractant</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_rho</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_extractant_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_extractant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_extractant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extractant_rho</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_extractant_rho"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_extractant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_extractant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extractant_rho</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes extractant density (g/L) to input extractant_rho</span>
 
 <span class="sd">        :param extractant_rho: (float) density of extractant</span>
@@ -824,14 +807,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_rho</span> <span class="o">=</span> <span class="n">extractant_rho</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_diluant_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_diluant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_diluant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_diluant_rho"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_diluant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">get_diluant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns diluant density (g/L)</span>
 
 <span class="sd">        :return: diluant_rho: (float) density of diluant</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_rho</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_diluant_rho"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_diluant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_diluant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diluant_rho</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_diluant_rho"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_diluant_rho">[docs]</a>    <span class="k">def</span> <span class="nf">set_diluant_rho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diluant_rho</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes diluant density (g/L) to input diluant_rho</span>
 
 <span class="sd">        :param diluant_rho: (float) density of diluant</span>
@@ -839,7 +822,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_rho</span> <span class="o">=</span> <span class="n">diluant_rho</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_in_moles"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_in_moles">[docs]</a>    <span class="k">def</span> <span class="nf">set_in_moles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feed_vol</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_in_moles"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_in_moles">[docs]</a>    <span class="k">def</span> <span class="nf">set_in_moles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feed_vol</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function that initializes mole fractions to input feed_vol</span>
 
 <span class="sd">        This function is called at initialization</span>
@@ -860,8 +843,8 @@
         <span class="n">solvent_rho</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aq_solvent_rho</span>
         <span class="n">extractant_rho</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_rho</span>
         <span class="n">diluant_rho</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diluant_rho</span>
-        <span class="n">extracted_species_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_ion_names</span>
-        <span class="n">extracted_species_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span>
+        <span class="n">re_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rare_earth_ion_names</span>
+        <span class="n">re_species_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span>
 
         <span class="n">mixed</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Mixture</span><span class="p">(</span><span class="n">phases_copy</span><span class="p">)</span>
         <span class="n">aq_ind</span> <span class="o">=</span> <span class="kc">None</span>
@@ -884,14 +867,11 @@
             <span class="n">extractant_name</span><span class="p">)</span>
         <span class="n">diluant_ind</span> <span class="o">=</span> <span class="n">phases_copy</span><span class="p">[</span><span class="n">org_ind</span><span class="p">]</span><span class="o">.</span><span class="n">species_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">diluant_name</span><span class="p">)</span>
 
-        <span class="n">extracted_species_ind_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">phases_copy</span><span class="p">[</span><span class="n">aq_ind</span><span class="p">]</span><span class="o">.</span><span class="n">species_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span>
-            <span class="n">extracted_species_name</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">extracted_species_name</span> <span class="ow">in</span> <span class="n">extracted_species_names</span><span class="p">]</span>
-        <span class="n">extracted_species_charges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">phases_copy</span><span class="p">[</span><span class="n">aq_ind</span><span class="p">]</span><span class="o">.</span><span class="n">species</span><span class="p">(</span>
-                <span class="n">extracted_species_ind</span><span class="p">)</span><span class="o">.</span><span class="n">charge</span>
-             <span class="k">for</span> <span class="n">extracted_species_ind</span> <span class="ow">in</span> <span class="n">extracted_species_ind_list</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_charges</span> <span class="o">=</span> <span class="n">extracted_species_charges</span>
+        <span class="n">re_ind_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">phases_copy</span><span class="p">[</span><span class="n">aq_ind</span><span class="p">]</span><span class="o">.</span><span class="n">species_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">re_name</span><span class="p">)</span>
+                       <span class="k">for</span> <span class="n">re_name</span> <span class="ow">in</span> <span class="n">re_names</span><span class="p">]</span>
+        <span class="n">re_charges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">phases_copy</span><span class="p">[</span><span class="n">aq_ind</span><span class="p">]</span><span class="o">.</span><span class="n">species</span><span class="p">(</span><span class="n">re_ind</span><span class="p">)</span><span class="o">.</span><span class="n">charge</span>
+                               <span class="k">for</span> <span class="n">re_ind</span> <span class="ow">in</span> <span class="n">re_ind_list</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_re_charges</span> <span class="o">=</span> <span class="n">re_charges</span>
 
         <span class="n">mix_aq</span> <span class="o">=</span> <span class="n">mixed</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">aq_ind</span><span class="p">)</span>
         <span class="n">mix_org</span> <span class="o">=</span> <span class="n">mixed</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">org_ind</span><span class="p">)</span>
@@ -916,24 +896,22 @@
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">exp_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
             <span class="n">h_plus_moles</span> <span class="o">=</span> <span class="n">feed_vol</span> <span class="o">*</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;h_i&#39;</span><span class="p">]</span>
             <span class="n">hydroxide_ions</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">extracted_species_moles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">feed_vol</span> <span class="o">*</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_i&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">extracted_species</span><span class="p">)]</span>
-                 <span class="k">for</span> <span class="n">extracted_species</span> <span class="ow">in</span> <span class="n">extracted_species_list</span><span class="p">])</span>
-            <span class="n">extracted_species_charge_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
-                <span class="n">extracted_species_charges</span> <span class="o">*</span> <span class="n">extracted_species_moles</span><span class="p">)</span>
-            <span class="n">chlorine_moles</span> <span class="o">=</span> <span class="n">extracted_species_charge_sum</span> <span class="o">+</span> <span class="n">h_plus_moles</span>
+            <span class="n">rare_earth_moles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">feed_vol</span> <span class="o">*</span> <span class="n">row</span><span class="p">[</span>
+                <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_i&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">re_species</span><span class="p">)]</span>
+                                         <span class="k">for</span> <span class="n">re_species</span> <span class="ow">in</span> <span class="n">re_species_list</span><span class="p">])</span>
+            <span class="n">re_charge_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">re_charges</span> <span class="o">*</span> <span class="n">rare_earth_moles</span><span class="p">)</span>
+            <span class="n">chlorine_moles</span> <span class="o">=</span> <span class="n">re_charge_sum</span> <span class="o">+</span> <span class="n">h_plus_moles</span>
             <span class="n">extractant_moles</span> <span class="o">=</span> <span class="n">feed_vol</span> <span class="o">*</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;z_i&#39;</span><span class="p">]</span>
             <span class="n">extractant_vol</span> <span class="o">=</span> <span class="n">extractant_moles</span> <span class="o">*</span> <span class="n">extractant_mw</span> <span class="o">/</span> <span class="n">extractant_rho</span>
             <span class="n">diluant_vol</span> <span class="o">=</span> <span class="n">feed_vol</span> <span class="o">-</span> <span class="n">extractant_vol</span>
             <span class="n">diluant_moles</span> <span class="o">=</span> <span class="n">diluant_vol</span> <span class="o">*</span> <span class="n">diluant_rho</span> <span class="o">/</span> <span class="n">diluant_mw</span>
-            <span class="n">complex_moles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">extracted_species_list</span><span class="p">))</span>
+            <span class="n">complex_moles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">re_species_list</span><span class="p">))</span>
 
             <span class="n">species_moles_aq</span> <span class="o">=</span> <span class="p">[</span><span class="n">aq_phase_solvent_moles</span><span class="p">,</span>
                                 <span class="n">h_plus_moles</span><span class="p">,</span>
                                 <span class="n">hydroxide_ions</span><span class="p">,</span>
                                 <span class="n">chlorine_moles</span><span class="p">]</span>
-            <span class="n">species_moles_aq</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">extracted_species_moles</span><span class="p">))</span>
+            <span class="n">species_moles_aq</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">rare_earth_moles</span><span class="p">))</span>
             <span class="n">species_moles_org</span> <span class="o">=</span> <span class="p">[</span><span class="n">extractant_moles</span><span class="p">,</span> <span class="n">diluant_moles</span><span class="p">]</span>
             <span class="n">species_moles_org</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">complex_moles</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">aq_ind</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -946,7 +924,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">()</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_in_moles"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_in_moles">[docs]</a>    <span class="k">def</span> <span class="nf">get_in_moles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="REEPS.get_in_moles"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_in_moles">[docs]</a>    <span class="k">def</span> <span class="nf">get_in_moles</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns the in_moles DataFrame which contains the initial mole</span>
 <span class="sd">        fractions of each species for each experiment</span>
 
@@ -954,7 +932,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_moles</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_objective_function"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_objective_function">[docs]</a>    <span class="k">def</span> <span class="nf">set_objective_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objective_function</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_objective_function"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_objective_function">[docs]</a>    <span class="k">def</span> <span class="nf">set_objective_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objective_function</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change objective function to input objective_function.</span>
 
 <span class="sd">         See class docstring on &quot;objective_function&quot; for instructions</span>
@@ -979,7 +957,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_objective_function</span> <span class="o">=</span> <span class="n">objective_function</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_objective_function"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_objective_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_objective_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.get_objective_function"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_objective_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_objective_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns objective function</span>
 
 <span class="sd">        :return: objective_function: (func) Objective function to quantify</span>
@@ -987,7 +965,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_objective_function</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_optimizer"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_optimizer">[docs]</a>    <span class="k">def</span> <span class="nf">set_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_optimizer"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_optimizer">[docs]</a>    <span class="k">def</span> <span class="nf">set_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Change optimizer function to input optimizer.</span>
 
 <span class="sd">         See class docstring on &quot;optimizer&quot; for instructions</span>
@@ -1007,12 +985,12 @@
                     <span class="s2">&quot;optimizer must be a function &quot;</span>
                     <span class="s2">&quot;with at least 2 arguments: &quot;</span>
                     <span class="s2">&quot;f(objective_func,x_guess, kwargs)&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">optimizer</span> <span class="o">==</span> <span class="s1">&#39;scipy_minimize&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">optimizer</span> <span class="o">==</span> <span class="s1">&#39;SLSQP&#39;</span><span class="p">:</span>
             <span class="n">optimizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scipy_minimize</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="n">optimizer</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_optimizer"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_optimizer">[docs]</a>    <span class="k">def</span> <span class="nf">get_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.get_optimizer"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_optimizer">[docs]</a>    <span class="k">def</span> <span class="nf">get_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns objective function</span>
 
 <span class="sd">        :return: optimizer: (func) Optimizer function to minimize objective</span>
@@ -1020,7 +998,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_temp_xml_file_path"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_temp_xml_file_path">[docs]</a>    <span class="k">def</span> <span class="nf">get_temp_xml_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.get_temp_xml_file_path"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_temp_xml_file_path">[docs]</a>    <span class="k">def</span> <span class="nf">get_temp_xml_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns path to temporary xml file.</span>
 
 <span class="sd">        This xml file is a duplicate of the phases_xml_file name and is</span>
@@ -1031,7 +1009,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_temp_xml_file_path</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_temp_xml_file_path"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_temp_xml_file_path">[docs]</a>    <span class="k">def</span> <span class="nf">set_temp_xml_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp_xml_file_path</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_temp_xml_file_path"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_temp_xml_file_path">[docs]</a>    <span class="k">def</span> <span class="nf">set_temp_xml_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp_xml_file_path</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Changes temporary xml file path to input temp_xml_file_path.</span>
 
 <span class="sd">        This xml file is a duplicate of the phases_xml_file name and is</span>
@@ -1043,45 +1021,24 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_temp_xml_file_path</span> <span class="o">=</span> <span class="n">temp_xml_file_path</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_dependant_params_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_dependant_params_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_dependant_params_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.get_dependant_params_dict"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_dependant_params_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_dependant_params_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the dependant_params_dict</span>
-
 <span class="sd">        :return: dependant_params_dict: (dict) dictionary containing</span>
 <span class="sd">            information about parameters dependant on opt_dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dependant_params_dict</span></div>
 
-<div class="viewcode-block" id="LLEPE.set_dependant_params_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_dependant_params_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_dependant_params_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dependant_params_dict</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.set_dependant_params_dict"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.set_dependant_params_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_dependant_params_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dependant_params_dict</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the dependant_params_dict</span>
-
 <span class="sd">        :param dependant_params_dict: (dict) dictionary containing information</span>
-<span class="sd">            about parameters dependant on opt_dict</span>
+<span class="sd">        about parameters dependant on opt_dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dependant_params_dict</span> <span class="o">=</span> <span class="n">dependant_params_dict</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_custom_objects_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_custom_objects_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_custom_objects_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the custom_objects_dict</span>
-
-<span class="sd">        :return: custom_objects_dict: (dict) dictionary containing</span>
-<span class="sd">            information about custom objects from user</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span></div>
-
-<div class="viewcode-block" id="LLEPE.set_custom_objects_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.set_custom_objects_dict">[docs]</a>    <span class="k">def</span> <span class="nf">set_custom_objects_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_objects_dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets the custom_objects_dict</span>
-
-<span class="sd">        :param custom_objects_dict: (dict) dictionary containing information</span>
-<span class="sd">            about about custom objects from user</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span> <span class="o">=</span> <span class="n">custom_objects_dict</span>
-        <span class="k">return</span> <span class="kc">None</span></div>
-
-<div class="viewcode-block" id="LLEPE.update_predicted_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.update_predicted_dict">[docs]</a>    <span class="k">def</span> <span class="nf">update_predicted_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="REEPS.update_predicted_dict"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.update_predicted_dict">[docs]</a>    <span class="k">def</span> <span class="nf">update_predicted_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                               <span class="n">phases_xml_filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">phase_names</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function that computes the predicted equilibrium concentrations</span>
@@ -1102,17 +1059,17 @@
         <span class="n">org_ind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_org_ind</span>
         <span class="n">complex_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_complex_names</span>
         <span class="n">extractant_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extractant_name</span>
-        <span class="n">extracted_species_ion_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_ion_names</span>
+        <span class="n">rare_earth_ion_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rare_earth_ion_names</span>
         <span class="n">in_moles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_moles</span>
-        <span class="n">extracted_species_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span>
+        <span class="n">re_species_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span>
 
         <span class="n">phases_copy</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">import_phases</span><span class="p">(</span><span class="n">phases_xml_filename</span><span class="p">,</span> <span class="n">phase_names</span><span class="p">)</span>
         <span class="n">mix</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">Mixture</span><span class="p">(</span><span class="n">phases_copy</span><span class="p">)</span>
         <span class="n">key_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;h_eq&#39;</span><span class="p">,</span> <span class="s1">&#39;z_eq&#39;</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">extracted_species</span> <span class="ow">in</span> <span class="n">extracted_species_list</span><span class="p">:</span>
-            <span class="n">key_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extracted_species</span><span class="p">))</span>
-            <span class="n">key_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_org_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extracted_species</span><span class="p">))</span>
-            <span class="n">key_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_d_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extracted_species</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">re_species</span> <span class="ow">in</span> <span class="n">re_species_list</span><span class="p">:</span>
+            <span class="n">key_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">re_species</span><span class="p">))</span>
+            <span class="n">key_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_org_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">re_species</span><span class="p">))</span>
+            <span class="n">key_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_d_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">re_species</span><span class="p">))</span>
 
         <span class="n">predicted_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key_name</span><span class="p">):</span> <span class="p">[]</span>
                           <span class="k">for</span> <span class="n">key_name</span> <span class="ow">in</span> <span class="n">key_names</span><span class="p">}</span>
@@ -1120,27 +1077,21 @@
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">in_moles</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
             <span class="n">mix</span><span class="o">.</span><span class="n">species_moles</span> <span class="o">=</span> <span class="n">row</span>
             <span class="n">mix</span><span class="o">.</span><span class="n">equilibrate</span><span class="p">(</span><span class="s1">&#39;TP&#39;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-            <span class="n">extracted_species_org_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">mix</span><span class="o">.</span><span class="n">species_moles</span><span class="p">[</span><span class="n">mix</span><span class="o">.</span><span class="n">species_index</span><span class="p">(</span>
-                    <span class="n">org_ind</span><span class="p">,</span> <span class="n">complex_name</span><span class="p">)]</span> <span class="k">for</span> <span class="n">complex_name</span> <span class="ow">in</span> <span class="n">complex_names</span><span class="p">])</span>
-            <span class="n">extracted_species_aq_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                <span class="p">[</span><span class="n">mix</span><span class="o">.</span><span class="n">species_moles</span><span class="p">[</span><span class="n">mix</span><span class="o">.</span><span class="n">species_index</span><span class="p">(</span>
-                    <span class="n">aq_ind</span><span class="p">,</span>
-                    <span class="n">extracted_species_ion_name</span><span class="p">)]</span> <span class="k">for</span> <span class="n">extracted_species_ion_name</span>
-                 <span class="ow">in</span> <span class="n">extracted_species_ion_names</span><span class="p">])</span>
-            <span class="n">d_array</span> <span class="o">=</span> <span class="n">extracted_species_org_array</span> <span class="o">/</span> <span class="n">extracted_species_aq_array</span>
+            <span class="n">re_org_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mix</span><span class="o">.</span><span class="n">species_moles</span><span class="p">[</span><span class="n">mix</span><span class="o">.</span><span class="n">species_index</span><span class="p">(</span>
+                <span class="n">org_ind</span><span class="p">,</span> <span class="n">complex_name</span><span class="p">)]</span> <span class="k">for</span> <span class="n">complex_name</span> <span class="ow">in</span> <span class="n">complex_names</span><span class="p">])</span>
+            <span class="n">re_aq_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mix</span><span class="o">.</span><span class="n">species_moles</span><span class="p">[</span><span class="n">mix</span><span class="o">.</span><span class="n">species_index</span><span class="p">(</span>
+                <span class="n">aq_ind</span><span class="p">,</span> <span class="n">re_ion_name</span><span class="p">)]</span> <span class="k">for</span> <span class="n">re_ion_name</span> <span class="ow">in</span> <span class="n">rare_earth_ion_names</span><span class="p">])</span>
+            <span class="n">d_array</span> <span class="o">=</span> <span class="n">re_org_array</span> <span class="o">/</span> <span class="n">re_aq_array</span>
             <span class="n">hydrogen_ions</span> <span class="o">=</span> <span class="n">mix</span><span class="o">.</span><span class="n">species_moles</span><span class="p">[</span><span class="n">mix</span><span class="o">.</span><span class="n">species_index</span><span class="p">(</span><span class="n">aq_ind</span><span class="p">,</span> <span class="s1">&#39;H+&#39;</span><span class="p">)]</span>
             <span class="n">extractant</span> <span class="o">=</span> <span class="n">mix</span><span class="o">.</span><span class="n">species_moles</span><span class="p">[</span><span class="n">mix</span><span class="o">.</span><span class="n">species_index</span><span class="p">(</span>
                 <span class="n">org_ind</span><span class="p">,</span> <span class="n">extractant_name</span><span class="p">)]</span>
-            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">extracted_species</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">extracted_species_list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">re_species</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">re_species_list</span><span class="p">):</span>
                 <span class="n">predicted_dict</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">extracted_species</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="n">extracted_species_aq_array</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+                    <span class="n">re_species</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re_aq_array</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
                 <span class="n">predicted_dict</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_org_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">extracted_species</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="n">extracted_species_org_array</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+                    <span class="n">re_species</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re_org_array</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
                 <span class="n">predicted_dict</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_d_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">extracted_species</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_array</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+                    <span class="n">re_species</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_array</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
             <span class="n">predicted_dict</span><span class="p">[</span><span class="s1">&#39;h_eq&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hydrogen_ions</span><span class="p">)</span>
             <span class="n">predicted_dict</span><span class="p">[</span><span class="s1">&#39;z_eq&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extractant</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">predicted_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1148,7 +1099,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_predicted_dict</span> <span class="o">=</span> <span class="n">predicted_dict</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.get_predicted_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.get_predicted_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_predicted_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.get_predicted_dict"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.get_predicted_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_predicted_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns predicted dictionary of species concentrations</span>
 <span class="sd">        that xml parameters predicts given current in_moles</span>
 
@@ -1158,9 +1109,6 @@
 
     <span class="k">def</span> <span class="nf">_internal_objective</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ver2 generalizes to handle accessing parameters. ver1 assumes species</span>
-<span class="sd">        parameter is modified. ver2 assumes parameter is accessed by going</span>
-<span class="sd">        through two elements: upper and lower</span>
 <span class="sd">        Internal objective function. Uses objective function to compute value</span>
 <span class="sd">        If the optimizer requires vectorized variables ie pso, this function</span>
 <span class="sd">        takes care of it</span>
@@ -1173,7 +1121,6 @@
         <span class="n">objective_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_objective_function</span>
         <span class="n">opt_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_opt_dict</span><span class="p">)</span>
         <span class="n">dep_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dependant_params_dict</span><span class="p">)</span>
-        <span class="n">custom_objects_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -1184,13 +1131,14 @@
             <span class="n">xs</span> <span class="o">=</span> <span class="n">x</span>
         <span class="n">objective_values</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">opt_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span>
-                        <span class="n">x</span><span class="p">[</span><span class="n">ind</span><span class="p">]):</span>  <span class="c1"># if nan, do not update xml with nan</span>
-                    <span class="n">opt_dict</span><span class="p">[</span><span class="n">param_name</span><span class="p">][</span><span class="s1">&#39;input_value&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">x</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">species_name</span> <span class="ow">in</span> <span class="n">opt_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">thermo_prop</span> <span class="ow">in</span> <span class="n">opt_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span>
+                            <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>  <span class="c1"># if nan, do not update xml with nan</span>
+                        <span class="n">opt_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">][</span><span class="n">thermo_prop</span><span class="p">]</span> <span class="o">*=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="k">if</span> <span class="n">custom_objects_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">update_custom_objects_dict</span><span class="p">(</span><span class="n">opt_dict</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">update_xml</span><span class="p">(</span><span class="n">opt_dict</span><span class="p">,</span>
                             <span class="n">temp_xml_file_path</span><span class="p">,</span>
                             <span class="n">dependant_params_dict</span><span class="o">=</span><span class="n">dep_dict</span><span class="p">)</span>
@@ -1212,7 +1160,7 @@
             <span class="n">objective_values</span> <span class="o">=</span> <span class="n">objective_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">objective_values</span>
 
-<div class="viewcode-block" id="LLEPE.fit"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="REEPS.fit"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
             <span class="n">objective_function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">optimizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">objective_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1240,6 +1188,168 @@
 
         <span class="n">optimizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span>
         <span class="n">opt_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_opt_dict</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">species_name</span> <span class="ow">in</span> <span class="n">opt_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">opt_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">x_guess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">optimizer_kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># noinspection PyCallingNonCallable</span>
+            <span class="n">est_parameters</span><span class="p">,</span> <span class="n">obj_value</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">x_guess</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># noinspection PyCallingNonCallable</span>
+            <span class="n">est_parameters</span><span class="p">,</span> <span class="n">obj_value</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span>
+                                                  <span class="n">x_guess</span><span class="p">,</span>
+                                                  <span class="n">optimizer_kwargs</span><span class="p">)</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">species_name</span> <span class="ow">in</span> <span class="n">opt_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">thermo_prop</span> <span class="ow">in</span> <span class="n">opt_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">opt_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">][</span><span class="n">thermo_prop</span><span class="p">]</span> <span class="o">*=</span> <span class="n">est_parameters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">opt_dict</span><span class="p">,</span> <span class="n">obj_value</span></div>
+
+<div class="viewcode-block" id="REEPS.update_xml"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.update_xml">[docs]</a>    <span class="k">def</span> <span class="nf">update_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                   <span class="n">info_dict</span><span class="p">,</span>
+                   <span class="n">phases_xml_filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">dependant_params_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;updates xml file with info_dict</span>
+
+<span class="sd">        :param info_dict: (dict) info in {species_names:{thermo_prop:val}}</span>
+<span class="sd">            Requires an identical structure to opt_dict</span>
+<span class="sd">        :param phases_xml_filename: (str) xml filename if editing other xml</span>
+<span class="sd">            If ``None``, the current xml will be modified and the internal</span>
+<span class="sd">            Cantera phases will be refreshed to the new values.</span>
+<span class="sd">        :param dependant_params_dict: (dict) dictionary containing information</span>
+<span class="sd">            about parameters dependant on info_dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">phases_xml_filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">phases_xml_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span>
+        <span class="n">new_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">info_dict</span><span class="p">)</span>
+        <span class="n">dep_dict</span> <span class="o">=</span> <span class="n">dependant_params_dict</span>
+        <span class="k">if</span> <span class="n">dep_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">species_name</span> <span class="ow">in</span> <span class="n">dep_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">thermo_prop</span> <span class="ow">in</span> <span class="n">dep_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">]:</span>
+                    <span class="n">mod_func</span> <span class="o">=</span> \
+                        <span class="n">dep_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">][</span><span class="n">thermo_prop</span><span class="p">][</span><span class="s1">&#39;function&#39;</span><span class="p">]</span>
+                    <span class="n">mod_kwargs</span> <span class="o">=</span> \
+                        <span class="n">dep_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">][</span><span class="n">thermo_prop</span><span class="p">][</span><span class="s1">&#39;kwargs&#39;</span><span class="p">]</span>
+                    <span class="n">ind_vars</span> <span class="o">=</span> \
+                        <span class="n">dep_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">][</span><span class="n">thermo_prop</span><span class="p">][</span><span class="s1">&#39;ind_vars&#39;</span><span class="p">]</span>
+                    <span class="n">ind_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_dict</span><span class="p">[</span><span class="n">ind_var</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">ind_var</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+                                <span class="k">for</span> <span class="n">ind_var</span> <span class="ow">in</span> <span class="n">ind_vars</span><span class="p">]</span>
+
+                    <span class="n">new_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">new_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">][</span><span class="n">thermo_prop</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">new_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">][</span><span class="n">thermo_prop</span><span class="p">]</span> <span class="o">=</span> \
+                        <span class="n">mod_func</span><span class="p">(</span><span class="n">ind_vals</span><span class="p">,</span> <span class="o">**</span><span class="n">mod_kwargs</span><span class="p">)</span>
+        <span class="c1">#             print(mod_func(ind_vals, **mod_kwargs))</span>
+        <span class="c1"># print(new_dict)</span>
+
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">phases_xml_filename</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+        <span class="c1"># Update xml file</span>
+        <span class="k">for</span> <span class="n">species_name</span> <span class="ow">in</span> <span class="n">new_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">thermo_prop</span> <span class="ow">in</span> <span class="n">new_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;species&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">species</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">species_name</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">changed_prop</span> <span class="ow">in</span> <span class="n">species</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="n">thermo_prop</span><span class="p">):</span>
+                            <span class="n">changed_prop</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
+                                <span class="n">new_dict</span><span class="p">[</span><span class="n">species_name</span><span class="p">][</span><span class="n">thermo_prop</span><span class="p">])</span>
+                            <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+                            <span class="n">changed_prop</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;updated&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;Updated at </span><span class="si">{0}</span><span class="s1">:</span><span class="si">{1}</span><span class="s1"> </span><span class="si">{2}</span><span class="s1">-</span><span class="si">{3}</span><span class="s1">-</span><span class="si">{4}</span><span class="s1">&#39;</span>
+                                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">now</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
+                                                     <span class="n">now</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">now</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+                                                     <span class="n">now</span><span class="o">.</span><span class="n">year</span><span class="p">))</span>
+
+        <span class="n">tree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">phases_xml_filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">phases_xml_filename</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_phases</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phase_names</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">_internal_objective_ver2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ver2 generalizes to handle accessing parameters. ver1 assumes species</span>
+<span class="sd">        parameter is modified. ver2 assumes parameter is accessed by going</span>
+<span class="sd">        through two levels: upper and lower</span>
+<span class="sd">        Internal objective function. Uses objective function to compute value</span>
+<span class="sd">        If the optimizer requires vectorized variables ie pso, this function</span>
+<span class="sd">        takes care of it</span>
+
+<span class="sd">        :param x: (list) thermo properties varied to minimize objective func</span>
+<span class="sd">        :param kwargs: (list) arguments for objective_function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temp_xml_file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_temp_xml_file_path</span>
+        <span class="n">exp_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exp_df</span>
+        <span class="n">objective_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_objective_function</span>
+        <span class="n">opt_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_opt_dict</span><span class="p">)</span>
+        <span class="n">dep_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dependant_params_dict</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">])</span>
+            <span class="n">vectorized_x</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vectorized_x</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">objective_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">opt_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span>
+                        <span class="n">x</span><span class="p">[</span><span class="n">ind</span><span class="p">]):</span>  <span class="c1"># if nan, do not update xml with nan</span>
+                    <span class="n">opt_dict</span><span class="p">[</span><span class="n">param_name</span><span class="p">][</span><span class="s1">&#39;input_value&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">x</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_xml_ver2</span><span class="p">(</span><span class="n">opt_dict</span><span class="p">,</span>
+                                 <span class="n">temp_xml_file_path</span><span class="p">,</span>
+                                 <span class="n">dependant_params_dict</span><span class="o">=</span><span class="n">dep_dict</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">(</span><span class="n">temp_xml_file_path</span><span class="p">)</span>
+            <span class="n">predicted_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_predicted_dict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_predicted_dict</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># noinspection PyCallingNonCallable</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">objective_function</span><span class="p">(</span><span class="n">predicted_dict</span><span class="p">,</span> <span class="n">exp_df</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># noinspection PyCallingNonCallable</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">objective_function</span><span class="p">(</span><span class="n">predicted_dict</span><span class="p">,</span> <span class="n">exp_df</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">objective_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">vectorized_x</span><span class="p">:</span>
+            <span class="n">objective_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">objective_values</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">objective_values</span> <span class="o">=</span> <span class="n">objective_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">objective_values</span>
+
+<div class="viewcode-block" id="REEPS.fit_ver2"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.fit_ver2">[docs]</a>    <span class="k">def</span> <span class="nf">fit_ver2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">objective_function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">optimizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">objective_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fits experimental to modeled data by minimizing objective function</span>
+<span class="sd">        with optimizer. Returns dictionary with opt_dict structure</span>
+
+<span class="sd">        :param objective_function: (function) function to compute objective</span>
+<span class="sd">            If &#39;None&#39;, last set objective or default function is used</span>
+<span class="sd">        :param optimizer: (function) function to perform optimization</span>
+<span class="sd">            If &#39;None&#39;, last set optimizer or default is used</span>
+<span class="sd">        :param optimizer_kwargs: (dict) optional arguments for optimizer</span>
+<span class="sd">        :param objective_kwargs: (dict) optional arguments</span>
+<span class="sd">            for objective function</span>
+<span class="sd">        :returns tuple: (opt_dict (dict), opt_value (float))</span>
+<span class="sd">            optimized opt_dict: Has identical structure as opt_dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">objective_function</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_objective_function</span><span class="p">(</span><span class="n">objective_function</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">optimizer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_optimizer</span><span class="p">(</span><span class="n">optimizer</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_internal_objective_ver2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">objective_kwargs</span><span class="p">)</span>
+
+        <span class="n">optimizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span>
+        <span class="n">opt_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_opt_dict</span><span class="p">)</span>
         <span class="n">x_guess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">opt_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
 
         <span class="k">if</span> <span class="n">optimizer_kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1255,14 +1365,14 @@
 
         <span class="k">return</span> <span class="n">opt_dict</span><span class="p">,</span> <span class="n">obj_value</span></div>
 
-<div class="viewcode-block" id="LLEPE.update_xml"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.update_xml">[docs]</a>    <span class="k">def</span> <span class="nf">update_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                   <span class="n">info_dict</span><span class="p">,</span>
-                   <span class="n">phases_xml_filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                   <span class="n">dependant_params_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.update_xml_ver2"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.update_xml_ver2">[docs]</a>    <span class="k">def</span> <span class="nf">update_xml_ver2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">info_dict</span><span class="p">,</span>
+                        <span class="n">phases_xml_filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">dependant_params_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;updates xml file with info_dict</span>
 
-<span class="sd">        :param info_dict: (dict) Requires an identical structure to opt_dict</span>
-<span class="sd">            Ignores items with keys containing &quot;custom_object_name&quot;</span>
+<span class="sd">        :param info_dict: (dict) info in {species_names:{thermo_prop:val}}</span>
+<span class="sd">            Requires an identical structure to opt_dict</span>
 <span class="sd">        :param phases_xml_filename: (str) xml filename if editing other xml</span>
 <span class="sd">            If ``None``, the current xml will be modified and the internal</span>
 <span class="sd">            Cantera phases will be refreshed to the new values.</span>
@@ -1272,8 +1382,7 @@
         <span class="k">if</span> <span class="n">phases_xml_filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">phases_xml_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span>
         <span class="n">new_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">info_dict</span><span class="p">)</span>
-        <span class="n">dep_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">dependant_params_dict</span><span class="p">)</span>
-        <span class="n">custom_objects_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span><span class="p">)</span>
+        <span class="n">dep_dict</span> <span class="o">=</span> <span class="n">dependant_params_dict</span>
 
         <span class="k">if</span> <span class="n">dep_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">new_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dep_dict</span><span class="p">)</span>
@@ -1291,12 +1400,10 @@
                 <span class="n">ind_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_dict</span><span class="p">[</span><span class="n">ind_param_name</span><span class="p">][</span><span class="s1">&#39;input_value&#39;</span><span class="p">]</span>
                             <span class="k">for</span> <span class="n">ind_param_name</span> <span class="ow">in</span> <span class="n">ind_param_names</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">mod_kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">new_dict</span><span class="p">[</span><span class="n">param_name</span><span class="p">][</span><span class="s1">&#39;input_value&#39;</span><span class="p">]</span> <span class="o">=</span> \
-                        <span class="n">mod_func</span><span class="p">(</span><span class="n">ind_vals</span><span class="p">,</span>
-                                 <span class="n">custom_objects_dict</span><span class="p">)</span>
+                    <span class="n">new_dict</span><span class="p">[</span><span class="n">param_name</span><span class="p">][</span><span class="s1">&#39;input_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mod_func</span><span class="p">(</span><span class="n">ind_vals</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">new_dict</span><span class="p">[</span><span class="n">param_name</span><span class="p">][</span><span class="s1">&#39;input_value&#39;</span><span class="p">]</span> <span class="o">=</span> \
-                        <span class="n">mod_func</span><span class="p">(</span><span class="n">ind_vals</span><span class="p">,</span> <span class="n">custom_objects_dict</span><span class="p">,</span>
+                        <span class="n">mod_func</span><span class="p">(</span><span class="n">ind_vals</span><span class="p">,</span>
                                  <span class="o">**</span><span class="n">mod_kwargs</span><span class="p">)</span>
         <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">phases_xml_filename</span><span class="p">)</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
@@ -1304,8 +1411,6 @@
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">new_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
             <span class="n">d</span> <span class="o">=</span> <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
             <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-            <span class="k">if</span> <span class="s1">&#39;custom_object_name&#39;</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-                <span class="k">continue</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;upper_attrib_name&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
                     <span class="ow">and</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;lower_attrib_name&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">child1</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;upper_element_name&#39;</span><span class="p">]):</span>
@@ -1362,32 +1467,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">set_phases</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phases_xml_filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phase_names</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="LLEPE.update_custom_objects_dict"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.update_custom_objects_dict">[docs]</a>    <span class="k">def</span> <span class="nf">update_custom_objects_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info_dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        updates internal custom_objects_dict with info_dict</span>
-
-<span class="sd">        :param info_dict: Requires an identical structure to opt_dict</span>
-<span class="sd">            Ignores items with keys containing &quot;custom_object_name&quot;</span>
-
-<span class="sd">        :return: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">custom_objects_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">info_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="n">info_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-            <span class="k">if</span> <span class="s1">&#39;upper_element_name&#39;</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-                <span class="k">continue</span>
-            <span class="n">func</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;function&#39;</span><span class="p">]</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;input_value&#39;</span><span class="p">]</span>
-            <span class="n">kwargs</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;kwargs&#39;</span><span class="p">]</span>
-            <span class="n">object_name</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;custom_object_name&#39;</span><span class="p">]</span>
-            <span class="n">new_object</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">custom_objects_dict</span><span class="p">[</span><span class="n">object_name</span><span class="p">],</span>
-                              <span class="n">value</span><span class="p">,</span>
-                              <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="n">custom_objects_dict</span><span class="p">[</span><span class="n">object_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_object</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_custom_objects_dict</span> <span class="o">=</span> <span class="n">custom_objects_dict</span>
-        <span class="k">return</span> <span class="kc">None</span></div>
-
-<div class="viewcode-block" id="LLEPE.parity_plot"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.parity_plot">[docs]</a>    <span class="k">def</span> <span class="nf">parity_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="REEPS.parity_plot"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.parity_plot">[docs]</a>    <span class="k">def</span> <span class="nf">parity_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                     <span class="n">compared_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">c_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">c_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1398,11 +1478,11 @@
                     <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parity plot between measured and predicted compared_value.</span>
-<span class="sd">        Default compared value is {ES_1}_aq_eq</span>
+<span class="sd">        Default compared value is {RE_1}_aq_eq</span>
 
 <span class="sd">        :param compared_value: (str) Quantity to compare predicted and</span>
 <span class="sd">            experimental data. Can be any column containing &quot;eq&quot; in exp_df i.e.</span>
-<span class="sd">            h_eq, z_eq, {ES}_d_eq, etc.</span>
+<span class="sd">            h_eq, z_eq, {RE}_d_eq, etc.</span>
 <span class="sd">        :param plot_title: (str or boolean)</span>
 
 <span class="sd">            If None (default): Plot title will be generated from compared_value</span>
@@ -1425,11 +1505,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">exp_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_df</span><span class="p">()</span>
         <span class="n">predicted_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_predicted_dict</span><span class="p">()</span>
-        <span class="n">extracted_species_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span>
+        <span class="n">re_species_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span>
         <span class="n">extractant_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_extractant_name</span><span class="p">()</span>
-        <span class="n">extracted_species_charges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_charges</span>
+        <span class="n">re_charges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_charges</span>
         <span class="k">if</span> <span class="n">compared_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">compared_value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extracted_species_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">compared_value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">re_species_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">predicted_dict</span><span class="p">)[</span><span class="n">compared_value</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
         <span class="n">meas</span> <span class="o">=</span> <span class="n">exp_df</span><span class="p">[</span><span class="n">compared_value</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
         <span class="n">name_breakdown</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[^_\W]+&#39;</span><span class="p">,</span> <span class="n">compared_value</span><span class="p">)</span>
@@ -1451,11 +1531,6 @@
                                         <span class="s1">&#39;meas&#39;</span><span class="p">:</span> <span class="n">meas</span><span class="p">,</span>
                                         <span class="n">c_data</span><span class="p">:</span> <span class="n">exp_df</span><span class="p">[</span><span class="n">c_data</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
                                         <span class="s1">&#39;feed_molarity&#39;</span><span class="p">:</span> <span class="n">feed_molarity</span><span class="p">})</span>
-        <span class="k">elif</span> <span class="n">c_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">combined_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;pred&#39;</span><span class="p">:</span> <span class="n">pred</span><span class="p">,</span>
-                                        <span class="s1">&#39;meas&#39;</span><span class="p">:</span> <span class="n">meas</span><span class="p">,</span>
-                                        <span class="s1">&#39;c_data&#39;</span><span class="p">:</span> <span class="n">c_data</span><span class="p">,</span>
-                                        <span class="s1">&#39;feed_molarity&#39;</span><span class="p">:</span> <span class="n">feed_molarity</span><span class="p">})</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">combined_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;pred&#39;</span><span class="p">:</span> <span class="n">pred</span><span class="p">,</span>
                                         <span class="s1">&#39;meas&#39;</span><span class="p">:</span> <span class="n">meas</span><span class="p">,</span>
@@ -1476,11 +1551,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">phase</span> <span class="o">=</span> <span class="n">name_breakdown</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;aq&#39;</span><span class="p">:</span>
-                <span class="n">extracted_species_charge</span> <span class="o">=</span> <span class="n">extracted_species_charges</span><span class="p">[</span>
-                    <span class="n">extracted_species_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span>
-                        <span class="n">compared_species</span><span class="p">)]</span>
+                <span class="n">re_charge</span> <span class="o">=</span> <span class="n">re_charges</span><span class="p">[</span><span class="n">re_species_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">compared_species</span><span class="p">)]</span>
                 <span class="n">default_title</span> <span class="o">=</span> <span class="s1">&#39;$</span><span class="si">%s</span><span class="s1">^{</span><span class="si">%d</span><span class="s1">+}$ eq. conc. (mol/L)&#39;</span> \
-                                <span class="o">%</span> <span class="p">(</span><span class="n">compared_species</span><span class="p">,</span> <span class="n">extracted_species_charge</span><span class="p">)</span>
+                                <span class="o">%</span> <span class="p">(</span><span class="n">compared_species</span><span class="p">,</span> <span class="n">re_charge</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
                 <span class="n">default_title</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> distribution ratio&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">compared_species</span><span class="p">)</span>
@@ -1488,36 +1561,35 @@
                 <span class="n">default_title</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> complex eq. conc. (mol/L)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">compared_species</span><span class="p">)</span>
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_labels</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">unique_labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">data_labels</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">:</span>
                 <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="n">combined_df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">label</span><span class="p">]</span>
                 <span class="n">filtered_meas</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;meas&#39;</span><span class="p">]</span>
                 <span class="n">filtered_pred</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_pred</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">filtered_meas</span><span class="p">,</span> <span class="n">filtered_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">filtered_meas</span><span class="p">,</span> <span class="n">filtered_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
                 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">c_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c_data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="n">c_data</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="n">c_data</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">c_data</span> <span class="o">=</span> <span class="n">combined_df</span><span class="p">[</span><span class="s1">&#39;c_data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
             <span class="n">p1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">meas</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">c_data</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
             <span class="n">c_bar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">c_label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">c_bar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">c_label</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">270</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">meas</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-
+            <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">meas</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+                            <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">min_max_data</span><span class="p">,</span> <span class="n">min_max_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">print_r_squared</span><span class="p">:</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">min_max_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                     <span class="n">min_max_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">,</span>
                     <span class="s1">&#39;$R^2$=</span><span class="si">{0:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_squared</span><span class="p">(</span><span class="n">compared_value</span><span class="p">)))</span>
+            <span class="c1"># plt.legend(loc=&#39;lower right&#39;)</span>
+        <span class="c1"># else:</span>
+        <span class="c1"># plt.legend()</span>
 
         <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Measured&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">plot_title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1531,20 +1603,20 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span></div>
 
-<div class="viewcode-block" id="LLEPE.r_squared"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.r_squared">[docs]</a>    <span class="k">def</span> <span class="nf">r_squared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compared_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="REEPS.r_squared"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.r_squared">[docs]</a>    <span class="k">def</span> <span class="nf">r_squared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compared_value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;r-squared value comparing measured and predicted compared value</span>
 
 <span class="sd">        Closer to 1, the better the model&#39;s predictions.</span>
 
 <span class="sd">        :param compared_value: (str) Quantity to compare predicted and</span>
 <span class="sd">            experimental data. Can be any column containing &quot;eq&quot; in exp_df i.e.</span>
-<span class="sd">            h_eq, z_eq, {ES}_d_eq, etc. default is {ES}_aq_eq</span>
+<span class="sd">            h_eq, z_eq, {RE}_d_eq, etc. default is {RE}_aq_eq</span>
 <span class="sd">             &quot;&quot;&quot;</span>
         <span class="n">exp_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exp_df</span><span class="p">()</span>
         <span class="n">predicted_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_predicted_dict</span><span class="p">()</span>
-        <span class="n">extracted_species_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_species_list</span>
+        <span class="n">re_species_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_species_list</span>
         <span class="k">if</span> <span class="n">compared_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">compared_value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extracted_species_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">compared_value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">_aq_eq&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">re_species_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">predicted_dict</span><span class="p">)[</span><span class="n">compared_value</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
         <span class="n">predicted_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
         <span class="n">actual_y</span> <span class="o">=</span> <span class="n">exp_df</span><span class="p">[</span><span class="n">compared_value</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
@@ -1571,7 +1643,7 @@
             <span class="n">r_2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">num</span> <span class="o">/</span> <span class="n">den</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">r_2</span></div>
 
-<div class="viewcode-block" id="LLEPE.plot_3d_data"><a class="viewcode-back" href="../../modules/reeps.html#llepe.LLEPE.plot_3d_data">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="REEPS.plot_3d_data"><a class="viewcode-back" href="../../modules/reeps.html#reeps.REEPS.plot_3d_data">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">plot_3d_data</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span>
                      <span class="n">y_data</span><span class="p">,</span>
                      <span class="n">z_data</span><span class="p">,</span>

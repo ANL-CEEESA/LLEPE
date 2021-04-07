@@ -18,13 +18,12 @@ Error between predicted and experimental data is then minimized.
    
    guide/install
    guide/quickstart
-   guide/about
    
 .. toctree::
    :maxdepth: 1
    :caption: Searchers
    
-   modules/LLEPE
+   modules/reeps
    
 
 

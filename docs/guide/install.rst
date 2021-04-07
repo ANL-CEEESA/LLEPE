@@ -30,11 +30,11 @@ To install the latest master version:
 Development version
 ===================
 
-To contribute to Stable-Baselines, with support for running tests and building the documentation.
+To contribute to LLEPE, with support for running tests and building the documentation.
 
 .. code-block:: bash
 
-    git clone https://github.com/titusquah/LLEPE.git && cd LLEPE
+    git clone https://github.com/ANL-CEEESA/LLEPE.git
     pip install -e .[docs,tests]
 
 

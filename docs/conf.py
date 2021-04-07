@@ -1,7 +1,6 @@
 #  LLEPE: Liquid-Liquid Equilibrium Parameter Estimator
 #  Copyright (C) 2020, UChicago Argonne, LLC. All rights reserved.
 #  Released under the modified BSD license. See LICENSE for more details.
-
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -17,7 +16,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../../'))
 
 # -- Project information -----------------------------------------------------
 
@@ -25,7 +24,6 @@ project = 'LLEPE'
 copyright = '2020, UChicago Argonne, LLC.'
 author = 'UChicago Argonne, LLC.'
 master_doc = 'index'
-autodoc_mock_imports = ["cantera"]
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'

@@ -24,6 +24,7 @@ project = 'LLEPE'
 copyright = '2020, UChicago Argonne, LLC.'
 author = 'UChicago Argonne, LLC.'
 master_doc = 'index'
+autodoc_mock_imports = ["cantera"]
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'

@@ -1,3 +1,6 @@
+> [!NOTE]
+> This repository has been archived and is no longer maintained. The code is provided for historical reference and may contain unpatched or unknown vulnerabilities. It should not be used in production systems.
+
 # LLEPE
 LLEPE (Liquid-Liquid Extraction Parameter Estimator) is a toolkit for estimating standard thermodynamic parameters for Gibbs minimization.
 

@@ -23,6 +23,6 @@ setup(
     install_requires=['cantera==2.4.0',
                       'pandas==1.0.3',
                       'numpy==1.15.4',
-                      'scipy==1.4.1',
+                      'scipy==1.10.0',
                       'matplotlib==3.1.3']
 )

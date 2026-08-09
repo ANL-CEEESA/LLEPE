@@ -22,7 +22,7 @@ setup(
     description='Liquid-liquid extraction parameter searcher',
     install_requires=['cantera==2.4.0',
                       'pandas==1.0.3',
-                      'numpy==1.15.4',
+                      'numpy==1.22.0',
                       'scipy==1.4.1',
                       'matplotlib==3.1.3']
 )
